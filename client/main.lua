@@ -38,3 +38,27 @@ end
 
 
 CreateThread(createZones)
+
+
+Citizen.CreateThread(function()
+    for _, hospital in pairs(Config.Hospitals) do
+        for name, pharmacy in pairs(hospital.pharmacy) do
+            if pharmacy.blip.enable then
+                utils.createBlip(pharmacy.blip)
+            end
+
+            lib.points.new({
+                coords = pharmacy.pos,
+                distance = 5,
+                nearby = function(self)
+                    DrawMarker(2, self.coords.x, self.coords.y, self.coords.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 1.0, 1.0, 1.0, 200, 20, 20, 50, false, true, 2, false, nil, nil, false)
+
+                    if self.currentDistance < 1 and IsControlJustReleased(0, 38) then
+                        print(name)
+                        exports.ox_inventory:openInventory("shop", name)
+                    end
+                end
+            })
+        end
+    end
+end)

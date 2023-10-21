@@ -40,22 +40,42 @@ Config.Hospitals = {
 			enable = true,
 			name = 'Phillbox Hospital',
 			type = 61,
-			scale = 0.8,
+			scale = 1.0,
 			color = 2,
-			pos = vector3(299.0, -585.28, 43.28),
+			pos = vector3(308.96, -591.52, 43.28),
 		},
 		respawn = {
-			bedPoint = vector4(-450.5561, -323.2419, 34.6836, 91.5347),
-			spawnPoint = vector4(-450.9195, -321.9326, 34.9059, 349.6794)
+			bedPoint = vector4(349.76, -583.44, 43.0, 150.04),
+			spawnPoint = vector4(348.84, -583.36, 43.32, 68.24)
+		},
+        stash = {
+			['ems_stash_1'] = {
+				slots = 50,
+				weight = 50, -- kg
+				min_grade = 0,
+				label = 'Ems stash',
+				shared = true, -- false if you want to make everyone has a personal stash
+				pos = vector3(309.96, -599.2, 43.28)
+			}
 		},
 		pharmacy = {
 			["ems_shop_1"] = {
 				job = false,
 				label = "Pharmacy",
 				grade = 0, -- works only if job true
-				pos = vector3(-484.7923, -342.2781, 34.3617),
+				pos = vector3(303.84, -597.6, 43.28),
+                blip = {
+                    enable = true,
+                    name = 'Pharmacy',
+                    type = 61,
+                    scale = 0.7,
+                    color = 2,
+                    pos = vector3(303.84, -597.6, 43.28),
+                },
 				items = {
-					{ name = 'bandage', price = 18000, },
+                    { name = 'burger', price = 10 },
+                    { name = 'water', price = 10 },
+                    { name = 'cola', price = 10 },
 				}
 			}
 		}
