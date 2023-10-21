@@ -283,6 +283,18 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
     if data.anim == "medic" then
         utils.showNotification("Reviving player")
 
+        CreateThread(function()
+            lib.progressBar({
+                duration = 14900 + (900 * 15) + 1000,
+                label = locale("reviving_patient"),
+                useWhileDead = false,
+                canCancel = false,
+                disable = {
+                    car = true,
+                    move = true,
+                },
+            })
+        end)
 
         lib.requestAnimDict("mini@cpr@char_a@cpr_def")
         lib.requestAnimDict("mini@cpr@char_a@cpr_str")
