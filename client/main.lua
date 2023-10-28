@@ -50,11 +50,16 @@ Citizen.CreateThread(function()
             lib.points.new({
                 coords = pharmacy.pos,
                 distance = 5,
+                onEnter = function(self)
+                    self.access = hasJob(Config.EmsJobs)
+                end,
                 nearby = function(self)
-                    DrawMarker(2, self.coords.x, self.coords.y, self.coords.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 1.0, 1.0, 1.0, 200, 20, 20, 50, false, true, 2, false, nil, nil, false)
+                    if self.access then
+                        DrawMarker(2, self.coords.x, self.coords.y, self.coords.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 1.0, 1.0, 1.0, 200, 20, 20, 50, false, true, 2, false, nil, nil, false)
 
-                    if self.currentDistance < 1 and IsControlJustReleased(0, 38) then
-                        exports.ox_inventory:openInventory("shop", { type = name })
+                        if self.currentDistance < 1 and IsControlJustReleased(0, 38) then
+                            exports.ox_inventory:openInventory("shop", { type = name })
+                        end
                     end
                 end
             })
