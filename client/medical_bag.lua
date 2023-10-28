@@ -1,0 +1,3 @@
+local function placeMedicalBag()
+
+end

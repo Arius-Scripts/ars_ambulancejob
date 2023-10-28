@@ -29,6 +29,7 @@ client_scripts {
 	"client/death.lua",
 	"client/job.lua",
 	"client/garage.lua",
+	"client/medical_bag.lua"
 }
 
 server_scripts {
@@ -36,6 +37,7 @@ server_scripts {
 	"server/main.lua",
 	"server/bridge/esx.lua",
 	"server/bridge/qb.lua",
+	"server/medical_bag.lua"
 }
 
 files {
