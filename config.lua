@@ -73,9 +73,8 @@ Config.Hospitals = {
                     pos = vector3(303.84, -597.6, 43.28),
                 },
 				items = {
-                    { name = 'burger', price = 10 },
-                    { name = 'water', price = 10 },
-                    { name = 'cola', price = 10 },
+                    { name = 'medikit', price = 10 },
+                    { name = 'bandage', price = 10 },
 				}
 			}
 		}
