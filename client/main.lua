@@ -27,7 +27,7 @@ local function createZones()
             size = cfg.zone.size,
             rotation = 0.0,
             onEnter = function(self)
-
+                initGarage(cfg.garage, Config.EmsJobs)
             end,
             onExit = function(self)
 

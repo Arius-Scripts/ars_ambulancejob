@@ -28,6 +28,7 @@ client_scripts {
 	"client/injuries.lua",
 	"client/death.lua",
 	"client/job.lua",
+	"client/garage.lua",
 }
 
 server_scripts {

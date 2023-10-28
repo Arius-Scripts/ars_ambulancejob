@@ -77,7 +77,25 @@ Config.Hospitals = {
                     { name = 'bandage', price = 10 },
 				}
 			}
-		}
+		},
+		garage = {
+			['ems_garage_1'] = {
+				pedPos = vector4(295.2, -600.56, 42.32, 150.2),
+				model = 'mp_m_weapexp_01',
+				spawn = vector4(294.28, -608.32, 43.32, 69.6),
+				deposit = vector3(294.28, -608.32, 43.32),
+				driverSpawnCoords = vector3(297.56, -600.52, 43.32),
+
+				vehicles = {
+					{
+						label = 'Ambulance',
+						spawn_code = 'ambulance',
+						min_grade = 3,
+						modifications = {} -- es. {color1 = {255, 12, 25}}
+					},
+				}
+			}
+		},
 	},
 }
 
