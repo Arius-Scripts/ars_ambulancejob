@@ -120,19 +120,22 @@ lib.callback.register('ars_ambulancejob:getDistressCalls', function(source)
     return distressCalls
 end)
 
-CreateThread(function()
-    for index, hospital in pairs(Config.Hospitals) do
-        local cfg = hospital
 
-        for id, stash in pairs(cfg.stash) do
-            exports.ox_inventory:RegisterStash(id, stash.label, stash.slots, stash.weight * 1000, cfg.stash.shared and true or nil, Config.EmsJobs, stash.pos)
-        end
+AddEventHandler('onServerResourceStart', function(resourceName)
+    if resourceName == GetCurrentResourceName() then
+        for index, hospital in pairs(Config.Hospitals) do
+            local cfg = hospital
 
-        for id, pharmacy in pairs(cfg.pharmacy) do
-            exports.ox_inventory:RegisterShop(id, {
-                name = pharmacy.label,
-                inventory = pharmacy.items,
-            })
+            -- for id, stash in pairs(cfg.stash) do
+            --     exports.ox_inventory:RegisterStash(id, stash.label, stash.slots, stash.weight * 1000, cfg.stash.shared and true or nil, Config.EmsJobs, stash.pos)
+            -- end
+
+            for id, pharmacy in pairs(cfg.pharmacy) do
+                exports.ox_inventory:RegisterShop(id, {
+                    name = pharmacy.label,
+                    inventory = pharmacy.items,
+                })
+            end
         end
     end
 end)
