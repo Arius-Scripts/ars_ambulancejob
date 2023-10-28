@@ -51,7 +51,15 @@ CreateThread(function()
                 coords = pharmacy.pos,
                 distance = 5,
                 onEnter = function(self)
-                    self.access = pharmacy.job and hasJob(Config.EmsJobs) or true
+                    if pharmacy.job then
+                        if hasJob(Config.EmsJobs) and getPlayerJobGrade() >= pharmacy.grade then
+                            self.access = true
+                        else
+                            self.access = false
+                        end
+                    else
+                        self.access = true
+                    end
                 end,
                 nearby = function(self)
                     if self.access then
