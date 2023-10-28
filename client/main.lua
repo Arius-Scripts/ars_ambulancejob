@@ -40,7 +40,7 @@ end
 CreateThread(createZones)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     for _, hospital in pairs(Config.Hospitals) do
         for name, pharmacy in pairs(hospital.pharmacy) do
             if pharmacy.blip.enable then
@@ -51,7 +51,7 @@ Citizen.CreateThread(function()
                 coords = pharmacy.pos,
                 distance = 5,
                 onEnter = function(self)
-                    self.access = hasJob(Config.EmsJobs)
+                    self.access = pharmacy.job and hasJob(Config.EmsJobs) or true
                 end,
                 nearby = function(self)
                     if self.access then
