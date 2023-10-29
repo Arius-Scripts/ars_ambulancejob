@@ -11,6 +11,9 @@ Config.RespawnTime = 5 -- in minutes
 Config.UseInterDistressSystem = true
 Config.WaitTimeForNewCall = 5 -- minutes
 
+Config.MedicBagProp = "xm_prop_x17_bag_med_01a"
+Config.MedicBagItem = "medicalbag"
+
 Config.LimpAnim = "move_m@injured"
 Config.StartLimp = 4
 

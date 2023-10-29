@@ -58,3 +58,9 @@ function getDeathStatus(target)
 
     return data
 end
+
+QBCore.Functions.CreateUseableItem(Config.MedicBagItem, function(source, item)
+    if not hasJob(source, Config.EmsJobs) then return end
+
+    TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
+end)

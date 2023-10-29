@@ -120,6 +120,14 @@ lib.callback.register('ars_ambulancejob:getDistressCalls', function(source)
     return distressCalls
 end)
 
+lib.callback.register('ars_ambulancejob:openMedicalBag', function(source)
+    exports.ox_inventory:RegisterStash("medicalBag_" .. source, "Medical Bag", 10, 50 * 1000)
+
+    return "medicalBag_" .. source
+end)
+
+
+
 
 AddEventHandler('onServerResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then

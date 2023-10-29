@@ -1,7 +1,7 @@
 ```lua
 
     ['medicalbag'] = {
-        label = 'Large Duffle Bag',
+        label = 'Medical bag',
         weight = 220,
         stack = false,
     }

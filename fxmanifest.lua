@@ -38,7 +38,6 @@ server_scripts {
 	"server/main.lua",
 	"server/bridge/esx.lua",
 	"server/bridge/qb.lua",
-	"server/medical_bag.lua"
 }
 
 files {
