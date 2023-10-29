@@ -1,4 +1,5 @@
 utils = {}
+peds = {}
 
 function utils.showNotification(msg, type)
     lib.notify({
@@ -30,6 +31,8 @@ function utils.createPed(name, ...)
 
     SetEntityInvincible(ped, true)
     SetModelAsNoLongerNeeded(model)
+
+    table.insert(peds, ped)
 
     return ped
 end

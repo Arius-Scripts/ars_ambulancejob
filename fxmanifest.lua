@@ -29,7 +29,8 @@ client_scripts {
 	"client/death.lua",
 	"client/job.lua",
 	"client/garage.lua",
-	"client/medical_bag.lua"
+	"client/medical_bag.lua",
+	"client/clothing.lua"
 }
 
 server_scripts {
