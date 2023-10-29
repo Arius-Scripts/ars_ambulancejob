@@ -35,7 +35,7 @@ local function placeMedicalBag()
         },
         {
             name = 'closeMedicBag' .. medicBag,
-            label = locale('close_medical_bag'),
+            label = locale('pickup_medical_bag'),
             icon = 'fa-solid fa-xmark',
             groups = jobs,
             onSelect = function(data)
