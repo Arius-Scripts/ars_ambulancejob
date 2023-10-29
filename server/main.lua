@@ -128,8 +128,6 @@ end)
 
 
 exports.ox_inventory:registerHook('swapItems', function(payload)
-    print(json.encode(payload, { indent = true }))
-
     if string.find(payload.toInventory, "medicalBag_") then
         if payload.fromSlot.name == Config.MedicBagItem then return false end
     end
