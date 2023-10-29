@@ -53,8 +53,3 @@ RegisterNetEvent("ars_ambulancejob:placeMedicalBag", function()
 
     placeMedicalBag()
 end)
-
-
-RegisterCommand("te", function()
-    placeMedicalBag()
-end)
