@@ -122,9 +122,20 @@ RegisterCommand(Config.HelpCommand, createDistressCall)
 function openDistressCalls()
     if not hasJob(Config.EmsJobs) then return end
 
+    local playerPed = cache.ped or PlayerPedId()
+    local playerCoords = cache.coords or GetEntityCoords(playerPed)
+
     local distressCalls = lib.callback.await('ars_ambulancejob:getDistressCalls', false)
 
     local calls = {}
+
+    local dict = lib.requestAnimDict("amb@world_human_tourist_map@male@base")
+    local model = lib.requestModel("prop_cs_tablet")
+
+    TaskPlayAnim(playerPed, dict, "base", 2.0, 2.0, -1, 51, 0, false, false, false)
+
+    local tablet = CreateObject(model, playerCoords.x, playerCoords.y, playerCoords.z + 0.2, true, true, true)
+    AttachEntityToEntity(tablet, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, -0.03, 0.0, 20.0, -90.0, 0.0, true, true, false, true, 1, true)
 
     for i = 1, #distressCalls do
         local call = distressCalls[i]
@@ -192,6 +203,10 @@ function openDistressCalls()
     lib.registerContext({
         id      = 'openDistressCalls',
         title   = "Calls",
+        onExit  = function()
+            ClearPedTasks(playerPed)
+            DeleteEntity(tablet)
+        end,
         options = calls
     })
     lib.showContext('openDistressCalls')
