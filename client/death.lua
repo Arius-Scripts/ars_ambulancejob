@@ -58,8 +58,8 @@ local function respawnPlayer()
     DoScreenFadeOut(500)
     while not IsScreenFadedOut() do Wait(1) end
 
-    SetEntityCoords(cache.ped, hospital.respawn.bedPoint)
-    SetEntityHeading(cache.ped, hospital.respawn.bedPoint.w)
+    SetEntityCoords(playerPed, hospital.respawn.bedPoint)
+    SetEntityHeading(playerPed, hospital.respawn.bedPoint.w)
     TaskPlayAnim(playerPed, "anim@gangops@morgue@table@", "body_search", 2.0, 2.0, -1, 1, 0, false, false, false)
     FreezeEntityPosition(playerPed, true)
 
@@ -71,7 +71,7 @@ local function respawnPlayer()
     stopPlayerDeath()
     ClearPedTasks(playerPed)
     FreezeEntityPosition(playerPed, false)
-    SetEntityCoords(cache.ped, hospital.respawn.spawnPoint)
+    SetEntityCoords(playerPed, hospital.respawn.spawnPoint)
 end
 
 local function initPlayerDeath()
