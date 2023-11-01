@@ -18,7 +18,7 @@ local function checkPatient(target)
 
     local options = {
         {
-            title = locale("status_patient: ") .. status,
+            title = locale("status_patient") .. status,
             icon = 'heartbeat',
             iconColor = isDead and "#b5300b" or "#5b87b0",
             readOnly = true,
@@ -46,7 +46,7 @@ local function checkPatient(target)
             iconColor = "#5BC0DE",
             onSelect = function()
                 local count = exports.ox_inventory:Search('count', "defibrillator")
-                if count < 1 then return utils.showNotification(locale("not_defibrillator")) end
+                if count < 1 then return utils.showNotification(locale("not_enough_defibrillator")) end
 
 
                 local playerPed = cache.ped or PlayerPedId()
@@ -76,7 +76,7 @@ local function checkPatient(target)
 
     lib.registerContext({
         id = 'check_patient',
-        title = locale("menu_title"),
+        title = locale("check_patient_menu_title"),
         options = options
     })
     lib.showContext('check_patient')

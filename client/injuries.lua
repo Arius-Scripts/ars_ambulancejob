@@ -14,7 +14,7 @@ local function checkInjuryCause(cause)
     utils.debug(item, cause)
 
     local count = exports.ox_inventory:Search('count', item)
-    if count < 1 then return utils.showNotification(locale("not_" .. item)) end
+    if count < 1 then return utils.showNotification(locale("not_enough_" .. item)) end
 
     utils.addRemoveItem("remove", item, 1)
 
@@ -97,7 +97,7 @@ function checkInjuries(data)
 
     lib.registerContext({
         id = 'patient_injuries',
-        title = locale("menu_title"),
+        title = locale("injury_menu_title"),
         menu = "check_patient",
         options = injuries
     })
