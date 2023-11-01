@@ -117,6 +117,7 @@ function createDistressCall()
 end
 
 exports("createDistressCall", createDistressCall)
+RegisterCommand(Config.HelpCommand, createDistressCall)
 
 function openDistressCalls()
     if not hasJob(Config.EmsJobs) then return end
