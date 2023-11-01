@@ -1,3 +1,66 @@
+function checkInjuries(data)
+    local injuries = {}
+
+    utils.debug(data.injuries)
+
+    if not data.injuries or not next(data.injuries) then
+        injuries[#injuries + 1] = {
+            title = 'No injuries',
+        }
+    else
+        for _, v in pairs(data.injuries) do
+            injuries[#injuries + 1] = {
+                title = v.label,
+                description = v.desc,
+
+                arrow = true,
+                onSelect = function()
+                    lib.registerContext({
+                        id = 'patient_injury' .. _,
+                        title = v.label,
+                        menu = "patient_injuries",
+                        options = {
+                            {
+                                title = locale("injury_value"),
+                                progress = v.value,
+                                metadata = { v.value .. "%" },
+                            },
+                            {
+                                title = locale("injury_cause"),
+                                description = v.cause,
+                            },
+                            {
+                                title = locale("injury_treat"),
+                                onSelect = function()
+                                    local dataToSend = {}
+                                    dataToSend.targetServerId = data.target
+                                    dataToSend.injury = true
+                                    dataToSend.bone = v.bone
+                                    TriggerServerEvent("ars_ambulancejob:healPlayer", dataToSend)
+
+                                    utils.debug("Injury treated " .. dataToSend.bone)
+                                end
+
+                            }
+                        }
+                    })
+
+                    lib.showContext('patient_injury' .. _)
+                end
+            }
+        end
+    end
+
+    lib.registerContext({
+        id = 'patient_injuries',
+        title = locale("menu_title"),
+        menu = "check_patient",
+        options = injuries
+    })
+
+    lib.showContext('patient_injuries')
+end
+
 function treatInjury(bone)
     if not player.injuries[bone] then return end -- secure check
 
