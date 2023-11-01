@@ -30,7 +30,9 @@ client_scripts {
 	"client/job.lua",
 	"client/garage.lua",
 	"client/medical_bag.lua",
-	"client/clothing.lua"
+	"client/stashes.lua",
+	"client/shops.lua",
+	"client/clothing.lua",
 }
 
 server_scripts {

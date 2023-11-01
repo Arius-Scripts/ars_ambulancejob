@@ -25,5 +25,8 @@
 	"reviving_patient": "Rianimazione di un Paziente",
 	"open_medical_bag": "Apri la Borsa Medica",
 	"pickup_medical_bag": "Raccogli la Borsa Medica",
-	"revive_player": "Rianima"
+	"revive_player": "Rianima",
+	"open_stash_label": "Apri Deposito",
+	"control_to_open_stash": "[E] per aprire deposito",
+	"control_to_open_shop": "[E] per accedere al negozio"
 }

@@ -157,9 +157,9 @@ AddEventHandler('onServerResourceStart', function(resourceName)
         for index, hospital in pairs(Config.Hospitals) do
             local cfg = hospital
 
-            -- for id, stash in pairs(cfg.stash) do
-            --     exports.ox_inventory:RegisterStash(id, stash.label, stash.slots, stash.weight * 1000, cfg.stash.shared and true or nil, Config.EmsJobs, stash.pos)
-            -- end
+            for id, stash in pairs(cfg.stash) do
+                exports.ox_inventory:RegisterStash(id, stash.label, stash.slots, stash.weight * 1000, cfg.stash.shared and true or nil)
+            end
 
             for id, pharmacy in pairs(cfg.pharmacy) do
                 exports.ox_inventory:RegisterShop(id, {
