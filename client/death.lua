@@ -177,6 +177,7 @@ function onPlayerLoaded()
 
     if player.isDead then
         initPlayerDeath()
+        utils.showNotification("logged_dead")
     end
 end
 
