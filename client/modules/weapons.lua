@@ -1,10 +1,10 @@
 WEAPONS = {
     [`WEAPON_UNARMED`] = { "Player got beaten to death", "beaten" },
     [`WEAPON_KNIFE`] = { "Player has been stabbed", "stabbed" },
-    [`WEAPON_NIGHTSTICK`] = { "Player has been hit with a nightstick", "hit" },
+    [`WEAPON_NIGHTSTICK`] = { "Player has been hit with a nightstick", "beaten" },
     [`WEAPON_HAMMER`] = { "Player has been struck with a hammer", "stabbed" },
-    [`WEAPON_BAT`] = { "Player has been hit with a bat", "hit" },
-    [`WEAPON_GOLFCLUB`] = { "Player has been whacked with a golf club", "hit" },
+    [`WEAPON_BAT`] = { "Player has been hit with a bat", "beaten" },
+    [`WEAPON_GOLFCLUB`] = { "Player has been whacked with a golf club", "beaten" },
     [`WEAPON_CROWBAR`] = { "Player has been struck with a crowbar", "stabbed" },
     [`WEAPON_PISTOL`] = { "Player has been shot with a pistol", "shot" },
     [`WEAPON_COMBATPISTOL`] = { "Player has been shot with a combat pistol", "shot" },
@@ -26,13 +26,13 @@ WEAPONS = {
     [`WEAPON_SNIPERRIFLE`] = { "Player has been shot by a sniper rifle", "shot" },
     [`WEAPON_HEAVYSNIPER`] = { "Player has been shot by a heavy sniper", "shot" },
     [`WEAPON_REMOTESNIPER`] = { "Player has been shot by a remote sniper", "shot" },
-    [`WEAPON_GRENADELAUNCHER`] = { "Player has been hit by a grenade launcher", "hit" },
+    [`WEAPON_GRENADELAUNCHER`] = { "Player has been hit by a grenade launcher", "beaten" },
     [`WEAPON_GRENADE`] = { "Player has been blown up by a grenade", "explosion" },
     [`WEAPON_STICKYBOMB`] = { "Player has been blown up by a sticky bomb", "explosion" },
     [`WEAPON_MOLOTOV`] = { "Player has been set on fire by a Molotov cocktail", "fire" },
-    [`WEAPON_RPG`] = { "Player has been hit by an RPG", "hit" },
+    [`WEAPON_RPG`] = { "Player has been hit by an RPG", "beaten" },
     [`WEAPON_MINIGUN`] = { "Player has been shot with a minigun", "shot" },
-    [`WEAPON_GRENADELAUNCHER_SMOKE`] = { "Player has been hit by a smoke grenade launcher", "hit" },
+    [`WEAPON_GRENADELAUNCHER_SMOKE`] = { "Player has been hit by a smoke grenade launcher", "beaten" },
     [`WEAPON_RAYPISTOL`] = { "Player has been shot by a ray pistol", "shot" },
     [`WEAPON_RAYCARBINE`] = { "Player has been shot by a ray carbine", "shot" },
     [`WEAPON_RAYMINIGUN`] = { "Player has been shot with a ray minigun", "shot" },
@@ -40,5 +40,5 @@ WEAPONS = {
     [`WEAPON_RAYASSAULTRIFLE`] = { "Player has been shot with a ray assault rifle", "shot" },
 
 
-    [-842959696] = { "Player has been fallen to death", "hit" },
+    [-842959696] = { "Player has been fallen to death", "beaten" },
 }
