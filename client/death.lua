@@ -88,6 +88,8 @@ local function respawnPlayer()
     local playerCoords = cache.coords or GetEntityCoords(playerPed)
 
     if Config.UseNewRespawnMethod then
+        local startTime = GetGameTimer()
+
         local ambulance = createAmbulance()
         local ambulanceDriver = createAmbulanceDriver(ambulance)
         while not DoesEntityExist(ambulanceDriver) do Wait(1) end
@@ -100,6 +102,12 @@ local function respawnPlayer()
             playerCoords = GetEntityCoords(playerPed)
             local dist = #(driverCoords - playerCoords)
 
+
+            print(GetGameTimer() - startTime)
+            if (GetGameTimer() - startTime) > 15000 then
+                break
+            end
+
             utils.debug(dist)
 
             if dist < 30 then
@@ -111,6 +119,8 @@ local function respawnPlayer()
         TaskLeaveVehicle(ambulanceDriver, ambulance, 64)
         TaskGoToCoordAnyMeans(ambulanceDriver, playerCoords.x, playerCoords.y, playerCoords.z, 10.0, 0, 0, 786603)
 
+        startTime = GetGameTimer()
+
         while true do
             local driverCoords = GetEntityCoords(ambulanceDriver)
             playerCoords = GetEntityCoords(playerPed)
@@ -118,16 +128,21 @@ local function respawnPlayer()
 
             utils.debug(dist)
 
+            print(GetGameTimer() - startTime)
+            if (GetGameTimer() - startTime) > 5000 then
+                break
+            end
+
             if dist < 2 then
                 break
             end
             Wait(1)
         end
 
-        Wait(1000)
-
-        DeleteEntity(ambulance)
-        DeleteEntity(ambulanceDriver)
+        SetTimeout(2000, function()
+            DeleteEntity(ambulance)
+            DeleteEntity(ambulanceDriver)
+        end)
     end
 
     if Config.RemoveItemsOnRespawn then
