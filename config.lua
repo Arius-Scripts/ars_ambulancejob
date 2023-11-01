@@ -114,7 +114,7 @@ Config.Hospitals = {
 		},
 		garage = {
 			['ems_garage_1'] = {
-				pedPos = vector4(295.2, -600.56, 42.32, 150.2),
+				pedPos = vector4(291.2237, -614.9087, 42.4234, 332.9413),
 				model = 'mp_m_weapexp_01',
 				spawn = vector4(294.28, -608.32, 43.32, 69.6),
 				deposit = vector3(294.28, -608.32, 43.32),

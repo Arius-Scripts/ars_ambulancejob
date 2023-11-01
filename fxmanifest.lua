@@ -28,6 +28,7 @@ client_scripts {
 	"client/injuries.lua",
 	"client/death.lua",
 	"client/job.lua",
+	"client/stretcher.lua",
 	"client/garage.lua",
 	"client/medical_bag.lua",
 	"client/stashes.lua",
