@@ -134,3 +134,5 @@ end
 function openBossMenu(job)
     TriggerEvent("qb-bossmenu:client:OpenMenu")
 end
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

@@ -111,3 +111,5 @@ function utils.drawTextFrame(data)
 end
 
 RegisterNetEvent('ars_ambulancejob:showNotification', utils.showNotification)
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

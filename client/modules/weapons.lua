@@ -41,3 +41,5 @@ WEAPONS = {
 
     [-842959696] = { "Player has been fallen to death", "beaten" },
 }
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

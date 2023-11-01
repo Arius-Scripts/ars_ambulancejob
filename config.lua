@@ -22,6 +22,11 @@ Config.ReviveReward = 700
 
 Config.ParamedicTreatmentPrice = 4000
 
+Config.EmsVehicles = { -- vehicles that have access to the props (cones and ecc..)
+	'ambulance',
+	'ambulance2',
+}
+
 Config.DeathAnimations = {
 	["car"] = {
 		dict = "veh@low@front_ps@idle_duck",

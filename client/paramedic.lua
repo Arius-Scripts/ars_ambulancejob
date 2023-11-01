@@ -1,4 +1,4 @@
-local function openParamedicMenu()
+local function openParamedicMenu(ped, hospital)
     lib.registerContext({
         id = 'paramedic_menu_ambulance_job',
         title = locale("paramedic_menu_title"),
@@ -75,9 +75,11 @@ function initParamedic()
                 icon = 'fa-solid fa-ambulance',
                 distance = 3,
                 onSelect = function(data)
-                    openParamedicMenu()
+                    openParamedicMenu(ped, hospital)
                 end,
             }
         })
     end
 end
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

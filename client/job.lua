@@ -330,3 +330,5 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(name)
     })
     PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset")
 end)
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

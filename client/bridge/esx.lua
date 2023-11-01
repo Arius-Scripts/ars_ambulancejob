@@ -142,3 +142,5 @@ end
 function openBossMenu(job)
     TriggerEvent('esx_society:openBossMenu', job, function(data, menu) end, { wash = false })
 end
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

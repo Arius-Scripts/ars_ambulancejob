@@ -33,3 +33,5 @@ local function createStashes()
     end
 end
 CreateThread(createStashes)
+
+-- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡
