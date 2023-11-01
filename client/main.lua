@@ -22,6 +22,8 @@ local function createZones()
                 if self.clothes then
                     initClothes(self.clothes, Config.EmsJobs)
                 end
+
+                initParamedic()
             end,
             onExit = function(self)
                 for k, v in pairs(peds) do

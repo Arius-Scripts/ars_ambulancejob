@@ -33,6 +33,7 @@ client_scripts {
 	"client/stashes.lua",
 	"client/shops.lua",
 	"client/clothing.lua",
+	"client/paramedic.lua",
 }
 
 server_scripts {

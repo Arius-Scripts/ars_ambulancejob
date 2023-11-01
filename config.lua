@@ -7,7 +7,7 @@ Config.Debug = false
 Config.ClothingScript = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.ReviveCommand = "revive"
 Config.EmsJobs = { "ambulance", "ems" }
-Config.RespawnTime = 0        -- in minutes
+Config.RespawnTime = 5        -- in minutes
 Config.UseInterDistressSystem = true
 Config.WaitTimeForNewCall = 5 -- minutes
 
@@ -19,6 +19,8 @@ Config.RemoveItemsOnRespawn = true
 
 Config.BaseInjuryReward = 150 -- changes if the injury value is higher then 1
 Config.ReviveReward = 700
+
+Config.ParamedicTreatmentPrice = 4000
 
 Config.DeathAnimations = {
 	["car"] = {
@@ -38,9 +40,13 @@ Config.DeathAnimations = {
 
 Config.Hospitals = {
 	["phillbox"] = {
+		paramedic = {
+			model = "s_m_m_scientist_01",
+			pos = vector4(312.0927, -596.1016, 42.2918, 338.7213),
+		},
 		zone = {
 			pos = vec3(299.0, -585.28, 43.28),
-			size = vec3(96.0, 79.0, 65.0),
+			size = vec3(200.0, 200.0, 200.0),
 		},
 		blip = {
 			enable = true,
@@ -52,7 +58,7 @@ Config.Hospitals = {
 		},
 		respawn = {
 			bedPoint = vector4(349.76, -583.44, 43.0, 150.04),
-			spawnPoint = vector4(348.84, -583.36, 43.32, 68.24)
+			spawnPoint = vector4(348.84, -583.36, 42.32, 68.24)
 		},
 		stash = {
 			['ems_stash_1'] = {

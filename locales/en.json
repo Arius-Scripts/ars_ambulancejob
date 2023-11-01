@@ -7,6 +7,7 @@
 	"not_enough_tweezers": "Short on Tweezers",
 	"not_enough_burncream": "Out of Burn Cream",
 	"not_enough_defibrillator": "Out of Defibrillators",
+	"not_enough_money": "You dont have enough money",
 	"injury_value": "Injury Severity",
 	"injury_cause": "Cause of Injury",
 	"injury_treat": "Treatment for Injury",
@@ -28,5 +29,10 @@
 	"revive_player": "Revive Patient",
 	"open_stash_label": "Open Stash",
 	"control_to_open_stash": "[E] to open stash",
-	"control_to_open_shop": "[E] to open shop"
+	"control_to_open_shop": "[E] to open shop",
+	"paramedic_interact_label": "Talk with parameidc",
+	"paramedic_menu_title": "Pramedic",
+	"get_treated_paramedic": "Get Treated",
+	"getting_treated": "Your getting checked by a paramedic",
+	"treated_by_paramedic": "Felling better"
 }
