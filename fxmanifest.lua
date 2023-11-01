@@ -17,7 +17,7 @@ shared_scripts {
 }
 
 client_scripts {
-	"client/modules/deathCause.lua",
+	"client/modules/weapons.lua",
 	"client/modules/utils.lua",
 
 	"client/main.lua",

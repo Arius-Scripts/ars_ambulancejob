@@ -26,6 +26,10 @@ local function checkInjuries(data)
                                 metadata = { v.value .. "%" },
                             },
                             {
+                                title = locale("injury_cause"),
+                                description = v.cause,
+                            },
+                            {
                                 title = locale("injury_treat"),
                                 onSelect = function()
                                     local dataToSend = {}
@@ -121,7 +125,7 @@ local function checkPatient(target)
         }
 
         options[#options + 1] = {
-            title = WEAPONS[data.killedBy] or "Not found",
+            title = WEAPONS[data.killedBy][1] or "Not found",
             readOnly = true,
             icon = 'skull',
 
