@@ -63,6 +63,29 @@ Config.Hospitals = {
 		},
 		pharmacy = {
 			["ems_shop_1"] = {
+				job = true,
+				label = "Pharmacy",
+				grade = 0, -- works only if job true
+				pos = vector3(315.5516, -598.6013, 43.2918),
+                blip = {
+                    enable = false,
+                    name = 'Pharmacy',
+                    type = 61,
+                    scale = 0.7,
+                    color = 2,
+                    pos = vector3(315.5516, -598.6013, 43.2918),
+                },
+				items = {
+                    { name = 'medicalbag', price = 10 },
+                    { name = 'bandage', price = 10 },
+                    { name = 'defibrillator', price = 10 },
+                    { name = 'tweezers', price = 10 },
+                    { name = 'burncream', price = 10 },
+                    { name = 'suturekit', price = 10 },
+                    { name = 'icepack', price = 10 },
+				}
+			},
+			["ems_shop_2"] = {
 				job = false,
 				label = "Pharmacy",
 				grade = 0, -- works only if job true
@@ -76,10 +99,9 @@ Config.Hospitals = {
                     pos = vector3(303.84, -597.6, 43.28),
                 },
 				items = {
-                    { name = 'medikit', price = 10 },
                     { name = 'bandage', price = 10 },
 				}
-			}
+			},
 		},
 		garage = {
 			['ems_garage_1'] = {
