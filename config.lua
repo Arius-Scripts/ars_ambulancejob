@@ -16,6 +16,7 @@ Config.MedicBagItem = "medicalbag"
 
 
 Config.BaseInjuryReward = 150 -- changes if the injury value is higher then 1
+Config.ReviveReward = 700  
 
 Config.DeathAnimations = {
 	["car"] = {

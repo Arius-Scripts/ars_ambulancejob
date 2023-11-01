@@ -45,6 +45,10 @@ local function checkPatient(target)
             icon = 'medkit',
             iconColor = "#5BC0DE",
             onSelect = function()
+                local count = exports.ox_inventory:Search('count', "defibrillator")
+                if count < 1 then return utils.showNotification(locale("not_defibrillator")) end
+
+
                 local playerPed = cache.ped or PlayerPedId()
                 local playerHeading = GetEntityHeading(playerPed)
                 local playerLocation = GetEntityForwardVector(playerPed)
@@ -195,14 +199,6 @@ end
 exports("openDistressCalls", openDistressCalls)
 
 
-RegisterCommand("dis", function()
-    openDistressCalls()
-end)
-
-RegisterCommand("dis2", function()
-    createDistressCall()
-end)
-
 exports.ox_target:addGlobalPlayer({
     {
         name = 'check_suspect',
@@ -252,6 +248,10 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
         Wait(1000)
 
         TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 10.0, -10.0, -1, 0, 0, 0, 0, 0)
+
+
+        utils.addRemoveItem("remove", "defibrillator", 1)
+        utils.addRemoveItem("remove", "money", Config.ReviveReward)
     elseif data.anim == "dead" then
         utils.showNotification("Getting revived")
 
