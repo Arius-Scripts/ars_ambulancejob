@@ -59,6 +59,6 @@
     weight = 200,
     stack = true,
     client = {
-        exports.ars_ambulancejob:openDistressCalls()
+        export = 'ars_ambulancejob.openDistressCalls'
     }
 },
