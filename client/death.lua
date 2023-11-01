@@ -1,6 +1,6 @@
 function stopPlayerDeath()
     player.isDead = false
-    player.injuries = {}
+    -- player.injuries = {}
 
     local playerPed = cache.ped or PlayerPedId()
 
