@@ -31,7 +31,7 @@ function stopPlayerDeath()
     DoScreenFadeIn(700)
     TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 8.0, -8.0, -1, 0, 0, 0, 0, 0)
 
-    LocalPlayer.state:set("injuries", {}, true)
+    -- LocalPlayer.state:set("injuries", {}, true)
     LocalPlayer.state:set("dead", false, true)
     player.distressCallTime = nil
 end
