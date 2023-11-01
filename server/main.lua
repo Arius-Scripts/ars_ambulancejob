@@ -134,13 +134,13 @@ exports.ox_inventory:registerHook('swapItems', function(payload)
 end, {})
 
 
-RegisterNetEvent("ars_ambulancejob:placedMeidcalBag", function(toggle)
+RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
     if not hasJob(source, Config.EmsJobs) then return end
 
-    if toggle then
-        exports.ox_inventory:RemoveItem(source, "medicalbag", 1)
+    if data.toggle then
+        exports.ox_inventory:RemoveItem(source, data.item, data.quantity)
     else
-        exports.ox_inventory:AddItem(source, "medicalbag", 1)
+        exports.ox_inventory:AddItem(source, data.item, data.quantity)
     end
 end)
 

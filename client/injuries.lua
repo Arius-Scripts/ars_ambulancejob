@@ -1,3 +1,27 @@
+local function checkInjuryCause(cause)
+    local item = ""
+
+    if cause == "beaten" then
+        item = "icepack"
+    elseif cause == "stabbed" then
+        item = "suturekit"
+    elseif cause == "shot" then
+        item = "tweezers"
+    elseif cause == "fire" then
+        item = "burncream"
+    end
+
+    utils.debug(item, cause)
+
+    local count = exports.ox_inventory:Search('count', item)
+    if count < 1 then return utils.showNotification(locale("not_" .. item)) end
+
+    utils.addRemoveItem("remove", item, 1)
+
+    return true
+end
+
+
 function checkInjuries(data)
     local injuries = {}
 
@@ -32,13 +56,33 @@ function checkInjuries(data)
                             {
                                 title = locale("injury_treat"),
                                 onSelect = function()
-                                    local dataToSend = {}
-                                    dataToSend.targetServerId = data.target
-                                    dataToSend.injury = true
-                                    dataToSend.bone = v.bone
-                                    TriggerServerEvent("ars_ambulancejob:healPlayer", dataToSend)
+                                    if checkInjuryCause(v.cause) then
+                                        if lib.progressBar({
+                                                duration = 2000 * (v.value / 10),
+                                                label = locale("treating_injury"),
+                                                useWhileDead = false,
+                                                canCancel = true,
+                                                disable = {
+                                                    car = true,
+                                                    move = true
+                                                },
 
-                                    utils.debug("Injury treated " .. dataToSend.bone)
+                                            })
+                                        then
+                                            local dataToSend = {}
+                                            dataToSend.targetServerId = data.target
+                                            dataToSend.injury = true
+                                            dataToSend.bone = v.bone
+                                            TriggerServerEvent("ars_ambulancejob:healPlayer", dataToSend)
+
+                                            utils.addRemoveItem("add", "money", (100 * (v.value / 10)))
+
+                                            utils.showNotification(locale("injurie_treated"))
+                                            utils.debug("Injury treated " .. dataToSend.bone)
+                                        else
+                                            utils.showNotification(locale("operation_canceled"))
+                                        end
+                                    end
                                 end
 
                             }
@@ -64,22 +108,8 @@ end
 function treatInjury(bone)
     if not player.injuries[bone] then return end -- secure check
 
-    local playerPed = cache.ped or PlayerPedId()
-
-    local currentHealth = GetEntityHealth(playerPed)
-    local healthToAdd = player.injuries[bone].value / 2
-    local newHealth = math.min(currentHealth + healthToAdd, 100)
-
-    player.bleedingLvl -= player.injuries[bone].value / 10
-
     player.injuries[bone] = nil
     LocalPlayer.state:set("injuries", player.injuries, true)
-
-    if player.bleedingLvl <= 5 then
-        toggleLimpWalk(false)
-    end
-
-    SetEntityHealth(playerPed, newHealth)
 end
 
 function updateInjuries(victim, weapon)

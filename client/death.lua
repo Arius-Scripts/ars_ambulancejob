@@ -182,7 +182,7 @@ AddEventHandler('gameEventTriggered', function(event, data)
     if event ~= 'CEventNetworkEntityDamage' then return end
 
     local victim, victimDied, weapon = data[1], data[4], data[7]
-    print(weapon)
+    utils.debug(weapon)
 
 
     if not IsPedAPlayer(victim) then return end

@@ -2,20 +2,20 @@ lib.locale()
 
 Config = {}
 
-Config.Debug = true
+Config.Debug = false
 
 Config.ClothingScript = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.ReviveCommand = "revive"
 Config.EmsJobs = { "ambulance", "ems" }
-Config.RespawnTime = 5 -- in minutes
+Config.RespawnTime = 5        -- in minutes
 Config.UseInterDistressSystem = true
 Config.WaitTimeForNewCall = 5 -- minutes
 
 Config.MedicBagProp = "xm_prop_x17_bag_med_01a"
 Config.MedicBagItem = "medicalbag"
 
-Config.LimpAnim = "move_m@injured"
-Config.StartLimp = 4
+
+Config.BaseInjuryReward = 150 -- changes if the injury value is higher then 1
 
 Config.DeathAnimations = {
 	["car"] = {
@@ -51,7 +51,7 @@ Config.Hospitals = {
 			bedPoint = vector4(349.76, -583.44, 43.0, 150.04),
 			spawnPoint = vector4(348.84, -583.36, 43.32, 68.24)
 		},
-        stash = {
+		stash = {
 			['ems_stash_1'] = {
 				slots = 50,
 				weight = 50, -- kg
@@ -67,22 +67,22 @@ Config.Hospitals = {
 				label = "Pharmacy",
 				grade = 0, -- works only if job true
 				pos = vector3(315.5516, -598.6013, 43.2918),
-                blip = {
-                    enable = false,
-                    name = 'Pharmacy',
-                    type = 61,
-                    scale = 0.7,
-                    color = 2,
-                    pos = vector3(315.5516, -598.6013, 43.2918),
-                },
+				blip = {
+					enable = false,
+					name = 'Pharmacy',
+					type = 61,
+					scale = 0.7,
+					color = 2,
+					pos = vector3(315.5516, -598.6013, 43.2918),
+				},
 				items = {
-                    { name = 'medicalbag', price = 10 },
-                    { name = 'bandage', price = 10 },
-                    { name = 'defibrillator', price = 10 },
-                    { name = 'tweezers', price = 10 },
-                    { name = 'burncream', price = 10 },
-                    { name = 'suturekit', price = 10 },
-                    { name = 'icepack', price = 10 },
+					{ name = 'medicalbag',    price = 10 },
+					{ name = 'bandage',       price = 10 },
+					{ name = 'defibrillator', price = 10 },
+					{ name = 'tweezers',      price = 10 },
+					{ name = 'burncream',     price = 10 },
+					{ name = 'suturekit',     price = 10 },
+					{ name = 'icepack',       price = 10 },
 				}
 			},
 			["ems_shop_2"] = {
@@ -90,16 +90,16 @@ Config.Hospitals = {
 				label = "Pharmacy",
 				grade = 0, -- works only if job true
 				pos = vector3(303.84, -597.6, 43.28),
-                blip = {
-                    enable = true,
-                    name = 'Pharmacy',
-                    type = 61,
-                    scale = 0.7,
-                    color = 2,
-                    pos = vector3(303.84, -597.6, 43.28),
-                },
+				blip = {
+					enable = true,
+					name = 'Pharmacy',
+					type = 61,
+					scale = 0.7,
+					color = 2,
+					pos = vector3(303.84, -597.6, 43.28),
+				},
 				items = {
-                    { name = 'bandage', price = 10 },
+					{ name = 'bandage', price = 10 },
 				}
 			},
 		},
@@ -202,16 +202,11 @@ Config.Hospitals = {
 	},
 }
 
-Config.BleedingWeapons = {
-	[`WEAPON_PISTOL`],
-	[`WEAPON_PISTOL_MK2`]
-}
-
 
 Config.BodyParts = {
 	["0"] = { id = "hip", label = "Damaged Hipbone", levels = { ["default"] = "Damaged" } },          -- hip bone,
 	["10706"] = { id = "rclavicle", label = "Right Clavicle", levels = { ["default"] = "Damaged" } }, --right clavicle
-	["64729"] = { id = "lclavicle", label = "Left Clavicle", levels = { ["default"] = "Damaged" } }, --right clavicle
+	["64729"] = { id = "lclavicle", label = "Left Clavicle", levels = { ["default"] = "Damaged" } },  --right clavicle
 	["14201"] = { id = "lfoot", label = "Left Foot", levels = { ["default"] = "Damaged" } },          -- left foot
 	["18905"] = { id = "lhand", label = "Left Hand", levels = { ["default"] = "Damaged" } },          -- left hand
 	["24816"] = { id = "lbdy", label = "Lower chest", levels = { ["default"] = "Damaged" } },         -- lower chest
@@ -233,19 +228,18 @@ Config.BodyParts = {
 }
 
 function Config.SendDistressCall(msg)
---[--] -- Quasar
+	--[--] -- Quasar
 
 	-- TriggerServerEvent('qs-smartphone:server:sendJobAlert', {message = msg, location = GetEntityCoords(PlayerPedId())}, "ambulance")
 
 
---[--] -- GKS
-    -- local myPos = GetEntityCoords(PlayerPedId())
-    -- local GPS = 'GPS: ' .. myPos.x .. ', ' .. myPos.y
+	--[--] -- GKS
+	-- local myPos = GetEntityCoords(PlayerPedId())
+	-- local GPS = 'GPS: ' .. myPos.x .. ', ' .. myPos.y
 
-    -- ESX.TriggerServerCallback('gksphone:namenumber', function(Races)
-    --     local name = Races[2].firstname .. ' ' .. Races[2].lastname
+	-- ESX.TriggerServerCallback('gksphone:namenumber', function(Races)
+	--     local name = Races[2].firstname .. ' ' .. Races[2].lastname
 
-    --     TriggerServerEvent('gksphone:jbmessage', name, Races[1].phone_number, msg, '', GPS, "ambulance")
-    -- end)
-
+	--     TriggerServerEvent('gksphone:jbmessage', name, Races[1].phone_number, msg, '', GPS, "ambulance")
+	-- end)
 end
