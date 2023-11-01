@@ -98,4 +98,4 @@ function utils.drawTextFrame(data)
     DrawText(data.x, data.y)
 end
 
-RegisterNetEvent('ars_policejob:showNotification', utils.showNotification)
+RegisterNetEvent('ars_ambulancejob:showNotification', utils.showNotification)
