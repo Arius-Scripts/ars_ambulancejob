@@ -121,7 +121,7 @@ function updateInjuries(victim, weapon)
 
     if damagedBone then
         if not player.injuries[damagedBone.id] then
-            player.injuries[damagedBone.id] = { bone = damagedBone.id, label = damagedBone.label, desc = damagedBone.levels["default"], value = 10, cause = WEAPONS[weapon][2] }
+            player.injuries[damagedBone.id] = { bone = damagedBone.id, label = damagedBone.label, desc = damagedBone.levels["default"], value = player.isDead and 100 or 10, cause = WEAPONS[weapon][2] }
         else
             local newVal = math.min(player.injuries[damagedBone.id].value + 10, 100)
             player.injuries[damagedBone.id].value = newVal

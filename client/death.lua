@@ -112,61 +112,63 @@ local function initPlayerDeath()
     local time = 60000 * Config.RespawnTime
     local deathTime = GetGameTimer()
 
-    while player.isDead do
-        local sleep = 1500
+    CreateThread(function()
+        while player.isDead do
+            local sleep = 1500
 
-        if not player.gettingRevived then
-            sleep = 0
-            local anim = cache.vehicle and Config.DeathAnimations["car"] or Config.DeathAnimations["normal"]
+            if not player.gettingRevived then
+                sleep = 0
+                local anim = cache.vehicle and Config.DeathAnimations["car"] or Config.DeathAnimations["normal"]
 
-            if not IsEntityPlayingAnim(playerPed, anim.dict, anim.clip, 3) then
-                TaskPlayAnim(playerPed, anim.dict, anim.clip, 50.0, 8.0, -1, 1, 1.0, false, false, false)
-            end
+                if not IsEntityPlayingAnim(playerPed, anim.dict, anim.clip, 3) then
+                    TaskPlayAnim(playerPed, anim.dict, anim.clip, 50.0, 8.0, -1, 1, 1.0, false, false, false)
+                end
 
-            local elapsedSeconds = math.floor((GetGameTimer() - deathTime) / 1000)
-
-            utils.drawTextFrame({
-                x = 0.5,
-                y = 0.9,
-                msg = "Press ~r~E~s~ to call medics"
-            })
-
-            if IsControlJustPressed(0, 38) then
-                createDistressCall()
-            end
-
-            if GetGameTimer() - deathTime >= time then
-                EnableControlAction(0, 47, true)
+                local elapsedSeconds = math.floor((GetGameTimer() - deathTime) / 1000)
 
                 utils.drawTextFrame({
                     x = 0.5,
-                    y = 0.86,
-                    msg = "Press ~r~G~s~ to respawn"
+                    y = 0.9,
+                    msg = "Press ~r~E~s~ to call medics"
                 })
 
-                if IsControlJustPressed(0, 47) then
-                    local confermation = lib.alertDialog({
-                        header = 'Top G',
-                        content = 'Are you sure you want to respawn!',
-                        centered = true,
-                        cancel = true
+                if IsControlJustPressed(0, 38) then
+                    createDistressCall()
+                end
+
+                if GetGameTimer() - deathTime >= time then
+                    EnableControlAction(0, 47, true)
+
+                    utils.drawTextFrame({
+                        x = 0.5,
+                        y = 0.86,
+                        msg = "Press ~r~G~s~ to respawn"
                     })
 
-                    if confermation == "confirm" then
-                        respawnPlayer()
-                    end
-                end
-            else
-                utils.drawTextFrame({
-                    x = 0.5,
-                    y = 0.86,
-                    msg = ("Respawn available in ~b~ %s seconds~s~"):format(math.floor((time / 1000) - elapsedSeconds))
-                })
-            end
-        end
+                    if IsControlJustPressed(0, 47) then
+                        local confermation = lib.alertDialog({
+                            header = 'Top G',
+                            content = 'Are you sure you want to respawn!',
+                            centered = true,
+                            cancel = true
+                        })
 
-        Wait(sleep)
-    end
+                        if confermation == "confirm" then
+                            respawnPlayer()
+                        end
+                    end
+                else
+                    utils.drawTextFrame({
+                        x = 0.5,
+                        y = 0.86,
+                        msg = ("Respawn available in ~b~ %s seconds~s~"):format(math.floor((time / 1000) - elapsedSeconds))
+                    })
+                end
+            end
+
+            Wait(sleep)
+        end
+    end)
 end
 
 function onPlayerLoaded()
@@ -193,8 +195,6 @@ AddEventHandler('gameEventTriggered', function(event, data)
 
     local victimDiedAndPlayer = victimDied and NetworkGetPlayerIndexFromPed(victim) == playerPed and (IsPedDeadOrDying(victim, true) or IsPedFatallyInjured(victim))
 
-    updateInjuries(victim, weapon)
-
     if victimDiedAndPlayer then
         local deathData = {}
 
@@ -205,6 +205,8 @@ AddEventHandler('gameEventTriggered', function(event, data)
         LocalPlayer.state:set("dead", true, true)
         initPlayerDeath()
     end
+
+    updateInjuries(victim, weapon)
 
     utils.debug(LocalPlayer.state.injuries)
 end)
