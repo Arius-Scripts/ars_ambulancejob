@@ -311,5 +311,8 @@ AddEventHandler('gameEventTriggered', function(event, data)
 
     updateInjuries(victim, weapon)
 
-    utils.debug(LocalPlayer.state.injuries)
+    -- utils.debug(LocalPlayer.state.injuries)
 end)
+
+
+exports("isDead", player.isDead)

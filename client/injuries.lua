@@ -109,7 +109,7 @@ function treatInjury(bone)
     if not player.injuries[bone] then return end -- secure check
 
     player.injuries[bone] = nil
-    LocalPlayer.state:set("injuries", player.injuries, true)
+    -- LocalPlayer.state:set("injuries", player.injuries, true)
 end
 
 function updateInjuries(victim, weapon)
@@ -128,6 +128,6 @@ function updateInjuries(victim, weapon)
             player.injuries[damagedBone.id].desc = damagedBone.levels[tostring(newVal)] or damagedBone.levels["default"]
         end
 
-        LocalPlayer.state:set("injuries", player.injuries, true)
+        -- LocalPlayer.state:set("injuries", player.injuries, true)
     end
 end
