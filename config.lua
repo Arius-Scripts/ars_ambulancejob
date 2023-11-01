@@ -7,7 +7,7 @@ Config.Debug = false
 Config.ClothingScript = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.ReviveCommand = "revive"
 Config.EmsJobs = { "ambulance", "ems" }
-Config.RespawnTime = 5        -- in minutes
+Config.RespawnTime = 0        -- in minutes
 Config.UseInterDistressSystem = true
 Config.WaitTimeForNewCall = 5 -- minutes
 
@@ -16,7 +16,6 @@ Config.MedicBagItem = "medicalbag"
 
 Config.HelpCommand = "911"
 Config.RemoveItemsOnRespawn = true
-Config.UseNewRespawnMethod = false
 
 Config.BaseInjuryReward = 150 -- changes if the injury value is higher then 1
 Config.ReviveReward = 700
