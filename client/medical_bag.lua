@@ -22,6 +22,7 @@ local function placeMedicalBag()
     medicBag = CreateObjectNoOffset(Config.MedicBagProp, coords.x, coords.y, coords.z, true, false)
     PlaceObjectOnGroundProperly(medicBag)
 
+    TriggerServerEvent("ars_ambulancejob:placedMeidcalBag", true)
 
     exports.ox_target:addLocalEntity(medicBag, {
         {
@@ -43,6 +44,7 @@ local function placeMedicalBag()
                 Wait(900)
                 DeleteEntity(data.entity)
                 ClearPedTasks(playerPed)
+                TriggerServerEvent("ars_ambulancejob:placedMeidcalBag", false)
             end
         },
     })

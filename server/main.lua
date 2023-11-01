@@ -134,6 +134,16 @@ exports.ox_inventory:registerHook('swapItems', function(payload)
 end, {})
 
 
+RegisterNetEvent("ars_ambulancejob:placedMeidcalBag", function(toggle)
+    if not hasJob(source, Config.EmsJobs) then return end
+
+    if toggle then
+        exports.ox_inventory:RemoveItem(source, "medicalbag", 1)
+    else
+        exports.ox_inventory:AddItem(source, "medicalbag", 1)
+    end
+end)
+
 
 AddEventHandler('onServerResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then
