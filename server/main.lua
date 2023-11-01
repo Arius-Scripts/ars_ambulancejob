@@ -145,6 +145,13 @@ RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
 end)
 
 
+RegisterNetEvent("ars_ambulancejob:removeInventory", function()
+    if player[source].isDead and Config.RemoveItemsOnRespawn then
+        print("d")
+        exports.ox_inventory:ClearInventory(source)
+    end
+end)
+
 AddEventHandler('onServerResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then
         for index, hospital in pairs(Config.Hospitals) do

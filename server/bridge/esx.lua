@@ -38,8 +38,6 @@ function updateStatus(data)
 
     player[source].isDead = data.status
 
-
-
     if data.status == true then
         player[source].killedBy = data.killedBy
     end

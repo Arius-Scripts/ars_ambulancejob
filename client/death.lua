@@ -45,10 +45,97 @@ RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
 end)
 
 
+
+if Config.UseNewRespawnMethod then
+    function createAmbulance()
+        local vehicleModel = "ambulance"
+        lib.requestModel(vehicleModel)
+
+        local playerPed = cache.ped or PlayerPedId()
+        local playerCoords = cache.coords or GetEntityCoords(playerPed)
+
+        local _, vector = GetNthClosestVehicleNode(playerCoords.x, playerCoords.y, playerCoords.z, math.random(50, 70), 0, 0, 0)
+        local sX, sY, sZ = table.unpack(vector)
+
+        ambulance = CreateVehicle(vehicleModel, sX, sY, sZ, 0, false, true)
+
+
+        SetEntityAsMissionEntity(ambulance, true, true)
+        SetVehicleEngineOn(ambulance, true, true, false)
+
+        SetModelAsNoLongerNeeded(ambulance)
+
+        SetVehicleSiren(ambulance, true)
+
+        return ambulance
+    end
+
+    function createAmbulanceDriver(vehicle)
+        local pedModel = "s_m_m_paramedic_01"
+        lib.requestModel(pedModel)
+
+        local ped = CreatePedInsideVehicle(vehicle, 26, pedModel, -1, true, false)
+        SetAmbientVoiceName(ped, "A_M_M_EASTSA_02_LATINO_FULL_01")
+        SetBlockingOfNonTemporaryEvents(ped, true)
+        SetEntityAsMissionEntity(ped, true, true)
+
+        SetModelAsNoLongerNeeded(pedModel)
+        return ped
+    end
+end
 local function respawnPlayer()
+    local playerPed = cache.ped or PlayerPedId()
+    local playerCoords = cache.coords or GetEntityCoords(playerPed)
+
+    if Config.UseNewRespawnMethod then
+        local ambulance = createAmbulance()
+        local ambulanceDriver = createAmbulanceDriver(ambulance)
+        while not DoesEntityExist(ambulanceDriver) do Wait(1) end
+
+        TaskVehicleDriveToCoord(ambulanceDriver, ambulance, playerCoords.x, playerCoords.y, playerCoords.z, 40.0, 0, GetEntityModel(ambulance), 262144, 10.0)
+        SetPedKeepTask(ambulanceDriver, true)
+
+        while true do
+            local driverCoords = GetEntityCoords(ambulanceDriver)
+            playerCoords = GetEntityCoords(playerPed)
+            local dist = #(driverCoords - playerCoords)
+
+            utils.debug(dist)
+
+            if dist < 30 then
+                break
+            end
+            Wait(1)
+        end
+
+        TaskLeaveVehicle(ambulanceDriver, ambulance, 64)
+        TaskGoToCoordAnyMeans(ambulanceDriver, playerCoords.x, playerCoords.y, playerCoords.z, 10.0, 0, 0, 786603)
+
+        while true do
+            local driverCoords = GetEntityCoords(ambulanceDriver)
+            playerCoords = GetEntityCoords(playerPed)
+            local dist = #(driverCoords - playerCoords)
+
+            utils.debug(dist)
+
+            if dist < 2 then
+                break
+            end
+            Wait(1)
+        end
+
+        Wait(1000)
+
+        DeleteEntity(ambulance)
+        DeleteEntity(ambulanceDriver)
+    end
+
+    if Config.RemoveItemsOnRespawn then
+        TriggerServerEvent("ars_ambulancejob:removeInventory")
+    end
+
     lib.requestAnimDict("anim@gangops@morgue@table@")
 
-    local playerPed = cache.ped or PlayerPedId()
     local hospital = utils.getClosestHospital()
 
     DoScreenFadeOut(500)

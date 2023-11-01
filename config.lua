@@ -15,6 +15,8 @@ Config.MedicBagProp = "xm_prop_x17_bag_med_01a"
 Config.MedicBagItem = "medicalbag"
 
 Config.HelpCommand = "911"
+Config.RemoveItemsOnRespawn = true
+Config.UseNewRespawnMethod = false
 
 Config.BaseInjuryReward = 150 -- changes if the injury value is higher then 1
 Config.ReviveReward = 700
