@@ -293,6 +293,8 @@ end)
 
 
 RegisterNetEvent("ars_ambulancejob:createDistressCall", function(name)
+    if not hasJob(Config.EmsJobs) then return end
+
     lib.notify({
         title = "New Distress Call",
         description = ("%s sent a distress call"):format(name),
