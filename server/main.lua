@@ -147,10 +147,23 @@ end)
 
 RegisterNetEvent("ars_ambulancejob:removeInventory", function()
     if player[source].isDead and Config.RemoveItemsOnRespawn then
-        print("d")
         exports.ox_inventory:ClearInventory(source)
     end
 end)
+
+RegisterNetEvent("ars_ambulancejob:putOnStretcher", function(data)
+    if not player[data.target].isDead then return end
+    TriggerClientEvent("ars_ambulancejob:putOnStretcher", data.target, data.toggle)
+end)
+
+RegisterNetEvent("ars_ambulancejob:togglePatientFromVehicle", function(data)
+    print(data.target)
+    if not player[data.target].isDead then return end
+
+    TriggerClientEvent("ars_ambulancejob:togglePatientFromVehicle", data.target, data.vehicle)
+end)
+
+
 
 AddEventHandler('onServerResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then

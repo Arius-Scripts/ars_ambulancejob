@@ -1,34 +1,6 @@
-function takeStretcher()
-    local stretcherModel = lib.requestModel("prop_ld_binbag_01")
-
-    local playerPed = cache.ped or PlayerPedId()
-    local playerCoords = cache.coords or GetEntityCoords(playerPed)
-    local stretcher = CreateObject(stretcherModel, playerCoords.x, playerCoords.y, playerCoords.z, false, false, false)
-    AttachEntityToEntity(stretcher, playerPed, GetPedBoneIndex(playerPed, 28422), -0.1681134, -1.0495786, -0.426176, 12.740244, 4.5091583, -8.204815, true, true, false, true, 1, true)
-
-    while IsEntityAttachedToEntity(stretcher, playerPed) do
-        Wait(0)
-        if not IsEntityPlayingAnim(playerPed, 'anim@heists@box_carry@', 'idle', 3) then
-            TaskPlayAnim(playerPed, 'anim@heists@box_carry@', 'idle', 8.0, 8.0, -1, 50, 0, false, false, false)
-        end
-        if IsControlJustPressed(0, 38) then
-            DetachEntity(stretcher, true, true)
-            ClearPedTasks(playerPed)
-            SetEntityCoords(stretcher, GetEntityCoords(stretcher) + vector3(0.0, 0.0, -0.1))
-            exports.ox_target:addLocalEntity(stretcher, {
-                {
-                    name = 'paramedicGuyAmbulanceJob' .. ped,
-                    label = locale('paramedic_interact_label'),
-                    icon = 'fa-solid fa-ambulance',
-                    distance = 3,
-                    onSelect = function(data)
-                        print("dsa")
-                    end,
-                }
-            })
-        end
-    end
-end
+local usingStretcher = false
+local currentStretcher = nil
+local patientOnStretcher = nil
 
 local function isEmsVehicle(vehicle)
     local vehicleModel = GetEntityModel(vehicle)
@@ -40,26 +12,234 @@ local function isEmsVehicle(vehicle)
 
     return false
 end
+local function useStretcher(stretcher)
+    usingStretcher = true
+    currentStretcher = stretcher
 
+    local playerPed = cache.ped or PlayerPedId()
+    local dict = lib.requestAnimDict("anim@heists@box_carry@")
+
+    AttachEntityToEntity(stretcher, playerPed, GetPedBoneIndex(playerPed, 28422), -0.1681134, -1.0495786, -0.516176, 12.740244, 4.5091583, -8.204815, true, true, false, true, 1, true)
+    SetEntityAsMissionEntity(stretcher)
+
+
+    lib.showTextUI('[G] - Place stretcher on the ground', {
+        position = "top-center",
+        icon = 'bed',
+        style = {
+            borderRadius = '8px',
+            backgroundColor = '#48BB78',
+            color = 'white',
+            padding = '10px',
+            boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)'
+        }
+    })
+
+    CreateThread(function()
+        while IsEntityAttachedToEntity(stretcher, playerPed) do
+            if IsControlJustPressed(0, 47) then
+                DetachEntity(stretcher, true, true)
+                ClearPedTasks(playerPed)
+                PlaceObjectOnGroundProperly(stretcher)
+                FreezeEntityPosition(stretcher, true)
+                usingStretcher = false
+                lib.hideTextUI()
+            end
+            Wait(1)
+        end
+    end)
+
+    while IsEntityAttachedToEntity(stretcher, playerPed) do
+        if not IsEntityPlayingAnim(playerPed, dict, 'idle', 3) then
+            TaskPlayAnim(playerPed, dict, 'idle', 8.0, 8.0, -1, 50, 0, false, false, false)
+        end
+
+        Wait(1000)
+    end
+end
+
+function toggleStretcher(toggle)
+    local playerPed = cache.ped or PlayerPedId()
+    local playerCoords = cache.coords or GetEntityCoords(playerPed)
+    if toggle then
+        local stretcherModel = lib.requestModel("prop_ld_binbag_01")
+
+        local stretcher = CreateObject(stretcherModel, playerCoords.x, playerCoords.y, playerCoords.z, true, false, false)
+        currentStretcher = stretcher
+
+        useStretcher(stretcher)
+    else
+        ClearPedTasks(playerPed)
+        DeleteEntity(currentStretcher)
+
+        usingStretcher = false
+        lib.hideTextUI()
+    end
+end
+
+function putOnStretcher(toggle, target)
+    local data = {}
+    data.toggle = toggle
+    data.target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(target))
+    print(data.target)
+    TriggerServerEvent("ars_ambulancejob:putOnStretcher", data)
+    patientOnStretcher = toggle and target or nil
+end
+
+RegisterNetEvent("ars_ambulancejob:togglePatientFromVehicle", function(veh)
+    local playerPed = cache.ped or PlayerPedId()
+    local vehicle = NetworkGetEntityFromNetworkId(veh)
+    local currentVehicle = cache.vehicle
+    local seatToGo = nil
+
+    DetachEntity(playerPed)
+
+    utils.debug(currentVehicle)
+
+    if not currentVehicle then
+        local seats = GetVehicleMaxNumberOfPassengers(vehicle)
+        for i = 0, seats - 1 do
+            if IsVehicleSeatFree(vehicle, i) then
+                seatToGo = i
+                break
+            end
+        end
+
+        if seatToGo then
+            TaskWarpPedIntoVehicle(playerPed, vehicle, seatToGo)
+        end
+    else
+        TaskLeaveVehicle(playerPed, currentVehicle, 16)
+    end
+end)
+
+RegisterNetEvent("ars_ambulancejob:putOnStretcher", function(toggle)
+    local playerPed = cache.ped or PlayerPedId()
+    local playerCoords = cache.coords or GetEntityCoords(playerPed)
+
+    if toggle then
+        local closestStretcher = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 5.5, `prop_ld_binbag_01`, false)
+        print(closestStretcher)
+        AttachEntityToEntity(playerPed, closestStretcher, 0, 0, 0.0, 1.0, 195.0, 0.0, 180.0, 0.0, false, false, false, false, 2)
+    else
+        DetachEntity(playerPed)
+        ClearPedTasks(playerPed)
+    end
+end)
 local function vehicleInteractions()
     local options = {
         {
-            name = 'ars_ambulancejob_stretcher',
+            name = 'ars_ambulancejob_take_stretcher',
             icon = 'fa-solid fa-car-side',
             label = locale('take_stretcher'),
             groups = Config.EmsJobs,
             canInteract = function(entity, distance, coords, name)
-                return isEmsVehicle(entity)
+                return isEmsVehicle(entity) and not usingStretcher
             end,
             onSelect = function(data)
-                takeStretcher()
+                local vehicle = data.entity
+                if not Entity(vehicle).state.stretcher then Entity(vehicle).state.stretcher = Config.AmbulanceStretchers end
+                if Entity(vehicle).state.stretcher < 1 then return utils.showNotification(locale("no_stretcher_found")) end
+
+                toggleStretcher(true)
+
+                Entity(vehicle).state.stretcher -= 1
             end
-        }
+        },
+        {
+            name = 'ars_ambulancejob_put_stretcher',
+            icon = 'fa-solid fa-car-side',
+            label = locale('put_stretcher'),
+            groups = Config.EmsJobs,
+            canInteract = function(entity, distance, coords, name)
+                return isEmsVehicle(entity) and usingStretcher and not patientOnStretcher
+            end,
+            onSelect = function(data)
+                local vehicle = data.entity
+                if Entity(vehicle).state.stretcher >= Config.AmbulanceStretchers then return utils.showNotification(locale("stretcher_limit_reached")) end
+
+                Entity(vehicle).state.stretcher += 1
+
+                toggleStretcher(false)
+            end
+        },
+        {
+            name = 'ars_ambulancejob_put_patient_in_vehicle',
+            icon = 'fa-solid fa-car-side',
+            label = locale('put_patient_in_vehicle'),
+            groups = Config.EmsJobs,
+            canInteract = function(entity, distance, coords, name)
+                return isEmsVehicle(entity) and usingStretcher and patientOnStretcher
+            end,
+            onSelect = function(data)
+                local dataToSend = {}
+                dataToSend.vehicle = NetworkGetNetworkIdFromEntity(data.entity)
+                dataToSend.target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(patientOnStretcher))
+                TriggerServerEvent('ars_ambulancejob:togglePatientFromVehicle', dataToSend)
+
+                Entity(data.entity).state.patient = patientOnStretcher
+                patientOnStretcher = nil
+            end
+        },
+        {
+            name = 'ars_ambulancejob_take_patient_from_vehicle',
+            icon = 'fa-solid fa-car-side',
+            label = locale('take_patient_from_vehicle'),
+            groups = Config.EmsJobs,
+            canInteract = function(entity, distance, coords, name)
+                return isEmsVehicle(entity) and Entity(entity).state?.patient
+            end,
+            onSelect = function(data)
+                local dataToSend = {}
+                dataToSend.target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(Entity(data.entity).state?.patient))
+                TriggerServerEvent('ars_ambulancejob:togglePatientFromVehicle', dataToSend)
+
+                Wait(150)
+                putOnStretcher(true, Entity(data.entity).state?.patient)
+
+                Entity(data.entity).state.patient = nil
+            end
+        },
+
     }
 
     exports.ox_target:addGlobalVehicle(options)
 end
 
+local function stretcherInteraction()
+    exports.ox_target:addModel({ `prop_ld_binbag_01` }, {
+        {
+            name = 'ars_ambulancejob_stretcher_model',
+            label = locale('take_stretcher'),
+            icon = 'fa-solid fa-bed',
+            distance = 3,
+            canInteract = function()
+                return not usingStretcher
+            end,
+            onSelect = function(data)
+                useStretcher(data.entity)
+            end,
+        },
+        {
+            name = 'ars_ambulancejob_remove_from_stretcher',
+            icon = 'fa-solid fa-car-side',
+            label = locale('remove_from_stretcher'),
+            groups = Config.EmsJobs,
+            canInteract = function(entity, distance, coords, name)
+                local playerId, playerPed, playerCoords = lib.getClosestPlayer(coords, 2.0, false)
+                return GetEntityAttachedTo(playerPed) == entity
+            end,
+            onSelect = function(data)
+                local playerId, playerPed, playerCoords = lib.getClosestPlayer(data.coords, 2.0, false)
+                if GetEntityAttachedTo(playerPed) == data.entity then
+                    putOnStretcher(false, playerPed)
+                end
+            end
+        },
+    })
+end
+
 vehicleInteractions()
+stretcherInteraction()
 
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

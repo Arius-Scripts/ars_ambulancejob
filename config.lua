@@ -22,7 +22,9 @@ Config.ReviveReward = 700
 
 Config.ParamedicTreatmentPrice = 4000
 
-Config.EmsVehicles = { -- vehicles that have access to the props (cones and ecc..)
+Config.AmbulanceStretchers = 2 -- how many stretchers should an ambunalce have
+
+Config.EmsVehicles = {         -- vehicles that have access to the props (cones and ecc..)
 	'ambulance',
 	'ambulance2',
 }

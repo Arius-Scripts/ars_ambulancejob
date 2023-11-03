@@ -35,5 +35,12 @@
 	"get_treated_paramedic": "Get Treated",
 	"getting_treated": "Your getting checked by a paramedic",
 	"treated_by_paramedic": "Felling better",
-	"take_stretcher": "Take strethcer"
+	"take_stretcher": "Take strethcer",
+	"put_stretcher": "Put strethcer",
+	"no_stretcher_found": "There are no stretchers in the vehicle",
+	"stretcher_limit_reached": "No space to put another stretcher in the vehicle",
+	"put_on_stretcher": "Put on stretcher",
+	"remove_from_stretcher": "Remove from stretcher",
+	"take_patient_from_vehicle": "Take patient from vehicle",
+	"put_patient_in_vehicle": "Put patient in vehicle"
 }

@@ -225,7 +225,22 @@ exports.ox_target:addGlobalPlayer({
         onSelect = function(data)
             checkPatient(data.entity)
         end
-    }
+    },
+    {
+        name = 'put_on_stretcher',
+        icon = 'fas fa-magnifying-glass',
+        label = locale('put_on_stretcher'),
+        groups = Config.EmsJobs,
+        distance = 3,
+        canInteract = function(entity, distance, coords, name, bone)
+            local closestStretcher = GetClosestObjectOfType(coords.x, coords.y, coords.z, 5.5, `prop_ld_binbag_01`, false)
+
+            return closestStretcher ~= 0
+        end,
+        onSelect = function(data)
+            putOnStretcher(true, data.entity)
+        end
+    },
 })
 
 
@@ -267,7 +282,7 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
 
 
         utils.addRemoveItem("remove", "defibrillator", 1)
-        utils.addRemoveItem("remove", "money", Config.ReviveReward)
+        utils.addRemoveItem("add", "money", Config.ReviveReward)
     elseif data.anim == "dead" then
         utils.showNotification("Getting revived")
 
