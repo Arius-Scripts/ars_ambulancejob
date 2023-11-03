@@ -55,6 +55,10 @@ Config.Hospitals = {
 			model = "s_m_m_scientist_01",
 			pos = vector4(312.0927, -596.1016, 42.2918, 338.7213),
 		},
+		bossmenu = {
+			pos = vector3(313.8239, -590.3199, 43.2918),
+			min_grade = 2
+		},
 		zone = {
 			pos = vec3(299.0, -585.28, 43.28),
 			size = vec3(200.0, 200.0, 200.0),

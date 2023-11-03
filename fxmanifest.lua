@@ -37,6 +37,7 @@ client_scripts {
 	"client/shops.lua",
 	"client/clothing.lua",
 	"client/paramedic.lua",
+	"client/bossmenu.lua",
 }
 
 server_scripts {

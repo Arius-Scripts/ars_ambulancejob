@@ -125,6 +125,12 @@ function getPlayerJobGrade()
     return jobGrade
 end
 
+function playerJob()
+    local playerData = ESX.GetPlayerData()
+
+    return playerData.job.name
+end
+
 function hasJob(jobs)
     local playerData = ESX.GetPlayerData()
 
