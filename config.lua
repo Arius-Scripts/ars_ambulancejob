@@ -5,11 +5,15 @@ Config = {}
 Config.Debug = false
 
 Config.ClothingScript = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
-Config.ReviveCommand = "revive"
 Config.EmsJobs = { "ambulance", "ems" }
-Config.RespawnTime = 0        -- in minutes
+Config.RespawnTime = 0                        -- in minutes
 Config.UseInterDistressSystem = true
-Config.WaitTimeForNewCall = 5 -- minutes
+Config.WaitTimeForNewCall = 5                 -- minutes
+
+Config.ReviveCommand = "revive"
+Config.ReviveAreaCommand = "revivearea"
+Config.HealCommand = "heal"
+Config.HealAreaCommand = "healarea"
 
 Config.MedicBagProp = "xm_prop_x17_bag_med_01a"
 Config.MedicBagItem = "medicalbag"

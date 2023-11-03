@@ -135,4 +135,11 @@ function openBossMenu(job)
     TriggerEvent("qb-bossmenu:client:OpenMenu")
 end
 
+function healStatus()
+    local playerData = QBCore.Functions.GetPlayerData()
+
+    TriggerServerEvent('consumables:server:addHunger', playerData.metadata.hunger + 100000)
+    TriggerServerEvent('consumables:server:addThirst', playerData.metadata.hunger + 100000)
+end
+
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

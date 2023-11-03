@@ -11,25 +11,6 @@ RegisterNetEvent("ars_ambulancejob:updateDeathStatus", function(death)
 end)
 
 
-lib.addCommand(Config.ReviveCommand, {
-    help = locale("revive_player"),
-    params = {
-        {
-            name = 'target',
-            type = 'playerId',
-            help = 'Target player\'s server id',
-            optional = true,
-        },
-    },
-    restricted = 'group.admin'
-}, function(source, args, raw)
-    if not args.target then args.target = source end
-
-    local data = {}
-    data.revive = true
-
-    TriggerClientEvent('ars_ambulancejob:healPlayer', args.target, data)
-end)
 
 
 

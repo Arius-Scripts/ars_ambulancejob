@@ -41,9 +41,10 @@ client_scripts {
 
 server_scripts {
 	"@oxmysql/lib/MySQL.lua",
-	"server/main.lua",
 	"server/bridge/esx.lua",
 	"server/bridge/qb.lua",
+	"server/main.lua",
+	"server/commands.lua",
 }
 
 files {

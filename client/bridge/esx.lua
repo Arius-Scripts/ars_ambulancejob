@@ -143,4 +143,9 @@ function openBossMenu(job)
     TriggerEvent('esx_society:openBossMenu', job, function(data, menu) end, { wash = false })
 end
 
+function healStatus()
+    TriggerEvent('esx_status:add', "hunger", 1000000)
+    TriggerEvent('esx_status:add', "thirst", 1000000)
+end
+
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

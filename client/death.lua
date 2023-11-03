@@ -36,21 +36,22 @@ function stopPlayerDeath()
     player.distressCallTime = nil
 end
 
+function healPlayer()
+    local playerPed = cache.ped or PlayerPedId()
+    local maxHealth = GetEntityMaxHealth(playerPed)
+
+    SetEntityHealth(playerPed, maxHealth)
+    healStatus()
+end
+
 RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
     if data.revive then
         stopPlayerDeath()
     elseif data.injury then
         treatInjury(data.bone)
+    elseif data.heal then
+        healPlayer()
     end
-end)
-
-RegisterCommand("testanim", function()
-    lib.requestAnimDict("switch@franklin@bed")
-    local hospital = utils.getClosestHospital()
-    SetEntityCoords(cache.ped, hospital.respawn.bedPoint)
-    SetEntityHeading(cache.ped, hospital.respawn.bedPoint.w + 90)
-
-    TaskPlayAnim(cache.ped, "switch@franklin@bed", "sleep_getup_rubeyes", 1.0, 1.0, -1, 8, -1, 0, 0, 0)
 end)
 
 local function respawnPlayer()
