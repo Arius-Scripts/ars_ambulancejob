@@ -44,6 +44,15 @@ RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
     end
 end)
 
+RegisterCommand("testanim", function()
+    lib.requestAnimDict("switch@franklin@bed")
+    local hospital = utils.getClosestHospital()
+    SetEntityCoords(cache.ped, hospital.respawn.bedPoint)
+    SetEntityHeading(cache.ped, hospital.respawn.bedPoint.w + 90)
+
+    TaskPlayAnim(cache.ped, "switch@franklin@bed", "sleep_getup_rubeyes", 1.0, 1.0, -1, 8, -1, 0, 0, 0)
+end)
+
 local function respawnPlayer()
     local playerPed = cache.ped or PlayerPedId()
 
@@ -52,26 +61,34 @@ local function respawnPlayer()
     end
 
     lib.requestAnimDict("anim@gangops@morgue@table@")
+    lib.requestAnimDict("switch@franklin@bed")
 
     local hospital = utils.getClosestHospital()
 
     DoScreenFadeOut(500)
     while not IsScreenFadedOut() do Wait(1) end
 
+    player.respawning = true
+
     SetEntityCoords(playerPed, hospital.respawn.bedPoint)
     SetEntityHeading(playerPed, hospital.respawn.bedPoint.w)
     TaskPlayAnim(playerPed, "anim@gangops@morgue@table@", "body_search", 2.0, 2.0, -1, 1, 0, false, false, false)
     FreezeEntityPosition(playerPed, true)
 
-    Wait(1000)
+
     DoScreenFadeIn(300)
+    Wait(5000)
+    SetEntityCoords(playerPed, vector3(hospital.respawn.bedPoint.x, hospital.respawn.bedPoint.y, hospital.respawn.bedPoint.z) + vector3(0.0, 0.0, -1.0))
+    FreezeEntityPosition(playerPed, false)
+    SetEntityHeading(cache.ped, hospital.respawn.bedPoint.w + 90.0)
+    TaskPlayAnim(playerPed, "switch@franklin@bed", "sleep_getup_rubeyes", 1.0, 1.0, -1, 8, -1, 0, 0, 0)
 
     Wait(5000)
 
     stopPlayerDeath()
     ClearPedTasks(playerPed)
-    FreezeEntityPosition(playerPed, false)
     SetEntityCoords(playerPed, hospital.respawn.spawnPoint)
+    player.respawning = false
 end
 
 local function initPlayerDeath()
@@ -120,7 +137,7 @@ local function initPlayerDeath()
         while player.isDead do
             local sleep = 1500
 
-            if not player.gettingRevived then
+            if not player.gettingRevived and not player.respawning then
                 sleep = 0
                 local anim = cache.vehicle and Config.DeathAnimations["car"] or Config.DeathAnimations["normal"]
 

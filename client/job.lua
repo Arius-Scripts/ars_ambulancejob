@@ -69,10 +69,8 @@ local function checkPatient(target)
             title = WEAPONS[data.killedBy][1] or "Not found",
             readOnly = true,
             icon = 'skull',
-
         }
     end
-
 
     lib.registerContext({
         id = 'check_patient',
@@ -145,9 +143,6 @@ function openDistressCalls()
         calls[#calls + 1] = {
             title       = call.name,
             description = call.msg,
-            onExit      = function()
-                print("dsad")
-            end,
             icon        = "fa-truck-medical",
             iconColor   = "#FEBD69",
             arrow       = true,
@@ -191,9 +186,7 @@ function openDistressCalls()
                             iconColor   = "#32CD32",
                             arrow       = true,
                             description = "Complete the call if you risolved it",
-
-
-                            onSelect = function()
+                            onSelect    = function()
                                 TriggerServerEvent("ars_ambulancejob:callCompleted", call)
                                 utils.showNotification("Call closed")
                                 ClearPedTasks(playerPed)
