@@ -125,6 +125,15 @@ RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
     end
 end)
 
+RegisterNetEvent("ars_ambulancejob:useItem", function(data)
+    if not hasJob(source, Config.EmsJobs) then return end
+
+    local item = exports.ox_inventory:GetSlotWithItem(source, data.item)
+    local slot = item.slot
+
+    exports.ox_inventory:SetDurability(source, slot, item.metadata?.durability and (item.metadata?.durability - data.value) or (100 - data.value))
+end)
+
 
 RegisterNetEvent("ars_ambulancejob:removeInventory", function()
     if player[source].isDead and Config.RemoveItemsOnRespawn then

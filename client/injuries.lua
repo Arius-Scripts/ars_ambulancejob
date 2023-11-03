@@ -16,7 +16,7 @@ local function checkInjuryCause(cause)
     local count = exports.ox_inventory:Search('count', item)
     if count < 1 then return utils.showNotification(locale("not_enough_" .. item)) end
 
-    utils.addRemoveItem("remove", item, 1)
+    utils.useItem(item, Config.ConsumeItemPerUse)
 
     return true
 end

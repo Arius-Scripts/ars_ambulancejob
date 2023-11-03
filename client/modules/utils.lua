@@ -96,6 +96,13 @@ function utils.addRemoveItem(type, item, quantity)
     TriggerServerEvent("ars_ambulancejob:removAddItem", data)
 end
 
+function utils.useItem(item, value)
+    local data = {}
+    data.item = item
+    data.value = value
+    TriggerServerEvent("ars_ambulancejob:useItem", data)
+end
+
 function utils.drawTextFrame(data)
     SetTextFont(4)
     SetTextScale(0.0, 0.5)

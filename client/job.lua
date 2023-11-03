@@ -281,7 +281,7 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
         TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 10.0, -10.0, -1, 0, 0, 0, 0, 0)
 
 
-        utils.addRemoveItem("remove", "defibrillator", 1)
+        utils.useItem("defibrillator", Config.ConsumeItemPerUse)
         utils.addRemoveItem("add", "money", Config.ReviveReward)
     elseif data.anim == "dead" then
         utils.showNotification("Getting revived")

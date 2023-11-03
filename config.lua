@@ -27,6 +27,7 @@ Config.ReviveReward = 700
 Config.ParamedicTreatmentPrice = 4000
 
 Config.AmbulanceStretchers = 2 -- how many stretchers should an ambunalce have
+Config.ConsumeItemPerUse = 10  -- every time you use an item it gets used by 10%
 
 Config.EmsVehicles = {         -- vehicles that have access to the props (cones and ecc..)
 	'ambulance',
