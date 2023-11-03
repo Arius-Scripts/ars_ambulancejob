@@ -145,6 +145,9 @@ function openDistressCalls()
         calls[#calls + 1] = {
             title       = call.name,
             description = call.msg,
+            onExit      = function()
+                print("dsad")
+            end,
             icon        = "fa-truck-medical",
             iconColor   = "#FEBD69",
             arrow       = true,
@@ -178,6 +181,8 @@ function openDistressCalls()
                             onSelect    = function()
                                 SetNewWaypoint(call.gps.x, call.gps.y)
                                 utils.showNotification("Waypoint set")
+                                ClearPedTasks(playerPed)
+                                DeleteEntity(tablet)
                             end
                         },
                         {
@@ -191,6 +196,8 @@ function openDistressCalls()
                             onSelect = function()
                                 TriggerServerEvent("ars_ambulancejob:callCompleted", call)
                                 utils.showNotification("Call closed")
+                                ClearPedTasks(playerPed)
+                                DeleteEntity(tablet)
                             end
                         },
                     }
