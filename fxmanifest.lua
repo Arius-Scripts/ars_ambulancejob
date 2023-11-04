@@ -29,15 +29,16 @@ client_scripts {
 
 	"client/injuries.lua",
 	"client/death.lua",
-	"client/job.lua",
 	"client/stretcher.lua",
-	"client/garage.lua",
-	"client/medical_bag.lua",
-	"client/stashes.lua",
-	"client/shops.lua",
-	"client/clothing.lua",
 	"client/paramedic.lua",
-	"client/bossmenu.lua",
+
+	"client/job/job.lua",
+	"client/job/garage.lua",
+	"client/job/medical_bag.lua",
+	"client/job/stashes.lua",
+	"client/job/shops.lua",
+	"client/job/clothing.lua",
+	"client/job/bossmenu.lua",
 }
 
 server_scripts {
