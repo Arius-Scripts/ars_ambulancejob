@@ -1,5 +1,9 @@
 if not Config.ClothingScript then return end
 
+local FreezeEntityPosition            = FreezeEntityPosition
+local SetEntityInvincible             = SetEntityInvincible
+local SetBlockingOfNonTemporaryEvents = SetBlockingOfNonTemporaryEvents
+
 local function openClothingMenu(clothes)
     lib.registerContext({
         id = 'ems_clothing_menu',

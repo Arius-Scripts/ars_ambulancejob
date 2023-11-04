@@ -1,3 +1,22 @@
+local CreatePed = CreatePed
+local SetEntityInvincible = SetEntityInvincible
+local SetModelAsNoLongerNeeded = SetModelAsNoLongerNeeded
+local CreateVehicle = CreateVehicle
+local SetVehicleNeedsToBeHotwired = SetVehicleNeedsToBeHotwired
+local NetworkFadeInEntity = NetworkFadeInEntity
+local AddBlipForCoord = AddBlipForCoord
+local SetBlipSprite = SetBlipSprite
+local SetBlipDisplay = SetBlipDisplay
+local SetBlipScale = SetBlipScale
+local SetBlipColour = SetBlipColour
+local SetBlipAsShortRange = SetBlipAsShortRange
+local BeginTextCommandSetBlipName = BeginTextCommandSetBlipName
+local AddTextComponentString = AddTextComponentString
+local EndTextCommandSetBlipName = EndTextCommandSetBlipName
+local GetEntityCoords = GetEntityCoords
+local PlayerPedId = PlayerPedId
+local TriggerServerEvent = TriggerServerEvent
+
 utils = {}
 peds = {}
 

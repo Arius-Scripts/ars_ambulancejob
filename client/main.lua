@@ -1,6 +1,12 @@
-player = {}
-player.injuries = {}
-local hospitals = {}
+local DoesEntityExist = DoesEntityExist
+local DeletePed       = DeletePed
+local CreateThread    = CreateThread
+
+player                = {}
+player.injuries       = {}
+local hospitals       = {}
+
+
 
 local function createZones()
     for index, hospital in pairs(Config.Hospitals) do

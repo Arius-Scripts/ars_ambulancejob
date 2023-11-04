@@ -1,3 +1,30 @@
+local DoScreenFadeOut              = DoScreenFadeOut
+local IsScreenFadedOut             = IsScreenFadedOut
+local NetworkResurrectLocalPlayer  = NetworkResurrectLocalPlayer
+local ShakeGameplayCam             = ShakeGameplayCam
+local AnimpostfxPlay               = AnimpostfxPlay
+local CreateThread                 = CreateThread
+local Wait                         = Wait
+local SetEntityCoords              = SetEntityCoords
+local TaskPlayAnim                 = TaskPlayAnim
+local FreezeEntityPosition         = FreezeEntityPosition
+local ClearPedTasks                = ClearPedTasks
+local SetEntityHealth              = SetEntityHealth
+local SetEntityInvincible          = SetEntityInvincible
+local SetEveryoneIgnorePlayer      = SetEveryoneIgnorePlayer
+local GetGameTimer                 = GetGameTimer
+local IsControlJustPressed         = IsControlJustPressed
+local TriggerServerEvent           = TriggerServerEvent
+local AddEventHandler              = AddEventHandler
+local SetEntityHeading             = SetEntityHeading
+local DoScreenFadeIn               = DoScreenFadeIn
+local PlayerPedId                  = PlayerPedId
+local NetworkGetPlayerIndexFromPed = NetworkGetPlayerIndexFromPed
+local IsPedAPlayer                 = IsPedAPlayer
+local IsPedDeadOrDying             = IsPedDeadOrDying
+local IsPedFatallyInjured          = IsPedFatallyInjured
+
+
 function stopPlayerDeath()
     player.isDead = false
     -- player.injuries = {}

@@ -1,3 +1,15 @@
+local DoScreenFadeOut    = DoScreenFadeOut
+local DoScreenFadeIn     = DoScreenFadeIn
+local GetEntityCoords    = GetEntityCoords
+local GetEntityMaxHealth = GetEntityMaxHealth
+local IsScreenFadedOut   = IsScreenFadedOut
+local SetEntityCoords    = SetEntityCoords
+local SetEntityHeading   = SetEntityHeading
+local SetEntityHealth    = SetEntityHealth
+local TaskPlayAnim       = TaskPlayAnim
+local Wait               = Wait
+
+
 local function openParamedicMenu(ped, hospital)
     lib.registerContext({
         id = 'paramedic_menu_ambulance_job',

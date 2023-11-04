@@ -1,3 +1,13 @@
+local TaskStartScenarioInPlace         = TaskStartScenarioInPlace
+local GetOffsetFromEntityInWorldCoords = GetOffsetFromEntityInWorldCoords
+local TaskPlayAnim                     = TaskPlayAnim
+local Wait                             = Wait
+local CreateObjectNoOffset             = CreateObjectNoOffset
+local PlaceObjectOnGroundProperly      = PlaceObjectOnGroundProperly
+local DeleteEntity                     = DeleteEntity
+local ClearPedTasks                    = ClearPedTasks
+local RegisterNetEvent                 = RegisterNetEvent
+
 local function openMedicalBag()
     local playerPed = cache.ped or PlayerPedId()
 

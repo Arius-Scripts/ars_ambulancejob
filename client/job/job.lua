@@ -1,3 +1,27 @@
+local GetPlayerServerId            = GetPlayerServerId
+local NetworkGetPlayerIndexFromPed = NetworkGetPlayerIndexFromPed
+local PlayerPedId                  = PlayerPedId
+local GetEntityHeading             = GetEntityHeading
+local GetEntityForwardVector       = GetEntityForwardVector
+local GetGameTimer                 = GetGameTimer
+local GetEntityCoords              = GetEntityCoords
+local GetStreetNameAtCoord         = GetStreetNameAtCoord
+local GetStreetNameFromHashKey     = GetStreetNameFromHashKey
+local TriggerServerEvent           = TriggerServerEvent
+local CreateThread                 = CreateThread
+local CreateObject                 = CreateObject
+local AttachEntityToEntity         = AttachEntityToEntity
+local SetNewWaypoint               = SetNewWaypoint
+local ClearPedTasks                = ClearPedTasks
+local DeleteEntity                 = DeleteEntity
+local TaskPlayAnim                 = TaskPlayAnim
+local PlaySound                    = PlaySound
+local SetEntityVisible             = SetEntityVisible
+local SetEntityInvincible          = SetEntityInvincible
+local TriggerEvent                 = TriggerEvent
+local SetCurrentPedWeapon          = SetCurrentPedWeapon
+
+
 local function checkPatient(target)
     local targetServerId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(target))
     local data = lib.callback.await('ars_ambulancejob:getData', false, targetServerId)

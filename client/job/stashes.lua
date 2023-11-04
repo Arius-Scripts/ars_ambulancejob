@@ -1,6 +1,6 @@
-local DrawMarker = DrawMarker
+local DrawMarker            = DrawMarker
 local IsControlJustReleased = IsControlJustReleased
-local CreateThread = CreateThread
+local CreateThread          = CreateThread
 
 
 local function createStashes()
