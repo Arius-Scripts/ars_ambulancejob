@@ -161,3 +161,6 @@ AddEventHandler('onServerResourceStart', function(resourceName)
         end
     end
 end)
+
+
+lib.versionCheck('Arius-Development/ars_ambulancejob')
