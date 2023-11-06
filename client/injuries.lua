@@ -112,7 +112,7 @@ function treatInjury(bone)
     if not player.injuries[bone] then return end -- secure check
 
     player.injuries[bone] = nil
-    -- LocalPlayer.state:set("injuries", player.injuries, true)
+    LocalPlayer.state:set("injuries", player.injuries, true)
 end
 
 function updateInjuries(victim, weapon)
@@ -124,14 +124,14 @@ function updateInjuries(victim, weapon)
 
     if damagedBone then
         if not player.injuries[damagedBone.id] then
-            player.injuries[damagedBone.id] = { bone = damagedBone.id, label = damagedBone.label, desc = damagedBone.levels["default"], value = player.isDead and 100 or 10, cause = WEAPONS[weapon][2] }
+            player.injuries[damagedBone.id] = { bone = damagedBone.id, label = damagedBone.label, desc = damagedBone.levels["default"], value = player.isDead and 100 or 10, cause = WEAPONS[weapon] and WEAPONS[weapon][2] or "not found" }
         else
             local newVal = math.min(player.injuries[damagedBone.id].value + 10, 100)
             player.injuries[damagedBone.id].value = newVal
             player.injuries[damagedBone.id].desc = damagedBone.levels[tostring(newVal)] or damagedBone.levels["default"]
         end
 
-        -- LocalPlayer.state:set("injuries", player.injuries, true)
+        LocalPlayer.state:set("injuries", player.injuries, true)
     end
 end
 
