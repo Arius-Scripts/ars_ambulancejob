@@ -137,6 +137,20 @@ lib.callback.register('ars_ambulancejob:openMedicalBag', function(source)
     return "medicalBag_" .. source
 end)
 
+lib.callback.register('ars_ambulancejob:getMedicsOniline', function(source)
+    local count = 0
+    local players = GetPlayers()
+
+    for i = 1, #players do
+        local id = tonumber(players[i])
+
+        if hasJob(id, Config.EmsJobs) then
+            count += 1
+        end
+    end
+    return count
+end)
+
 exports.ox_inventory:registerHook('swapItems', function(payload)
     if string.find(payload.toInventory, "medicalBag_") then
         if payload.fromSlot.name == Config.MedicBagItem then return false end

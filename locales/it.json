@@ -49,5 +49,8 @@
 	"put_on_stretcher": "Metti sul stretcher",
 	"remove_from_stretcher": "Stacca dal stretcher",
 	"take_patient_from_vehicle": "Prendi dal veicolo",
-	"put_patient_in_vehicle": "Metti nel veicolo"
+	"put_patient_in_vehicle": "Metti nel veicolo",
+	"medics_online": "Non puoi fare il comando ci sono medici online",
+	"wait_time": "Devi aspettare %s secondi prima di fare questo comando",
+	"medic_coming": "Chiamata inviata"
 }

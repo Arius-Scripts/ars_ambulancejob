@@ -123,6 +123,7 @@ local function initPlayerDeath()
     if player.isDead then return end
 
     player.isDead = true
+    startCommandTimer()
 
     for _, anim in pairs(Config.DeathAnimations) do
         lib.requestAnimDict(anim.dict)
