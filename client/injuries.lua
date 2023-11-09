@@ -69,6 +69,9 @@ function checkInjuries(data)
                                                     car = true,
                                                     move = true
                                                 },
+                                                anim = {
+                                                    scenario = "CODE_HUMAN_MEDIC_TEND_TO_DEAD"
+                                                }
 
                                             })
                                         then
