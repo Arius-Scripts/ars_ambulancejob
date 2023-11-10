@@ -10,6 +10,7 @@ end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     player.loaded = false
+    player.isDead = false
 end)
 
 function toggleClothes(toggle, clothes)

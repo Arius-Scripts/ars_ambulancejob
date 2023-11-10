@@ -13,6 +13,7 @@ end)
 RegisterNetEvent('esx:onPlayerLogout')
 AddEventHandler('esx:onPlayerLogout', function()
     player.loaded = false
+    player.isDead = false
 end)
 
 function toggleClothes(toggle, clothes)

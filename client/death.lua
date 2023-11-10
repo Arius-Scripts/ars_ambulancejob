@@ -223,9 +223,8 @@ end
 
 function onPlayerLoaded()
     local data = lib.callback.await('ars_ambulancejob:getDeathStatus', false)
-    player.isDead = data.isDead and data.isDead or false
 
-    if player.isDead then
+    if data?.isDead then
         initPlayerDeath()
         utils.showNotification("logged_dead")
     end
