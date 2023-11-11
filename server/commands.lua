@@ -8,7 +8,7 @@ lib.addCommand(Config.ReviveCommand, {
             optional = true,
         },
     },
-    restricted = 'group.admin'
+    restricted = Config.AdminGroup
 }, function(source, args, raw)
     if not args.target then args.target = source end
 
@@ -30,7 +30,7 @@ lib.addCommand(Config.ReviveAreaCommand, {
             optional = false,
         },
     },
-    restricted = 'group.admin'
+    restricted = Config.AdminGroup
 }, function(source, args, raw)
     local players = GetPlayers()
 
@@ -61,7 +61,7 @@ lib.addCommand(Config.HealCommand, {
             optional = true,
         },
     },
-    restricted = 'group.admin'
+    restricted = Config.AdminGroup
 }, function(source, args, raw)
     if not args.target then args.target = source end
 
@@ -81,7 +81,7 @@ lib.addCommand(Config.HealAreaCommand, {
             optional = false,
         },
     },
-    restricted = 'group.admin'
+    restricted = Config.AdminGroup
 }, function(source, args, raw)
     local players = GetPlayers()
 
@@ -102,7 +102,7 @@ end)
 
 lib.addCommand(Config.ReviveAllCommand, {
     help = locale("revive_all"),
-    restricted = 'group.admin'
+    restricted = Config.AdminGroup
 }, function(source, args, raw)
     local players = GetPlayers()
 
