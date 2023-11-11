@@ -53,5 +53,7 @@
 	"medics_online": "Cant do command there are medics online",
 	"wait_time": "You need to wait %s seconds before doing this command",
 	"medic_coming": "Call sent",
-	"logged_dead": "You logged off dead"
+	"logged_dead": "You logged off dead",
+	"revive_all": "Revive all the players",
+	"revived_all": "You revived everyone"
 }

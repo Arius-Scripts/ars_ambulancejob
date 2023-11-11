@@ -99,3 +99,17 @@ lib.addCommand(Config.HealAreaCommand, {
     end
     TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("healed_area")):format(args.radius))
 end)
+
+lib.addCommand(Config.ReviveAllCommand, {
+    help = locale("revive_all"),
+    restricted = 'group.admin'
+}, function(source, args, raw)
+    local players = GetPlayers()
+
+    for i = 1, #players do
+        local player = players[i]
+        TriggerClientEvent('ars_ambulancejob:healPlayer', player, { heal = true })
+    end
+
+    TriggerClientEvent("ars_ambulancejob:showNotification", source, locale("revived_all"))
+end)

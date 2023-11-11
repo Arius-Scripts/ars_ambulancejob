@@ -14,6 +14,7 @@ Config.ReviveCommand           = "revive"
 Config.ReviveAreaCommand       = "revivearea"
 Config.HealCommand             = "heal"
 Config.HealAreaCommand         = "healarea"
+Config.ReviveAllCommand        = "reviveall"
 
 Config.MedicBagProp            = "xm_prop_x17_bag_med_01a"
 Config.MedicBagItem            = "medicalbag"

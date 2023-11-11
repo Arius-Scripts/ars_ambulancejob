@@ -53,5 +53,7 @@
 	"medics_online": "Non puoi fare il comando ci sono medici online",
 	"wait_time": "Devi aspettare %s secondi prima di fare questo comando",
 	"medic_coming": "Chiamata inviata",
-	"logged_dead": "Hai quittato morto"
+	"logged_dead": "Hai quittato morto",
+	"revive_all": "Rianima Tutti i giocatori",
+	"revived_all": "Hai rianimato tutti i giocatori"
 }

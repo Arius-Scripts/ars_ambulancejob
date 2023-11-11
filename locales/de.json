@@ -53,5 +53,7 @@
 	"medics_online": "Es sind Medics online",
 	"wait_time": "Du musst %s Sekunden warten bevor du diesen Befehl ausführen kannst",
 	"medic_coming": "Anruf gesendet",
-	"logged_dead": "Du hast dich tot abgemeldet“"
+	"logged_dead": "Du hast dich tot abgemeldet",
+	"revive_all": "Beleben Sie alle Spieler wieder",
+	"revived_all": "Sie haben alle Spieler eingeladen"
 }
