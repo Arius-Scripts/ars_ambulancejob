@@ -222,6 +222,8 @@ local function initPlayerDeath()
 end
 
 function onPlayerLoaded()
+    exports.spawnmanager:setAutoSpawn(false) -- for qbcore
+
     local data = lib.callback.await('ars_ambulancejob:getDeathStatus', false)
 
     if data?.isDead then
