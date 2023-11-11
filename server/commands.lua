@@ -108,7 +108,7 @@ lib.addCommand(Config.ReviveAllCommand, {
 
     for i = 1, #players do
         local player = players[i]
-        TriggerClientEvent('ars_ambulancejob:healPlayer', player, { heal = true })
+        TriggerClientEvent('ars_ambulancejob:healPlayer', player, { revive = true })
     end
 
     TriggerClientEvent("ars_ambulancejob:showNotification", source, locale("revived_all"))
