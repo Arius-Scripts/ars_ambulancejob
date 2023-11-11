@@ -73,31 +73,33 @@ local function depositVehicle(data)
 
                 lib.hideTextUI()
 
-                local emsDriver = utils.createPed(data.model, data.driverSpawnCoords)
-                FreezeEntityPosition(emsDriver, false)
+                if Config.UsePedToDepositVehicle then
+                    local emsDriver = utils.createPed(data.model, data.driverSpawnCoords)
+                    FreezeEntityPosition(emsDriver, false)
 
-                TaskEnterVehicle(emsDriver, vehicleToDelete, -1, -1, 1.0, 1, 0)
+                    TaskEnterVehicle(emsDriver, vehicleToDelete, -1, -1, 1.0, 1, 0)
 
-                Wait(1000)
+                    Wait(1000)
 
-                while GetPedInVehicleSeat(vehicleToDelete, 0) ~= 0 do Wait(1) end
-                while GetPedInVehicleSeat(vehicleToDelete, 1) ~= 0 do Wait(1) end
-                while GetPedInVehicleSeat(vehicleToDelete, 2) ~= 0 do Wait(1) end
+                    while GetPedInVehicleSeat(vehicleToDelete, 0) ~= 0 do Wait(1) end
+                    while GetPedInVehicleSeat(vehicleToDelete, 1) ~= 0 do Wait(1) end
+                    while GetPedInVehicleSeat(vehicleToDelete, 2) ~= 0 do Wait(1) end
 
-                TaskVehicleDriveWander(emsDriver, vehicleToDelete, 60.0, 8)
+                    TaskVehicleDriveWander(emsDriver, vehicleToDelete, 60.0, 8)
 
-                Wait(20 * 1000) -- 20 seconds
+                    Wait(20 * 1000) -- 20 seconds
 
-                NetworkFadeOutEntity(vehicleToDelete, false, true)
-                NetworkFadeOutEntity(emsDriver, false, true)
+                    NetworkFadeOutEntity(vehicleToDelete, false, true)
+                    NetworkFadeOutEntity(emsDriver, false, true)
 
-                Wait(1 * 1000)
+                    Wait(1 * 1000)
+
+                    DeletePed(emsDriver)
+                    emsDriver = nil
+                end
 
                 DeleteVehicle(vehicleToDelete)
-                DeletePed(emsDriver)
-
                 vehicleToDelete = nil
-                emsDriver = nil
             end
         end
     end

@@ -1,43 +1,45 @@
 lib.locale()
 
-Config = {}
+Config                         = {}
 
-Config.Debug = false
+Config.Debug                   = false
 
-Config.ClothingScript = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
-Config.EmsJobs = { "ambulance", "ems" }
-Config.RespawnTime = 5                        -- in minutes
-Config.UseInterDistressSystem = true
-Config.WaitTimeForNewCall = 5                 -- minutes
+Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
+Config.EmsJobs                 = { "ambulance", "ems" }
+Config.RespawnTime             = 5                     -- in minutes
+Config.UseInterDistressSystem  = true
+Config.WaitTimeForNewCall      = 5                     -- minutes
 
-Config.ReviveCommand = "revive"
-Config.ReviveAreaCommand = "revivearea"
-Config.HealCommand = "heal"
-Config.HealAreaCommand = "healarea"
+Config.ReviveCommand           = "revive"
+Config.ReviveAreaCommand       = "revivearea"
+Config.HealCommand             = "heal"
+Config.HealAreaCommand         = "healarea"
 
-Config.MedicBagProp = "xm_prop_x17_bag_med_01a"
-Config.MedicBagItem = "medicalbag"
+Config.MedicBagProp            = "xm_prop_x17_bag_med_01a"
+Config.MedicBagItem            = "medicalbag"
 
-Config.HelpCommand = "911"
-Config.RemoveItemsOnRespawn = true
+Config.HelpCommand             = "911"
+Config.RemoveItemsOnRespawn    = true
 
-Config.BaseInjuryReward = 150 -- changes if the injury value is higher then 1
-Config.ReviveReward = 700
+Config.BaseInjuryReward        = 150 -- changes if the injury value is higher then 1
+Config.ReviveReward            = 700
 
 Config.ParamedicTreatmentPrice = 4000
 
-Config.AmbulanceStretchers = 2        -- how many stretchers should an ambunalce have
-Config.ConsumeItemPerUse = 10         -- every time you use an item it gets used by 10%
+Config.AmbulanceStretchers     = 2           -- how many stretchers should an ambunalce have
+Config.ConsumeItemPerUse       = 10          -- every time you use an item it gets used by 10%
 
-Config.TimeToWaitForCommand = 2       -- when player dies he needs to wait 2 minutes to do the ambulance command
-Config.NpcReviveCommand = "ambulance" -- this will work only when there are no medics online
+Config.TimeToWaitForCommand    = 2           -- when player dies he needs to wait 2 minutes to do the ambulance command
+Config.NpcReviveCommand        = "ambulance" -- this will work only when there are no medics online
 
-Config.EmsVehicles = {                -- vehicles that have access to the props (cones and ecc..)
+Config.UsePedToDepositVehicle  = false       -- if false the vehicle will instantly despawns
+
+Config.EmsVehicles             = {           -- vehicles that have access to the props (cones and ecc..)
 	'ambulance',
 	'ambulance2',
 }
 
-Config.DeathAnimations = {
+Config.DeathAnimations         = {
 	["car"] = {
 		dict = "veh@low@front_ps@idle_duck",
 		clip = "sit"
