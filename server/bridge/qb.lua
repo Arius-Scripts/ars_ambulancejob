@@ -46,7 +46,7 @@ end
 function getPlayerName(target)
     local xPlayer = QBCore.Functions.GetPlayer(target)
 
-    return xPlayer.charinfo.firstname .. " " .. xPlayer.charinfo.lastname
+    return xPlayer.PlayerData.charinfo.firstname .. " " .. xPlayer.PlayerData.charinfo.lastname
 end
 
 function getDeathStatus(target)
