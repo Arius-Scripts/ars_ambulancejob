@@ -69,9 +69,8 @@ ESX.RegisterUsableItem(Config.MedicBagItem, function(source)
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
 end)
 
-
 CreateThread(function()
     for k, v in pairs(Config.EmsJobs) do
-        TriggerEvent('esxsociety:registerSociety', v, v, 'society' .. v, 'society' .. v, 'society' .. v, { type = 'public' })
+        TriggerEvent('esx_society:registerSociety', v, v, 'society' .. v, 'society' .. v, 'society' .. v, { type = 'public' })
     end
 end)
