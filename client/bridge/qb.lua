@@ -118,6 +118,12 @@ function getPlayerJobGrade()
     return type(jobGrade) == "table" and jobGrade.level or jobGrade
 end
 
+function playerJob()
+    local playerData = QBCore.Functions.GetPlayerData()
+
+    return playerData.job.name
+end
+
 function hasJob(jobs)
     local playerData = QBCore.Functions.GetPlayerData()
 
