@@ -90,7 +90,7 @@ local function checkPatient(target)
         }
 
         options[#options + 1] = {
-            title = WEAPONS[data.killedBy][1] or "Not found",
+            title = WEAPONS[data.killedBy] and WEAPONS[data.killedBy][1] or "Not found",
             readOnly = true,
             icon = 'skull',
         }
@@ -109,7 +109,8 @@ function createDistressCall()
     if player.distressCallTime then
         local currentTime = GetGameTimer()
         utils.debug(currentTime - player.distressCallTime, 60000 * Config.WaitTimeForNewCall)
-        if currentTime - player.distressCallTime < 60000 * Config.WaitTimeForNewCall then return utils.showNotification("Wait before sending another call") end
+        if currentTime - player.distressCallTime < 60000 * Config.WaitTimeForNewCall then return utils.showNotification(
+            "Wait before sending another call") end
     end
 
     local input = lib.inputDialog('Arius Ambulance', {
@@ -157,7 +158,8 @@ function openDistressCalls()
     TaskPlayAnim(playerPed, dict, "base", 2.0, 2.0, -1, 51, 0, false, false, false)
 
     local tablet = CreateObject(model, playerCoords.x, playerCoords.y, playerCoords.z + 0.2, true, true, true)
-    AttachEntityToEntity(tablet, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, -0.03, 0.0, 20.0, -90.0, 0.0, true, true, false, true, 1, true)
+    AttachEntityToEntity(tablet, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, -0.03, 0.0, 20.0, -90.0, 0.0, true,
+        true, false, true, 1, true)
 
     for i = 1, #distressCalls do
         local call = distressCalls[i]
@@ -302,7 +304,8 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
 
         Wait(1000)
 
-        TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 10.0, -10.0, -1, 0, 0, 0, 0, 0)
+        TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 10.0, -10.0,
+            -1, 0, 0, 0, 0, 0)
 
 
         utils.useItem("defibrillator", Config.ConsumeItemPerUse)
