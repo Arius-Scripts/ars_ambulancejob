@@ -41,12 +41,12 @@ function utils.debug(...)
     end
 end
 
-function utils.createPed(name, x, y, z, h)
+function utils.createPed(name, ...)
     local model = lib.requestModel(name)
 
     if not model then return end
 
-    local ped = CreatePed(0, model, x, y, z, h, false, true)
+    local ped = CreatePed(0, model, ...)
 
     SetEntityInvincible(ped, true)
     SetModelAsNoLongerNeeded(model)
