@@ -110,7 +110,7 @@ end
 
 function initParamedic()
     for index, hospital in pairs(Config.Hospitals) do
-        local ped = utils.createPed(hospital.paramedic.model, hospital.paramedic.pos)
+        local ped = utils.createPed(hospital.paramedic.model, hospital.paramedic.pos[1], hospital.paramedic.pos[2], hospital.paramedic.pos[3], hospital.paramedic.pos[4])
 
         FreezeEntityPosition(ped, true)
         SetEntityInvincible(ped, true)

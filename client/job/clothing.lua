@@ -64,7 +64,7 @@ local function openClothingMenu(clothes)
 end
 
 function initClothes(data, jobs)
-    local ped = utils.createPed(data.model, data.pos)
+    local ped = utils.createPed(data.model, data.pos[1], data.pos[2], data.pos[3], data.pos[4])
 
     FreezeEntityPosition(ped, true)
     SetEntityInvincible(ped, true)
