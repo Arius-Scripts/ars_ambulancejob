@@ -13,8 +13,15 @@ author 'Arius Development'
 --Manifest--
 --#--
 
+--if QBX
+-- modules {
+-- 	'qbx_core:playerdata',
+--     'qbx_core:utils'
+-- }
+
 shared_scripts {
 	'@ox_lib/init.lua',
+    --'@qbx_core/import.lua', --QBX
 	'config.lua',
 }
 
@@ -26,6 +33,7 @@ client_scripts {
 
 	"client/bridge/esx.lua",
 	"client/bridge/qb.lua",
+    --"client/bridge/qbx.lua", --QBX
 
 	"client/injuries.lua",
 	"client/death.lua",
@@ -45,6 +53,7 @@ server_scripts {
 	"@oxmysql/lib/MySQL.lua",
 	"server/bridge/esx.lua",
 	"server/bridge/qb.lua",
+    --"server/bridge/qbx.lua", --QBX
 	"server/main.lua",
 	"server/commands.lua",
 }
