@@ -54,4 +54,7 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 :speech_balloon: **Join our discord**
 [Discord](https://discord.gg/TkjDhjyeSe)
 
+:book: **Check out the documentation**
+[Documentation](https://app.gitbook.com/o/bULSX0c2NqgvAX7LgIng/s/FmVxFhUkZwqlcwogKb6U/~/changes/27/arius-ambulancejob)
+
 Feel free to provide suggestions and report any bugs you encounter. Your feedback is invaluable to us as we continue to improve the script. Enjoy!
