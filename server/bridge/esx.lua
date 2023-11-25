@@ -71,6 +71,6 @@ end)
 
 CreateThread(function()
     for k, v in pairs(Config.EmsJobs) do
-        TriggerEvent('esx_society:registerSociety', v, v, 'society' .. v, 'society' .. v, 'society' .. v, { type = 'public' })
+        TriggerEvent('esx_society:registerSociety', v, v, 'society_' .. v, 'society_' .. v, 'society_' .. v, { type = 'public' })
     end
 end)
