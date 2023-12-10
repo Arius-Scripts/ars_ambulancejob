@@ -43,7 +43,7 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 :crystal_ball: _Stay tuned for more exciting features coming soon!_
 
 :page_facing_up: **GitHub Repository:**
-[Download](https://github.com/Arius-Development/ars_ambulancejob)
+[Download](https://github.com/Arius-Scripts/ars_ambulancejob)
 
 :link: **Video Preview:**
 [Preview](https://youtu.be/q59_st6iuQU)
@@ -55,6 +55,6 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 [Discord](https://discord.gg/TkjDhjyeSe)
 
 :book: **Check out the documentation**
-[Documentation](https://arius-development.gitbook.io/ariusdevelopment/arius-ambulancejob)
+[Documentation](https://docs.arius-scripts.com)
 
 Feel free to provide suggestions and report any bugs you encounter. Your feedback is invaluable to us as we continue to improve the script. Enjoy!
