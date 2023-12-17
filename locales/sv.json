@@ -7,7 +7,8 @@
 	"not_enough_tweezers": "Du har inte tillräckligt med Pincetter",
 	"not_enough_burncream": "Du har inte tillräckligt med kylbalsam",
 	"not_enough_defibrillator": "Du har inte tillräckligt med Defibrillatorer",
-	"not_enough_money": "Du har inte tillräckligt med pengar",
+	"not_enough_money": "han har inga bandage att läka",
+	"not_enough_bandage": "Você precisa de bandagens para curá-lo",
 	"injury_value": "Skadans svårighetsgrad",
 	"injury_cause": "Orsak till skada",
 	"injury_treat": "Behandling för skada",
@@ -56,5 +57,5 @@
 	"logged_dead": "Du loggade ut medans du var död",
 	"revive_all": "Återuppliva alla spelare",
 	"revived_all": "Du återupplivade alla spelare",
-    "bossmenu_label": "Chefsmeny"
+	"bossmenu_label": "Chefsmeny"
 }

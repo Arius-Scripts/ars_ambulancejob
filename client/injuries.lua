@@ -2,7 +2,7 @@ local TriggerServerEvent   = TriggerServerEvent
 local GetPedLastDamageBone = GetPedLastDamageBone
 
 local function checkInjuryCause(cause)
-    local item = ""
+    local item = "bandage"
 
     if cause == "beaten" then
         item = "icepack"
