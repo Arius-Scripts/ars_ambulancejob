@@ -14,10 +14,20 @@ local function checkInjuryCause(cause)
         item = "burncream"
     end
 
+
     utils.debug(item, cause)
 
     local count = exports.ox_inventory:Search('count', item)
     if count < 1 then return utils.showNotification(locale("not_enough_" .. item)) end
+
+    local itemDurability = utils.getItem(item).metadata?.durability
+
+    if itemDurability then
+        if itemDurability < Config.ConsumeItemPerUse then
+            utils.showNotification(locale("no_durability"))
+            return false
+        end
+    end
 
     utils.useItem(item, Config.ConsumeItemPerUse)
 
@@ -118,7 +128,10 @@ function treatInjury(bone)
     LocalPlayer.state:set("injuries", player.injuries, true)
 
     local playerHealth = GetEntityHealth(cache.ped)
-    SetEntityHealth(cache.ped, math.min(playerHealth + 10, 100))
+    local playerMaxHealth = GetEntityMaxHealth(cache.ped)
+    print(playerMaxHealth)
+    local newHealth = math.min(playerHealth + 10, playerMaxHealth)
+    SetEntityHealth(cache.ped, newHealth)
 end
 
 function updateInjuries(victim, weapon)

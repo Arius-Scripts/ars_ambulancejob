@@ -2,7 +2,7 @@ lib.locale()
 
 Config                         = {}
 
-Config.Debug                   = false
+Config.Debug                   = true
 
 Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.EmsJobs                 = { "ambulance", "ems" }
@@ -30,7 +30,7 @@ Config.ReviveReward            = 700
 Config.ParamedicTreatmentPrice = 4000
 
 Config.AmbulanceStretchers     = 2           -- how many stretchers should an ambunalce have
-Config.ConsumeItemPerUse       = 10          -- every time you use an item it gets used by 10%
+Config.ConsumeItemPerUse       = 100         -- every time you use an item it gets used by 10%
 
 Config.TimeToWaitForCommand    = 2           -- when player dies he needs to wait 2 minutes to do the ambulance command
 Config.NpcReviveCommand        = "ambulance" -- this will work only when there are no medics online

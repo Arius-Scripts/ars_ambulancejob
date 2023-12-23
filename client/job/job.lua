@@ -73,6 +73,12 @@ local function checkPatient(target)
                 if count < 1 then return utils.showNotification(locale("not_enough_defibrillator")) end
 
 
+                local itemDurability = utils.getItem("defibrillator").metadata?.durability
+
+                if itemDurability then
+                    if itemDurability < Config.ConsumeItemPerUse then return utils.showNotification(locale("no_durability")) end
+                end
+
                 local playerPed = cache.ped or PlayerPedId()
                 local playerHeading = GetEntityHeading(playerPed)
                 local playerLocation = GetEntityForwardVector(playerPed)
@@ -109,8 +115,10 @@ function createDistressCall()
     if player.distressCallTime then
         local currentTime = GetGameTimer()
         utils.debug(currentTime - player.distressCallTime, 60000 * Config.WaitTimeForNewCall)
-        if currentTime - player.distressCallTime < 60000 * Config.WaitTimeForNewCall then return utils.showNotification(
-            "Wait before sending another call") end
+        if currentTime - player.distressCallTime < 60000 * Config.WaitTimeForNewCall then
+            return utils.showNotification(
+                "Wait before sending another call")
+        end
     end
 
     local input = lib.inputDialog('Arius Ambulance', {

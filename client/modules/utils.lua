@@ -122,6 +122,12 @@ function utils.useItem(item, value)
     TriggerServerEvent("ars_ambulancejob:useItem", data)
 end
 
+function utils.getItem(name)
+    local item = lib.callback.await('ars_ambulancejob:getItem', false, name)
+
+    return item
+end
+
 function utils.drawTextFrame(data)
     SetTextFont(4)
     SetTextScale(0.0, 0.5)

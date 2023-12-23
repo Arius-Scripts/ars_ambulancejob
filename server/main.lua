@@ -136,6 +136,11 @@ lib.callback.register('ars_ambulancejob:openMedicalBag', function(source)
 
     return "medicalBag_" .. source
 end)
+lib.callback.register('ars_ambulancejob:getItem', function(source, name)
+    local item = exports.ox_inventory:GetSlotWithItem(source, name)
+
+    return item
+end)
 
 lib.callback.register('ars_ambulancejob:getMedicsOniline', function(source)
     local count = 0
