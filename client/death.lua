@@ -128,7 +128,7 @@ local function initPlayerDeath()
     for _, anim in pairs(Config.DeathAnimations) do
         lib.requestAnimDict(anim.dict)
     end
-    if not Config.ExtraEffects then
+    if Config.ExtraEffects then
         ShakeGameplayCam('DEATH_FAIL_IN_EFFECT_SHAKE', 1.0)
         AnimpostfxPlay('DeathFailOut', 0, true)
 
@@ -138,6 +138,8 @@ local function initPlayerDeath()
         Wait(800)
         DoScreenFadeIn(400)
     end
+
+    if not player.isDead then return end
 
     local playerPed = cache.ped or PlayerPedId()
 
