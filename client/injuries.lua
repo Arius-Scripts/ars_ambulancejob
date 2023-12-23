@@ -116,6 +116,9 @@ function treatInjury(bone)
 
     player.injuries[bone] = nil
     LocalPlayer.state:set("injuries", player.injuries, true)
+
+    local playerHealth = GetEntityHealth(cache.ped)
+    SetEntityHealth(cache.ped, math.min(playerHealth + 10, 100))
 end
 
 function updateInjuries(victim, weapon)
