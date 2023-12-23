@@ -138,7 +138,6 @@ local function initPlayerDeath()
         Wait(800)
         DoScreenFadeIn(400)
     end
-
     if not player.isDead then return end
 
     local playerPed = cache.ped or PlayerPedId()
