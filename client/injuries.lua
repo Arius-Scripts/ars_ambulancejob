@@ -129,8 +129,12 @@ function treatInjury(bone)
 
     local playerHealth = GetEntityHealth(cache.ped)
     local playerMaxHealth = GetEntityMaxHealth(cache.ped)
-    print(playerMaxHealth)
     local newHealth = math.min(playerHealth + 10, playerMaxHealth)
+
+    utils.debug("current", playerHealth)
+    utils.debug("max", playerMaxHealth)
+    utils.debug("new", newHealth, type(newHealth))
+
     SetEntityHealth(cache.ped, newHealth)
 end
 
