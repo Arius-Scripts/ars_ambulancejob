@@ -36,6 +36,7 @@ Config.TimeToWaitForCommand    = 2           -- when player dies he needs to wai
 Config.NpcReviveCommand        = "ambulance" -- this will work only when there are no medics online
 
 Config.UsePedToDepositVehicle  = false       -- if false the vehicle will instantly despawns
+Config.ExtraEffects            = true        -- true >> disables the screen shake and the black and white screen
 
 Config.EmsVehicles             = {           -- vehicles that have access to the props (cones and ecc..)
 	'ambulance',
