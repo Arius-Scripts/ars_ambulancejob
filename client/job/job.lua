@@ -73,7 +73,7 @@ local function checkPatient(target)
                 if count < 1 then return utils.showNotification(locale("not_enough_defibrillator")) end
 
 
-                local itemDurability = utils.getItem("defibrillator").metadata?.durability
+                local itemDurability = utils.getItem("defibrillator")?.metadata?.durability
 
                 if itemDurability then
                     if itemDurability < Config.ConsumeItemPerUse then return utils.showNotification(locale("no_durability")) end
