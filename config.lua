@@ -28,6 +28,7 @@ Config.BaseInjuryReward        = 150 -- changes if the injury value is higher th
 Config.ReviveReward            = 700
 
 Config.ParamedicTreatmentPrice = 4000
+Config.AllowAlways             = true        -- false if you want it to work only when there are only medics online
 
 Config.AmbulanceStretchers     = 2           -- how many stretchers should an ambunalce have
 Config.ConsumeItemPerUse       = 10          -- every time you use an item it gets used by 10%

@@ -123,7 +123,16 @@ function initParamedic()
                 icon = 'fa-solid fa-ambulance',
                 distance = 3,
                 onSelect = function(data)
-                    openParamedicMenu(ped, hospital)
+                    if not Config.AllowAlways then
+                        local medicsOnline = lib.callback.await('ars_ambulancejob:getMedicsOniline', false)
+                        if medicsOnline > 0 then
+                            openParamedicMenu(ped, hospital)
+                        else
+                            utils.showNotification(locale("medics_online"))
+                        end
+                    else
+                        openParamedicMenu(ped, hospital)
+                    end
                 end,
             }
         })

@@ -51,7 +51,7 @@
 	"remove_from_stretcher": "Remove from stretcher",
 	"take_patient_from_vehicle": "Take patient from vehicle",
 	"put_patient_in_vehicle": "Put patient in vehicle",
-	"medics_online": "Cant do command there are medics online",
+	"medics_online": "there are medics online",
 	"wait_time": "You need to wait %s seconds before doing this command",
 	"medic_coming": "Call sent",
 	"logged_dead": "You logged off dead",
