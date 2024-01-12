@@ -155,4 +155,11 @@ function healStatus()
     TriggerEvent('esx_status:add', "thirst", 1000000)
 end
 
+function playerSpawned()
+    TriggerEvent('esx_basicneeds:resetStatus')
+    TriggerServerEvent('esx:onPlayerSpawn')
+    TriggerEvent('esx:onPlayerSpawn')
+    TriggerEvent('playerSpawned')
+end
+
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

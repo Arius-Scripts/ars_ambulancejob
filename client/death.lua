@@ -63,6 +63,7 @@ function stopPlayerDeath()
     player.distressCallTime = nil
 
     healPlayer()
+    playerSpawned()
 end
 
 function healPlayer()

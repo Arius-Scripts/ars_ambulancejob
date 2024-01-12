@@ -149,4 +149,7 @@ function healStatus()
     TriggerServerEvent('consumables:server:addThirst', playerData.metadata.hunger + 100000)
 end
 
+function playerSpawned()
+end
+
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡
