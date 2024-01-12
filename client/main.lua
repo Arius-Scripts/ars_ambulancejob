@@ -21,6 +21,7 @@ local function createZones()
             coords = cfg.zone.pos,
             size = cfg.zone.size,
             clothes = Config.ClothingScript and cfg.clothes,
+            debug = Config.Debug,
             rotation = 0.0,
             onEnter = function(self)
                 initGarage(cfg.garage, Config.EmsJobs)
