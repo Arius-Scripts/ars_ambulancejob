@@ -70,13 +70,12 @@ function initClothes(data, jobs)
     SetEntityInvincible(ped, true)
     SetBlockingOfNonTemporaryEvents(ped, true)
 
-    exports.ox_target:addLocalEntity(ped, {
+    addLocalEntity(ped, {
         {
-            name = 'clothing' .. ped,
             label = locale('clothing_interact_label'),
             icon = 'fa-solid fa-road',
             groups = jobs,
-            onSelect = function(entity)
+            fn = function()
                 openClothingMenu(data)
             end
         }

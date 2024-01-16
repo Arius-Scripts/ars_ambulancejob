@@ -34,27 +34,25 @@ local function placeMedicalBag()
 
     utils.addRemoveItem("remove", "medicalbag", 1)
 
-    exports.ox_target:addLocalEntity(medicBag, {
+    addLocalEntity(medicBag, {
         {
-            name = 'takeMedicBag' .. medicBag,
             label = locale('open_medical_bag'),
             icon = 'fa-solid fa-suitcase',
-            groups = jobs,
-            onSelect = function(data)
+            groups = false,
+            fn = function()
                 openMedicalBag()
             end
         },
         {
-            name = 'closeMedicBag' .. medicBag,
             label = locale('pickup_medical_bag'),
             icon = 'fa-solid fa-xmark',
-            groups = jobs,
-            onSelect = function(data)
+            groups = false,
+            fn = function(data)
                 TaskPlayAnim(playerPed, "pickup_object", "pickup_low", 8.0, 8.0, 1000, 50, 0, false, false, false)
-                Wait(900)
-                DeleteEntity(data.entity)
-                ClearPedTasks(playerPed)
 
+                Wait(900)
+                DeleteEntity(type(data) == "number" and data or data.entity)
+                ClearPedTasks(playerPed)
 
                 utils.addRemoveItem("add", "medicalbag", 1)
             end

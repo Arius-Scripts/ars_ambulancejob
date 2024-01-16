@@ -2,7 +2,7 @@ lib.locale()
 
 Config                         = {}
 
-Config.Debug                   = true
+Config.Debug                   = false
 
 Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.EmsJobs                 = { "ambulance", "ems" }
@@ -67,7 +67,7 @@ Config.Hospitals = {
 			pos = vector4(312.0927, -596.1016, 42.2918, 338.7213),
 		},
 		bossmenu = {
-			pos = vector3(313.8239, -590.3199, 43.2918),
+			pos = vector3(284.84, -615.6, 44.24),
 			min_grade = 2
 		},
 		zone = {

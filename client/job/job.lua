@@ -249,15 +249,15 @@ end
 exports("openDistressCalls", openDistressCalls)
 
 
-exports.ox_target:addGlobalPlayer({
+addGlobalPlayer({
     {
         name = 'check_suspect',
         icon = 'fas fa-magnifying-glass',
         label = locale('check_patient'),
         groups = Config.EmsJobs,
         distance = 3,
-        onSelect = function(data)
-            checkPatient(data.entity)
+        fn = function(data)
+            checkPatient(type(data) == "number" and data or data.entity)
         end
     },
     {
@@ -266,13 +266,14 @@ exports.ox_target:addGlobalPlayer({
         label = locale('put_on_stretcher'),
         groups = Config.EmsJobs,
         distance = 3,
-        canInteract = function(entity, distance, coords, name, bone)
-            local closestStretcher = GetClosestObjectOfType(coords.x, coords.y, coords.z, 5.5, `prop_ld_binbag_01`, false)
+        cn = function(entity, distance, coords, name, bone)
+            local _coords = GetEntityCoords(entity)
+            local closestStretcher = GetClosestObjectOfType(_coords.x, _coords.y, _coords.z, 5.5, `prop_ld_binbag_01`, false)
 
             return closestStretcher ~= 0
         end,
-        onSelect = function(data)
-            putOnStretcher(true, data.entity)
+        fn = function(data)
+            putOnStretcher(true, type(data) == "number" and data or data.entity)
         end
     },
 })

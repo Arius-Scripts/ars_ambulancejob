@@ -114,21 +114,14 @@ function initGarage(data, jobs)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
 
-        exports.ox_target:addLocalEntity(ped, {
+        addLocalEntity(ped, {
             {
-                name = 'garageGuyAmbulanceJob' .. ped,
                 label = locale('garage_interact_label'),
                 icon = 'fa-solid fa-car',
-                distance = 3,
                 groups = jobs,
-                canInteract = function(entity, distance, coords, name, bone)
-                    return not IsEntityDead(entity)
-                end,
-                onSelect = function(data)
-                    local position, heading = vector3(garage.spawn.x, garage.spawn.y, garage.spawn.z),
-                        garage.spawn.w
+                fn = function()
                     openCarList(garage)
-                end,
+                end
             }
         })
 

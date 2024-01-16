@@ -116,13 +116,12 @@ function initParamedic()
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
 
-        exports.ox_target:addLocalEntity(ped, {
+        addLocalEntity(ped, {
             {
-                name = 'paramedicGuyAmbulanceJob' .. ped,
                 label = locale('paramedic_interact_label'),
                 icon = 'fa-solid fa-ambulance',
-                distance = 3,
-                onSelect = function(data)
+                groups = false,
+                fn = function()
                     if not Config.AllowAlways then
                         local medicsOnline = lib.callback.await('ars_ambulancejob:getMedicsOniline', false)
                         if medicsOnline > 0 then
@@ -133,7 +132,7 @@ function initParamedic()
                     else
                         openParamedicMenu(ped, hospital)
                     end
-                end,
+                end
             }
         })
     end

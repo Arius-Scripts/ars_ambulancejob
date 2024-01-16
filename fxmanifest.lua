@@ -26,6 +26,7 @@ client_scripts {
 
 	"client/bridge/esx.lua",
 	"client/bridge/qb.lua",
+	"client/bridge/target.lua",
 
 	"client/injuries.lua",
 	"client/death.lua",

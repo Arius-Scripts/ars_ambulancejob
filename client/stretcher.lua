@@ -160,11 +160,11 @@ local function vehicleInteractions()
             icon = 'fa-solid fa-car-side',
             label = locale('take_stretcher'),
             groups = Config.EmsJobs,
-            canInteract = function(entity, distance, coords, name)
+            cn = function(entity, distance, coords, name)
                 return isEmsVehicle(entity) and not usingStretcher
             end,
-            onSelect = function(data)
-                local vehicle = data.entity
+            fn = function(data)
+                local vehicle = type(data) == "number" and data or data.entity
                 if not Entity(vehicle).state.stretcher then Entity(vehicle).state.stretcher = Config.AmbulanceStretchers end
                 if Entity(vehicle).state.stretcher < 1 then return utils.showNotification(locale("no_stretcher_found")) end
 
@@ -178,11 +178,11 @@ local function vehicleInteractions()
             icon = 'fa-solid fa-car-side',
             label = locale('put_stretcher'),
             groups = Config.EmsJobs,
-            canInteract = function(entity, distance, coords, name)
+            cn = function(entity, distance, coords, name)
                 return isEmsVehicle(entity) and usingStretcher and not patientOnStretcher
             end,
-            onSelect = function(data)
-                local vehicle = data.entity
+            fn = function(data)
+                local vehicle = type(data) == "number" and data or data.entity
                 if Entity(vehicle).state.stretcher >= Config.AmbulanceStretchers then return utils.showNotification(locale("stretcher_limit_reached")) end
 
                 Entity(vehicle).state.stretcher += 1
@@ -195,10 +195,10 @@ local function vehicleInteractions()
             icon = 'fa-solid fa-car-side',
             label = locale('put_patient_in_vehicle'),
             groups = Config.EmsJobs,
-            canInteract = function(entity, distance, coords, name)
+            cn = function(entity, distance, coords, name)
                 return isEmsVehicle(entity) and usingStretcher and patientOnStretcher
             end,
-            onSelect = function(data)
+            fn = function(data)
                 local dataToSend = {}
                 dataToSend.vehicle = NetworkGetNetworkIdFromEntity(data.entity)
                 dataToSend.target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(patientOnStretcher))
@@ -213,10 +213,10 @@ local function vehicleInteractions()
             icon = 'fa-solid fa-car-side',
             label = locale('take_patient_from_vehicle'),
             groups = Config.EmsJobs,
-            canInteract = function(entity, distance, coords, name)
+            cn = function(entity, distance, coords, name)
                 return isEmsVehicle(entity) and Entity(entity).state?.patient
             end,
-            onSelect = function(data)
+            fn = function(data)
                 local dataToSend = {}
                 dataToSend.target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(Entity(data.entity).state?.patient))
                 TriggerServerEvent('ars_ambulancejob:togglePatientFromVehicle', dataToSend)
@@ -230,21 +230,22 @@ local function vehicleInteractions()
 
     }
 
-    exports.ox_target:addGlobalVehicle(options)
+    addGlobalVehicle(options)
 end
 
 local function stretcherInteraction()
-    exports.ox_target:addModel({ `prop_ld_binbag_01` }, {
+    addModel({ `prop_ld_binbag_01` }, {
         {
             name = 'ars_ambulancejob_stretcher_model',
             label = locale('take_stretcher'),
             icon = 'fa-solid fa-bed',
+            groups = Config.EmsJobs,
             distance = 3,
-            canInteract = function()
+            cn = function()
                 return not usingStretcher
             end,
-            onSelect = function(data)
-                useStretcher(data.entity)
+            fn = function(data)
+                useStretcher(type(data) == "number" and data or data.entity)
             end,
         },
         {
@@ -252,12 +253,12 @@ local function stretcherInteraction()
             icon = 'fa-solid fa-car-side',
             label = locale('remove_from_stretcher'),
             groups = Config.EmsJobs,
-            canInteract = function(entity, distance, coords, name)
-                local playerId, playerPed, playerCoords = lib.getClosestPlayer(coords, 2.0, false)
+            cn = function(entity, distance, coords, name)
+                local playerId, playerPed, playerCoords = lib.getClosestPlayer(GetEntityCoords(entity), 2.0, false)
                 return GetEntityAttachedTo(playerPed) == entity
             end,
-            onSelect = function(data)
-                local playerId, playerPed, playerCoords = lib.getClosestPlayer(data.coords, 2.0, false)
+            fn = function(data)
+                local playerId, playerPed, playerCoords = lib.getClosestPlayer(GetEntityCoords(cache.ped), 2.0, false)
                 if GetEntityAttachedTo(playerPed) == data.entity then
                     putOnStretcher(false, playerPed)
                 end
