@@ -40,6 +40,7 @@ client_scripts {
 	"client/job/shops.lua",
 	"client/job/clothing.lua",
 	"client/job/bossmenu.lua",
+	"client/modules/coords_debug.lua",
 }
 
 server_scripts {

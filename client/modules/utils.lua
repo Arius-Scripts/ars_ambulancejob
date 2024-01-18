@@ -136,6 +136,14 @@ function utils.isBedOccupied(coords)
     return false
 end
 
+function utils.inHospitalZone(playerPos, boxPos, boxSize)
+    local xInside = playerPos.x >= boxPos.x - boxSize.x / 2 and playerPos.x <= boxPos.x + boxSize.x / 2
+    local yInside = playerPos.y >= boxPos.y - boxSize.y / 2 and playerPos.y <= boxPos.y + boxSize.y / 2
+    local zInside = playerPos.z >= boxPos.z - boxSize.z / 2 and playerPos.z <= boxPos.z + boxSize.z / 2
+
+    return xInside and yInside and zInside
+end
+
 function utils.drawTextFrame(data)
     SetTextFont(4)
     SetTextScale(0.0, 0.5)
