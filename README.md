@@ -10,7 +10,7 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 :dart: **Dependencies**
 
 -   ox_inventory
--   ox_target
+-   ox_target / qb-target
 
 :loudspeaker: **Features:**
 
@@ -40,7 +40,7 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 -   Saved deaths
 -   Optimized idle (0.0 ms).
 
-:crystal_ball: _Stay tuned for more exciting features coming soon!_
+:crystal*ball: \_Stay tuned for more exciting features coming soon!*
 
 :page_facing_up: **GitHub Repository:**
 [Download](https://github.com/Arius-Scripts/ars_ambulancejob)
