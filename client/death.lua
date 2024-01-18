@@ -95,30 +95,42 @@ local function respawnPlayer()
     lib.requestAnimDict("switch@franklin@bed")
 
     local hospital = utils.getClosestHospital()
+    local bed = nil
 
     DoScreenFadeOut(500)
     while not IsScreenFadedOut() do Wait(1) end
 
+    for i = 1, #hospital.respawn do
+        local _bed = hospital.respawn[i]
+        local isBedOccupied = utils.isBedOccupied(_bed.bedPoint)
+        if not isBedOccupied then
+            bed = _bed
+            break
+        end
+    end
+
+    if not bed then bed = hospital.respawn[1] end
+
     player.respawning = true
 
-    SetEntityCoords(playerPed, hospital.respawn.bedPoint)
-    SetEntityHeading(playerPed, hospital.respawn.bedPoint.w)
+    SetEntityCoords(playerPed, bed.bedPoint)
+    SetEntityHeading(playerPed, bed.bedPoint.w)
     TaskPlayAnim(playerPed, "anim@gangops@morgue@table@", "body_search", 2.0, 2.0, -1, 1, 0, false, false, false)
     FreezeEntityPosition(playerPed, true)
 
 
     DoScreenFadeIn(300)
     Wait(5000)
-    SetEntityCoords(playerPed, vector3(hospital.respawn.bedPoint.x, hospital.respawn.bedPoint.y, hospital.respawn.bedPoint.z) + vector3(0.0, 0.0, -1.0))
+    SetEntityCoords(playerPed, vector3(bed.bedPoint.x, bed.bedPoint.y, bed.bedPoint.z) + vector3(0.0, 0.0, -1.0))
     FreezeEntityPosition(playerPed, false)
-    SetEntityHeading(cache.ped, hospital.respawn.bedPoint.w + 90.0)
+    SetEntityHeading(cache.ped, bed.bedPoint.w + 90.0)
     TaskPlayAnim(playerPed, "switch@franklin@bed", "sleep_getup_rubeyes", 1.0, 1.0, -1, 8, -1, 0, 0, 0)
 
     Wait(5000)
 
     stopPlayerDeath()
     ClearPedTasks(playerPed)
-    SetEntityCoords(playerPed, hospital.respawn.spawnPoint)
+    SetEntityCoords(playerPed, bed.spawnPoint)
     player.respawning = false
 end
 

@@ -128,6 +128,14 @@ function utils.getItem(name)
     return item
 end
 
+function utils.isBedOccupied(coords)
+    local playerId, playerPed, playerCoords = lib.getClosestPlayer(coords.xyz, 1.5, true)
+    if not playerPed then return false end
+    if IsEntityPlayingAnim(playerPed, "anim@gangops@morgue@table@", "body_search", 3) or IsEntityPlayingAnim(playerPed, "switch@franklin@bed", "sleep_getup_rubeyes", 3) then return true end
+
+    return false
+end
+
 function utils.drawTextFrame(data)
     SetTextFont(4)
     SetTextScale(0.0, 0.5)

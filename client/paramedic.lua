@@ -26,7 +26,7 @@ local function openParamedicMenu(ped, hospital)
                         local dict = lib.requestAnimDict("anim@gangops@morgue@table@")
                         local playerPed = cache.ped or PlayerPedId()
                         local previousCoords = cache.coords or GetEntityCoords(playerPed)
-                        local nearHospital = utils.getClosestHospital()
+                        local bed = nil
 
                         DoScreenFadeOut(500)
                         while not IsScreenFadedOut() do Wait(1) end
@@ -34,13 +34,22 @@ local function openParamedicMenu(ped, hospital)
                         Wait(1000)
                         DoScreenFadeIn(300)
 
-                        SetEntityCoords(playerPed, nearHospital.respawn.bedPoint)
-                        SetEntityHeading(playerPed, nearHospital.respawn.bedPoint.w)
+                        for i = 1, #hospital.respawn do
+                            local _bed = hospital.respawn[i]
+                            local isBedOccupied = utils.isBedOccupied(_bed.bedPoint)
+                            if not isBedOccupied then
+                                bed = _bed
+                                break
+                            end
+                        end
+
+                        if not bed then bed = hospital.respawn[1] end
+
+                        SetEntityCoords(playerPed, bed.bedPoint)
+                        SetEntityHeading(playerPed, bed.bedPoint.w)
                         TaskPlayAnim(playerPed, dict, "body_search", 2.0, 2.0, -1, 1, 0, false, false, false)
 
-                        print(nearHospital.respawn.spawnPoint)
-
-                        SetEntityCoords(ped, nearHospital.respawn.spawnPoint)
+                        SetEntityCoords(ped, bed.spawnPoint)
                         TaskStartScenarioInPlace(ped, "WORLD_HUMAN_CLIPBOARD", -1, true)
 
                         lib.progressBar({ duration = 15000, label = locale("getting_treated"), useWhileDead = false, canCancel = true, disable = { car = true, move = true }, })

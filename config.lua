@@ -6,7 +6,7 @@ Config.Debug                   = false
 
 Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.EmsJobs                 = { "ambulance", "ems" }
-Config.RespawnTime             = 5                     -- in minutes
+Config.RespawnTime             = 0                     -- in minutes
 Config.UseInterDistressSystem  = true
 Config.WaitTimeForNewCall      = 5                     -- minutes
 
@@ -83,8 +83,15 @@ Config.Hospitals = {
 			pos = vector3(308.96, -591.52, 43.28),
 		},
 		respawn = {
-			bedPoint = vector4(349.76, -583.44, 43.0, 150.04),
-			spawnPoint = vector4(348.84, -583.36, 42.32, 68.24)
+			{
+				bedPoint = vector4(349.76, -583.44, 43.0, 150.04),
+				spawnPoint = vector4(348.84, -583.36, 42.32, 68.24)
+			},
+			-- {
+			-- 	bedPoint = vector4(346.96, -590.64, 44.12, 338.0),
+			-- 	spawnPoint = vector4(348.84, -583.36, 42.32, 68.24)
+			-- },
+
 		},
 		stash = {
 			['ems_stash_1'] = {
