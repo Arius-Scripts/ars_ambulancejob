@@ -133,7 +133,7 @@ function initParamedic()
                 fn = function()
                     if not Config.AllowAlways then
                         local medicsOnline = lib.callback.await('ars_ambulancejob:getMedicsOniline', false)
-                        if medicsOnline > 0 then
+                        if medicsOnline <= 0 then
                             openParamedicMenu(ped, hospital)
                         else
                             utils.showNotification(locale("medics_online"))
