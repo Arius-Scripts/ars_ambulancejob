@@ -78,8 +78,6 @@ RegisterNetEvent("ars_ambulancejob:callCompleted", function(call)
 end)
 
 RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
-    if not hasJob(source, Config.EmsJobs) then return end
-
     if data.toggle then
         exports.ox_inventory:RemoveItem(source, data.item, data.quantity)
     else
