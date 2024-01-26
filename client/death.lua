@@ -62,8 +62,8 @@ function stopPlayerDeath()
     LocalPlayer.state:set("dead", false, true)
     player.distressCallTime = nil
 
-    healPlayer()
     playerSpawned()
+    healPlayer()
 end
 
 function healPlayer()

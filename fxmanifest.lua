@@ -49,6 +49,7 @@ server_scripts {
 	"server/bridge/qb.lua",
 	"server/main.lua",
 	"server/commands.lua",
+	"server/txadmin.lua",
 }
 
 files {
