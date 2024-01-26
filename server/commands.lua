@@ -16,7 +16,13 @@ lib.addCommand(Config.ReviveCommand, {
     data.revive = true
 
     TriggerClientEvent('ars_ambulancejob:healPlayer', args.target, data)
-    TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("revived_player")):format(args.target))
+
+
+    if source > 0 then
+        TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("revived_player")):format(args.target))
+    else
+        print("^4ars_ambulancejob > ^0", (locale("revived_player")):format(args.target))
+    end
 end)
 
 
@@ -32,6 +38,8 @@ lib.addCommand(Config.ReviveAreaCommand, {
     },
     restricted = Config.AdminGroup
 }, function(source, args, raw)
+    if source <= 0 then return print("^4ars_ambulancejob > ^0", "You cant run this command from console") end
+
     local players = GetPlayers()
 
     local playerPed = GetPlayerPed(source)
@@ -68,7 +76,12 @@ lib.addCommand(Config.HealCommand, {
     local data = {}
     data.heal = true
     TriggerClientEvent('ars_ambulancejob:healPlayer', args.target, data)
-    TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("healed_player")):format(args.target))
+
+    if source > 0 then
+        TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("healed_player")):format(args.target))
+    else
+        print("^4ars_ambulancejob > ^0", (locale("healed_player")):format(args.target))
+    end
 end)
 
 lib.addCommand(Config.HealAreaCommand, {
@@ -83,6 +96,8 @@ lib.addCommand(Config.HealAreaCommand, {
     },
     restricted = Config.AdminGroup
 }, function(source, args, raw)
+    if source <= 0 then return print("^4ars_ambulancejob > ^0", "You cant run this command from console") end
+
     local players = GetPlayers()
 
     local playerPed = GetPlayerPed(source)
@@ -111,5 +126,9 @@ lib.addCommand(Config.ReviveAllCommand, {
         TriggerClientEvent('ars_ambulancejob:healPlayer', player, { revive = true })
     end
 
-    TriggerClientEvent("ars_ambulancejob:showNotification", source, locale("revived_all"))
+    if source > 0 then
+        TriggerClientEvent("ars_ambulancejob:showNotification", source, locale("revived_all"))
+    else
+        print("^4ars_ambulancejob > ^0", locale("revived_all"))
+    end
 end)
