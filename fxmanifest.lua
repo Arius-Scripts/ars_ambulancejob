@@ -5,8 +5,9 @@ fx_version 'cerulean'
 use_fxv2_oal 'yes'
 lua54 'yes'
 game 'gta5'
-version '1.0.2'
-author 'Arius Development'
+version '1.0.3'
+author 'Arius Scripts'
+description 'Advanced ambulance job with intergrated death system'
 
 
 --#--
