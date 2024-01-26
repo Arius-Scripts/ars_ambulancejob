@@ -6,8 +6,6 @@ player                = {}
 player.injuries       = {}
 local hospitals       = {}
 
-
-
 local function createZones()
     for index, hospital in pairs(Config.Hospitals) do
         local cfg = hospital

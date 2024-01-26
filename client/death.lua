@@ -134,7 +134,7 @@ local function respawnPlayer()
     player.respawning = false
 end
 
-local function initPlayerDeath()
+local function initPlayerDeath(logged_dead)
     if player.isDead then return end
 
     player.isDead = true
@@ -143,6 +143,9 @@ local function initPlayerDeath()
     for _, anim in pairs(Config.DeathAnimations) do
         lib.requestAnimDict(anim.dict)
     end
+
+    if logged_dead then goto logged_dead end
+
     if Config.ExtraEffects then
         ShakeGameplayCam('DEATH_FAIL_IN_EFFECT_SHAKE', 1.0)
         AnimpostfxPlay('DeathFailOut', 0, true)
@@ -155,6 +158,7 @@ local function initPlayerDeath()
     end
     if not player.isDead then return end
 
+    ::logged_dead::
     local playerPed = cache.ped or PlayerPedId()
 
     CreateThread(function()
@@ -244,7 +248,7 @@ function onPlayerLoaded()
     local data = lib.callback.await('ars_ambulancejob:getDeathStatus', false)
 
     if data?.isDead then
-        initPlayerDeath()
+        initPlayerDeath(true)
         utils.showNotification("logged_dead")
     end
 end
