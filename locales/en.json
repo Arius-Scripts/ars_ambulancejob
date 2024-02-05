@@ -135,5 +135,12 @@
     "death_screen_respawn": "Press ~r~G~s~ to respawn",
     "death_screen_confirm_respawn_header": "Top G",
     "death_screen_confirm_respawn_content": "Are you sure you want to respawn!",
-    "death_screen_respawn_timer": "Respawn available in ~b~ %s seconds~s~"
+    "death_screen_respawn_timer": "Respawn available in ~b~ %s seconds~s~",
+    "no_injuries": "No injuries",
+    "shot": "Shot",
+    "beaten": "Beaten",
+    "stabbed": "Stabbed",
+    "burn": "Burnt"
+
+
 }

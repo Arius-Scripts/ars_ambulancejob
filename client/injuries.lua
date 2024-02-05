@@ -42,7 +42,7 @@ function checkInjuries(data)
 
     if not data.injuries or not next(data.injuries) then
         injuries[#injuries + 1] = {
-            title = 'No injuries',
+            title = locale('no_injuries'),
         }
     else
         for _, v in pairs(data.injuries) do
@@ -64,7 +64,7 @@ function checkInjuries(data)
                             },
                             {
                                 title = locale("injury_cause"),
-                                description = v.cause,
+                                description = locale(v.cause),
                             },
                             {
                                 title = locale("injury_treat"),
@@ -139,11 +139,11 @@ function treatInjury(bone)
 end
 
 function updateInjuries(victim, weapon)
-    local found, lastDamaagedBone = GetPedLastDamageBone(victim)
+    local found, lastDamagedBone = GetPedLastDamageBone(victim)
 
-    local damagedBone = Config.BodyParts[tostring(lastDamaagedBone)]
+    local damagedBone = Config.BodyParts[tostring(lastDamagedBone)]
 
-    utils.debug("Damaged bone ", lastDamaagedBone, damagedBone.label)
+    utils.debug("Damaged bone ", lastDamagedBone, damagedBone.label)
 
     if damagedBone then
         if not player.injuries[damagedBone.id] then
