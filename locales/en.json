@@ -56,5 +56,7 @@
 	"medic_coming": "Call sent",
 	"logged_dead": "You logged off dead",
 	"revive_all": "Revive all the players",
-	"revived_all": "You revived everyone"
+	"revived_all": "You revived everyone",
+    "bossmenu_label":  "Boss Menu",
+    "bossmenu_denied": "No access"
 }
