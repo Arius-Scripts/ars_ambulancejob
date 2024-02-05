@@ -61,7 +61,7 @@ Config.DeathAnimations         = {
 
 
 Config.Hospitals = {
-	["phillbox"] = {
+	["pillbox"] = {
 		paramedic = {
 			model = "s_m_m_scientist_01",
 			pos = vector4(312.0927, -596.1016, 42.2918, 338.7213),
@@ -76,7 +76,7 @@ Config.Hospitals = {
 		},
 		blip = {
 			enable = true,
-			name = 'Phillbox Hospital',
+			name = 'Pillbox Hospital',
 			type = 61,
 			scale = 1.0,
 			color = 2,
