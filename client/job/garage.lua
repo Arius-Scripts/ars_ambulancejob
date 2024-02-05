@@ -49,7 +49,7 @@ local function openCarList(garage)
 
     lib.registerContext({
         id = 'vehicleList',
-        title = 'Vehicle menu',
+        title = locale("vehiclemenu_label"),
         options = vehicles
     })
     lib.showContext('vehicleList')

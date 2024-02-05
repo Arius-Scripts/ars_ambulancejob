@@ -65,5 +65,6 @@
     "clothesmenu_civilian_description": "Putting on civilian clothes",
     "clothesmenu_job_label": "Working clothes",
     "clothesmenu_job_use": "Putting on working clothes",
-    "clothesmenu_job_description": "Example button description"
+    "clothesmenu_job_description": "Example button description",
+    "vehiclemenu_label": "Vehicle menu",
 }
