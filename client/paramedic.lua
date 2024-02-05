@@ -68,11 +68,11 @@ local function openParamedicMenu(ped, hospital)
                         Wait(1000)
                         DoScreenFadeIn(300)
 
-                        utils.showNotification("treated_by_paramedic")
+                        utils.showNotification(locale("treated_by_paramedic"))
                         ClearPedTasks(ped)
                         ClearAreaOfObjects(hospital.paramedic.pos.xyz, 2.0, 0)
                     else
-                        utils.showNotification("not_enough_money")
+                        utils.showNotification(locale("not_enough_money"))
                     end
                 end,
             }
