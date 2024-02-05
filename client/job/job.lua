@@ -50,7 +50,7 @@ local function checkPatient(target)
 
         {
             title = locale("check_injuries"),
-            description = 'check if the patient has any fractures',
+            description = locale("check_injuries_desc"),
             icon = 'user-injured',
             onSelect = function()
                 local passData = {}
@@ -65,7 +65,7 @@ local function checkPatient(target)
     if isDead then
         options[#options + 1] = {
             title = locale("revive_patient"),
-            description = 'check if the patient has any fractures',
+            description = locale("revive_patient_desc"),
             icon = 'medkit',
             iconColor = "#5BC0DE",
             onSelect = function()
@@ -96,7 +96,7 @@ local function checkPatient(target)
         }
 
         options[#options + 1] = {
-            title = WEAPONS[data.killedBy] and WEAPONS[data.killedBy][1] or "Not found",
+            title = WEAPONS[data.killedBy] and WEAPONS[data.killedBy][1] or locale("patient_not_found"),
             readOnly = true,
             icon = 'skull',
         }
@@ -117,12 +117,12 @@ function createDistressCall()
         utils.debug(currentTime - player.distressCallTime, 60000 * Config.WaitTimeForNewCall)
         if currentTime - player.distressCallTime < 60000 * Config.WaitTimeForNewCall then
             return utils.showNotification(
-                "Wait before sending another call")
+                locale("distress_call_in_cooldown"))
         end
     end
 
-    local input = lib.inputDialog('Arius Ambulance', {
-        { type = 'input', label = 'Message', description = 'a message to send to medics online', required = true },
+    local input = lib.inputDialog(locale("distress_call_form_title"), {
+        { type = 'input', label = locale("distress_call_form_label"), description = locale("distress_call_form_desc"), required = true },
     })
     if not input then return end
 
@@ -191,38 +191,38 @@ function openDistressCalls()
                             icon        = "fa-info-circle",
                             iconColor   = "#0077FF",
                             readOnly    = true,
-                            description = "message sent from the patient"
+                            description = locale("tablet_call_desc")
                         },
                         {
                             title       = call.location,
                             icon        = "fa-map-marker",
                             iconColor   = "#00CC00",
                             readOnly    = true,
-                            description = "Location of the patient"
+                            description = locale("tablet_call_location")
                         },
                         {
-                            title       = "Set Waypoint",
+                            title       = locale("tablet_call_waypoint_title"),
                             icon        = "fa-map-pin",
                             iconColor   = "#FFA500",
                             arrow       = true,
-                            description = "Set the waypoint to the patient direction",
+                            description = locale("tablet_call_waypoint_desc"),
 
                             onSelect    = function()
                                 SetNewWaypoint(call.gps.x, call.gps.y)
-                                utils.showNotification("Waypoint set")
+                                utils.showNotification(locale("tablet_call_waypoint_notification"))
                                 ClearPedTasks(playerPed)
                                 DeleteEntity(tablet)
                             end
                         },
                         {
-                            title       = "Risolved",
+                            title       = locale("tablet_call_resolved_title"),
                             icon        = "fa-check",
                             iconColor   = "#32CD32",
                             arrow       = true,
-                            description = "Complete the call if you risolved it",
+                            description = locale("tablet_call_resolved_desc"),
                             onSelect    = function()
                                 TriggerServerEvent("ars_ambulancejob:callCompleted", call)
-                                utils.showNotification("Call closed")
+                                utils.showNotification(locale("tablet_call_resolved_notification"))
                                 ClearPedTasks(playerPed)
                                 DeleteEntity(tablet)
                             end
@@ -284,7 +284,7 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
     local coords = GetEntityCoords(playerPed)
 
     if data.anim == "medic" then
-        utils.showNotification("Reviving player")
+        utils.showNotification(locale("action_revive_notification"))
 
         CreateThread(function()
             lib.progressBar({
@@ -320,7 +320,7 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
         utils.useItem("defibrillator", Config.ConsumeItemPerUse)
         utils.addRemoveItem("add", "money", Config.ReviveReward)
     elseif data.anim == "dead" then
-        utils.showNotification("Getting revived")
+        utils.showNotification(locale("action_revived_notification"))
 
         player.gettingRevived = true
 
@@ -363,8 +363,8 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(name)
     if not hasJob(Config.EmsJobs) then return end
 
     lib.notify({
-        title = "New Distress Call",
-        description = ("%s sent a distress call"):format(name),
+        title = locale("notification_new_call_title"),
+        description = (locale("notification_new_call_desc")):format(name),
         position = 'bottom-right',
         duration = 8000,
         style = {
