@@ -13,7 +13,7 @@
 	"injury_cause": "Orsak till skada",
 	"injury_treat": "Behandling för skada",
 	"treating_injury": "Behandlar skada",
-	"injurie_treated": "Skadan är behandlad",
+	"injury_treated": "Skadan är behandlad",
 	"operation_canceled": "Operation avbruten",
 	"injury_menu_title": "Meny för skador",
 	"patient_not_conscious": "Patient medvetslös",

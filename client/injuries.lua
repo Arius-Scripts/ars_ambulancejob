@@ -93,7 +93,7 @@ function checkInjuries(data)
 
                                             utils.addRemoveItem("add", "money", (100 * (v.value / 10)))
 
-                                            utils.showNotification(locale("injurie_treated"))
+                                            utils.showNotification(locale("injury_treated"))
                                             utils.debug("Injury treated " .. dataToSend.bone)
                                         else
                                             utils.showNotification(locale("operation_canceled"))
