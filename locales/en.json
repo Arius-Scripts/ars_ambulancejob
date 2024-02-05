@@ -130,5 +130,10 @@
     "raycarbine":  "a ray carbine",
     "rayminigun": "a ray minigun",
     "rayshotgun":  "a ray shotgun",
-    "rayassaultrifle": "a ray assault rifle"
+    "rayassaultrifle": "a ray assault rifle",
+    "death_screen_call_medic": "Press ~r~E~s~ to call medics",
+    "death_screen_respawn": "Press ~r~G~s~ to respawn",
+    "death_screen_confirm_respawn_header": "Top G",
+    "death_screen_confirm_respawn_content": "Are you sure you want to respawn!",
+    "death_screen_respawn_timer": "Respawn available in ~b~ %s seconds~s~"
 }

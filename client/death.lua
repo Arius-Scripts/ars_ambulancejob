@@ -200,7 +200,7 @@ local function initPlayerDeath(logged_dead)
                 utils.drawTextFrame({
                     x = 0.5,
                     y = 0.9,
-                    msg = "Press ~r~E~s~ to call medics"
+                    msg = locale("death_screen_call_medic")
                 })
 
                 if IsControlJustPressed(0, 38) then
@@ -213,18 +213,18 @@ local function initPlayerDeath(logged_dead)
                     utils.drawTextFrame({
                         x = 0.5,
                         y = 0.86,
-                        msg = "Press ~r~G~s~ to respawn"
+                        msg = locale("death_screen_respawn")
                     })
 
                     if IsControlJustPressed(0, 47) then
-                        local confermation = lib.alertDialog({
-                            header = 'Top G',
-                            content = 'Are you sure you want to respawn!',
+                        local confirmation = lib.alertDialog({
+                            header = locale("death_screen_confirm_respawn_header"),
+                            content = locale("death_screen_confirm_respawn_content"),
                             centered = true,
                             cancel = true
                         })
 
-                        if confermation == "confirm" then
+                        if confirmation == "confirm" then
                             respawnPlayer()
                         end
                     end
@@ -232,7 +232,7 @@ local function initPlayerDeath(logged_dead)
                     utils.drawTextFrame({
                         x = 0.5,
                         y = 0.86,
-                        msg = ("Respawn available in ~b~ %s seconds~s~"):format(math.floor((time / 1000) - elapsedSeconds))
+                        msg = (locale("death_screen_respawn_timer")):format(math.floor((time / 1000) - elapsedSeconds))
                     })
                 end
             end
