@@ -58,5 +58,12 @@
 	"revive_all": "Revive all the players",
 	"revived_all": "You revived everyone",
     "bossmenu_label":  "Boss Menu",
-    "bossmenu_denied": "No access"
+    "bossmenu_denied": "No access",
+    "clothesmenu_label": "Clothing Menu",
+    "clothesmenu_civilian_label": "Civilian clothes",
+    "clothesmenu_civilian_use": "Putting on civilian clothes",
+    "clothesmenu_civilian_description": "Putting on civilian clothes",
+    "clothesmenu_job_label": "Working clothes",
+    "clothesmenu_job_use": "Putting on working clothes",
+    "clothesmenu_job_description": "Example button description"
 }
