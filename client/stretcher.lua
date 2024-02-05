@@ -50,7 +50,7 @@ local function useStretcher(stretcher)
     SetEntityAsMissionEntity(stretcher)
 
 
-    lib.showTextUI('[G] - Place stretcher on the ground', {
+    lib.showTextUI(locale("control_drop_stretcher"), {
         position = "top-center",
         icon = 'bed',
         style = {
