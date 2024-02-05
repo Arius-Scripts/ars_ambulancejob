@@ -48,10 +48,10 @@
 },
 
 ['stretcher'] = {
-    label = 'Ice Pack',
+    label = 'Stretcher',
     weight = 200,
     stack = true,
-    description = "An ice pack used to reduce swelling and provide relief from pain and inflammation.",
+    description = "A stretcher used to moving patients who require medical care.",
 },
 
 ['emstablet'] = {

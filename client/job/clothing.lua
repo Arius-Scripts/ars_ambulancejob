@@ -7,15 +7,16 @@ local SetBlockingOfNonTemporaryEvents = SetBlockingOfNonTemporaryEvents
 local function openClothingMenu(clothes)
     lib.registerContext({
         id = 'ems_clothing_menu',
-        title = 'Clothing Menu',
+        title = locale("clothesmenu_label"),
         options = {
             {
-                title = '🧥 Civil Clothes',
-                description = 'Example button description',
+                title = locale('clothesmenu_civilian_label'),
+                description = locale('clothesmenu_civilian_description'),
+                icon = "fa-solid fa-shirt",
                 onSelect = function()
                     if lib.progressBar({
                             duration = 3000,
-                            label = 'Putting on civil clothes',
+                            label = locale("clothesmenu_civilian_use"),
                             useWhileDead = false,
                             allowCuffed = false,
                             canCancel = false,
@@ -34,12 +35,13 @@ local function openClothingMenu(clothes)
                 end,
             },
             {
-                title = '👮 Work Clothes',
-                description = 'Example button description',
+                title = locale('clothesmenu_job_label'),
+                description = locale('clothesmenu_job_description'),
+                icon = "fa-solid fa-user-doctor",
                 onSelect = function()
                     if lib.progressBar({
                             duration = 3000,
-                            label = 'Putting on works clothes',
+                            label = locale("clothesmenu_job_use"),
                             useWhileDead = false,
                             allowCuffed = false,
                             canCancel = false,
