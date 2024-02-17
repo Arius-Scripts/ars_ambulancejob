@@ -4,8 +4,8 @@ Config                         = {}
 
 Config.Debug                   = false
 
-Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
-Config.EmsJobs                 = { "ambulance", "ems" }
+Config.ClothingScript          = 'false' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
+Config.EmsJobs                 = { "ambulance" }
 Config.RespawnTime             = 0                     -- in minutes
 Config.UseInterDistressSystem  = true
 Config.WaitTimeForNewCall      = 5                     -- minutes
@@ -16,12 +16,15 @@ Config.HealCommand             = "heal"
 Config.HealAreaCommand         = "healarea"
 Config.ReviveAllCommand        = "reviveall"
 
+Config.Webhook 				   = "https://discord.com/api/webhooks/"
+
 Config.AdminGroup              = "group.admin"
+Config.OwnerGroup              = "group.owner"              
 
 Config.MedicBagProp            = "xm_prop_x17_bag_med_01a"
 Config.MedicBagItem            = "medicalbag"
 
-Config.HelpCommand             = "911"
+Config.HelpCommand             = "help"
 Config.RemoveItemsOnRespawn    = true
 
 Config.BaseInjuryReward        = 150 -- changes if the injury value is higher then 1
@@ -64,28 +67,28 @@ Config.Hospitals = {
 	["pillbox"] = {
 		paramedic = {
 			model = "s_m_m_scientist_01",
-			pos = vector4(312.0927, -596.1016, 42.2918, 338.7213),
+			pos = vector4(-436.1755, -325.7487, 33.910762, 171.40728),
 		},
 		bossmenu = {
-			pos = vector3(284.84, -615.6, 44.24),
-			min_grade = 2
+			pos = vector3(-455.3441, 320.0995, 34.910755),
+			min_grade = 5
 		},
 		zone = {
-			pos = vec3(299.0, -585.28, 43.28),
-			size = vec3(200.0, 200.0, 200.0),
+			pos = vector3(-436.4369, -340.4771, 34.910762),
+			size = vec3(150.0, 200.0, 150.0),
 		},
 		blip = {
 			enable = true,
-			name = 'Pillbox Hospital',
+			name = 'Hospital',
 			type = 61,
 			scale = 1.0,
 			color = 2,
-			pos = vector3(308.96, -591.52, 43.28),
+			pos = vector3(-436.4369, -340.4771, 34.910762),
 		},
 		respawn = {
 			{
-				bedPoint = vector4(349.76, -583.44, 43.0, 150.04),
-				spawnPoint = vector4(348.84, -583.36, 42.32, 68.24)
+				bedPoint = vector4(-445.7848, -307.135, 35.837501, 34.940803),
+				spawnPoint = vector4(-444.5588, -304.94, 34.910758, 103.79467)
 			},
 			-- {
 			-- 	bedPoint = vector4(346.96, -590.64, 44.12, 338.0),
@@ -95,12 +98,12 @@ Config.Hospitals = {
 		},
 		stash = {
 			['ems_stash_1'] = {
-				slots = 50,
-				weight = 50, -- kg
+				slots = 100,
+				weight = 450, -- kg
 				min_grade = 0,
-				label = 'Ems stash',
-				shared = true, -- false if you want to make everyone has a personal stash
-				pos = vector3(309.96, -599.2, 43.28)
+				label = 'Locker',
+				shared = false, -- false if you want to make everyone has a personal stash
+				pos = vector3(-435.8961, -320.2668, 34.910758)
 			}
 		},
 		pharmacy = {
@@ -108,14 +111,14 @@ Config.Hospitals = {
 				job = true,
 				label = "Pharmacy",
 				grade = 0, -- works only if job true
-				pos = vector3(315.5516, -598.6013, 43.2918),
+				pos = vector3(-430.8908, -320.9941, 34.910751),
 				blip = {
 					enable = false,
 					name = 'Pharmacy',
 					type = 61,
 					scale = 0.7,
 					color = 2,
-					pos = vector3(315.5516, -598.6013, 43.2918),
+					pos = vector3(-430.8908, -320.9941, 34.910751),
 				},
 				items = {
 					{ name = 'medicalbag',    price = 10 },
@@ -131,14 +134,14 @@ Config.Hospitals = {
 				job = false,
 				label = "Pharmacy",
 				grade = 0, -- works only if job true
-				pos = vector3(303.84, -597.6, 43.28),
+				pos = vector3(22.644552, -1107.116, 29.796998),
 				blip = {
 					enable = true,
 					name = 'Pharmacy',
 					type = 61,
 					scale = 0.7,
 					color = 2,
-					pos = vector3(303.84, -597.6, 43.28),
+					pos = vector3(22.644552, -1107.116, 29.796998),
 				},
 				items = {
 					{ name = 'bandage', price = 10 },
@@ -147,24 +150,24 @@ Config.Hospitals = {
 		},
 		garage = {
 			['ems_garage_1'] = {
-				pedPos = vector4(291.2237, -614.9087, 42.4234, 332.9413),
-				model = 'mp_m_weapexp_01',
-				spawn = vector4(294.28, -608.32, 43.32, 69.6),
-				deposit = vector3(294.28, -608.32, 43.32),
-				driverSpawnCoords = vector3(297.56, -600.52, 43.32),
+				pedPos = vector4(-452.3661, -351.736, 33.501834, 15.006129),
+				model = 's_m_m_chemsec_01',
+				spawn = vector4(-454.2525, -339.5548, 34.363494, 352.72827),
+				deposit = vector3(-492.2372, -336.2443, 34.372535),
+				driverSpawnCoords = vector3(-458.4902, -338.0246, 34.500801),
 
 				vehicles = {
 					{
-						label = 'Ambulance',
-						spawn_code = 'ambulance',
-						min_grade = 3,
+						label = 'Ambulance Audi 3',
+						spawn_code = 'ambuaudi3',
+						min_grade = 1,
 						modifications = {} -- es. {color1 = {255, 12, 25}}
 					},
 				}
 			}
 		},
 		clothes = {
-			enable = true,
+			enable = false,
 			pos = vector4(300.7454, -597.4542, 42.2918, 298.0781),
 			model = 'a_f_m_bevhills_01',
 			male = {
@@ -274,7 +277,7 @@ Config.BodyParts = {
 function Config.SendDistressCall(msg)
 	--[--] -- Quasar
 
-	-- TriggerServerEvent('qs-smartphone:server:sendJobAlert', {message = msg, location = GetEntityCoords(PlayerPedId())}, "ambulance")
+	--TriggerServerEvent('qs-smartphone:server:sendJobAlert', {message = msg, location = GetEntityCoords(PlayerPedId())}, "ambulance")
 
 
 	--[--] -- GKS

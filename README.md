@@ -5,15 +5,17 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 :arrows_counterclockwise: **Frameworks**
 
 -   ESX
--   QBCORE
 
 :dart: **Dependencies**
 
+-   es_extended
 -   ox_inventory
 -   ox_target / qb-target
 
 :loudspeaker: **Features:**
 
+
+-   Discord Logs
 -   Create hospitals without any limitations.
 -   Integrated death handling system.
 -   Internal dispatch system for hospital service calls.
@@ -43,18 +45,9 @@ Experience the intensity of emergency response in Arius Ambulance Job :ambulance
 :crystal*ball: \_Stay tuned for more exciting features coming soon!*
 
 :page_facing_up: **GitHub Repository:**
-[Download](https://github.com/Arius-Scripts/ars_ambulancejob)
-
-:link: **Video Preview:**
-[Preview](https://youtu.be/q59_st6iuQU)
-
-:globe_with_meridians: **Cfx Forums**
-[Forums](https://forum.cfx.re/t/free-esx-qbcore-arius-ambulancejob/5184085)
-
-:speech_balloon: **Join our discord**
-[Discord](https://discord.gg/TkjDhjyeSe)
-
-:book: **Check out the documentation**
-[Documentation](https://docs.arius-scripts.com)
+[Download](https://github.com/Poseidon281/ars_ambulancejob)
 
 Feel free to provide suggestions and report any bugs you encounter. Your feedback is invaluable to us as we continue to improve the script. Enjoy!
+
+A very special thanks to Arius Script on that ambulance i build and upgraded this one
+[Arius-Scripts-Github](https://github.com/Arius-Scripts)
