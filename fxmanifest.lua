@@ -1,22 +1,16 @@
---#--
---Fx info--
---#--
 fx_version 'cerulean'
 use_fxv2_oal 'yes'
 lua54 'yes'
 game 'gta5'
-version '1.0.3'
-author 'Arius Scripts'
+version '1.0.1'
+author 'Senna'
 description 'Advanced ambulance job with intergrated death system'
 
-
---#--
---Manifest--
---#--
 
 shared_scripts {
 	'@ox_lib/init.lua',
 	'config.lua',
+	'logtranslation.lua',
 }
 
 client_scripts {
@@ -55,4 +49,11 @@ server_scripts {
 
 files {
 	'locales/*.json',
+}
+
+dependencies {
+    'es_extended',
+    'ox_lib',
+	'ox_target',
+	'oxmysql',
 }
