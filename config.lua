@@ -287,11 +287,12 @@ function Config.sendDistressCall(msg)
 	-- end)
 end
 
-function Config.giveVehicleKeys(vehicle plate)
+function Config.giveVehicleKeys(vehicle, plate)
 	-- exaple usage
 	-- exports['youscript']:name(vehicle, plate)
 end
-function Config.removeVehicleKeys(vehicle plate)
+
+function Config.removeVehicleKeys(vehicle, plate)
 	-- exaple usage
 	-- exports['youscript']:name(vehicle, plate)
 end
