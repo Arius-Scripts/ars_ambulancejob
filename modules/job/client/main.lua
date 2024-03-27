@@ -128,20 +128,20 @@ function createDistressCall()
 
     local msg = input[1]
 
-    if not Config.UseInterDistressSystem then
-        Config.SendDistressCall(msg)
-    else
-        local data = {}
-        local playerCoords = cache.coords or GetEntityCoords(cache.ped)
 
-        local current, crossing = GetStreetNameAtCoord(playerCoords.x, playerCoords.y, playerCoords.z)
+    Config.SendDistressCall(msg)
 
-        data.msg = msg
-        data.gps = playerCoords
-        data.location = GetStreetNameFromHashKey(current)
+    local data = {}
+    local playerCoords = cache.coords or GetEntityCoords(cache.ped)
 
-        TriggerServerEvent("ars_ambulancejob:createDistressCall", data)
-    end
+    local current, crossing = GetStreetNameAtCoord(playerCoords.x, playerCoords.y, playerCoords.z)
+
+    data.msg = msg
+    data.gps = playerCoords
+    data.location = GetStreetNameFromHashKey(current)
+
+    TriggerServerEvent("ars_ambulancejob:createDistressCall", data)
+
 
 
     player.distressCallTime = GetGameTimer()
