@@ -129,11 +129,15 @@ lib.callback.register('ars_ambulancejob:getDistressCalls', function(source)
     return distressCalls
 end)
 
-lib.callback.register('ars_ambulancejob:openMedicalBag', function(source)
-    exports.ox_inventory:RegisterStash("medicalBag_" .. source, "Medical Bag", 10, 50 * 1000)
+lib.callback.register('ars_ambulancejob:openMedicalBag', function(playerId)
+    local source = playerId
+    local playerIdentifier = GetPlayerIdentifierByType(source, "license"):gsub("license:", "")
 
-    return "medicalBag_" .. source
+    exports.ox_inventory:RegisterStash("medicalBag_" .. playerIdentifier, "Medical Bag", 10, 50 * 1000)
+
+    return "medicalBag_" .. playerIdentifier
 end)
+
 lib.callback.register('ars_ambulancejob:getItem', function(source, name)
     local item = exports.ox_inventory:GetSlotWithItem(source, name)
 

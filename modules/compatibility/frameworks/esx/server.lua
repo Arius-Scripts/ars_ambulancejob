@@ -63,7 +63,7 @@ function getDeathStatus(target)
     return data
 end
 
-ESX.RegisterUsableItem(Config.MedicBagItem, function(source)
+ESX.RegisterUsableItem(Config.MedicBagItem, function(source, a, b)
     if not hasJob(source, Config.EmsJobs) then return end
 
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)

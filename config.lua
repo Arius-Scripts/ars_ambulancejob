@@ -7,7 +7,6 @@ Config.Debug                   = false
 Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.EmsJobs                 = { "ambulance", "ems" }
 Config.RespawnTime             = 0                     -- in minutes
-Config.UseInterDistressSystem  = true
 Config.WaitTimeForNewCall      = 5                     -- minutes
 
 Config.ReviveCommand           = "revive"
