@@ -20,37 +20,36 @@ shared_scripts {
 }
 
 client_scripts {
-	"client/modules/weapons.lua",
-	"client/modules/utils.lua",
+	"data/weapons.lua",
+	"modules/utils/client/utils.lua",
 
-	"client/main.lua",
+	"client.lua",
 
-	"client/bridge/esx.lua",
-	"client/bridge/qb.lua",
-	"client/bridge/target.lua",
+	"modules/compatibility/frameworks/**/client.lua",
+	"modules/compatibility/target/**/client.lua",
 
-	"client/injuries.lua",
-	"client/death.lua",
-	"client/stretcher.lua",
-	"client/paramedic.lua",
+	"modules/injuries/client.lua",
+	"modules/death/client.lua",
+	"modules/stretcher/client.lua",
+	"modules/paramedic/client.lua",
 
-	"client/job/job.lua",
-	"client/job/garage.lua",
-	"client/job/medical_bag.lua",
-	"client/job/stashes.lua",
-	"client/job/shops.lua",
-	"client/job/clothing.lua",
-	"client/job/bossmenu.lua",
-	"client/modules/coords_debug.lua",
+	"modules/job/client/main.lua",
+	"modules/job/client/garage.lua",
+	"modules/job/client/medical_bag.lua",
+	"modules/job/client/stashes.lua",
+	"modules/job/client/shops.lua",
+	"modules/job/client/clothing.lua",
+	"modules/job/client/bossmenu.lua",
+
+	"modules/utils/client/coords_debug.lua",
 }
 
 server_scripts {
 	"@oxmysql/lib/MySQL.lua",
-	"server/bridge/esx.lua",
-	"server/bridge/qb.lua",
-	"server/main.lua",
-	"server/commands.lua",
-	"server/txadmin.lua",
+	"modules/compatibility/frameworks/**/server.lua",
+	"server.lua",
+	"modules/commands/server.lua",
+	"modules/compatibility/txadmin/server.lua",
 }
 
 files {
