@@ -41,6 +41,9 @@ local function openCarList(garage)
                     NetworkFadeInEntity(vehicle, 1)
                     lib.setVehicleProperties(vehicle, v.modifications)
 
+                    local plate = lib.getVehicleProperties(vehicle).plate
+                    Config.giveVehicleKeys(vehicle, plate)
+
                     TaskEnterVehicle(playerPed, vehicle, -1, -1, 1.0, 1, 0)
                 end
             })
@@ -70,6 +73,9 @@ local function depositVehicle(data)
                 while cache.vehicle do Wait(100) end
 
                 local vehicleToDelete = playerVehicle
+
+                local plate = lib.getVehicleProperties(playerVehicle).plate
+                Config.removeVehicleKeys(playerVehicle, plate)
 
                 lib.hideTextUI()
 

@@ -129,7 +129,7 @@ function createDistressCall()
     local msg = input[1]
 
 
-    Config.SendDistressCall(msg)
+    Config.sendDistressCall(msg)
 
     local data = {}
     local playerCoords = cache.coords or GetEntityCoords(cache.ped)

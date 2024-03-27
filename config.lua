@@ -270,7 +270,7 @@ Config.BodyParts = {
 	["31086"] = { id = "head", label = "Head", levels = { ["default"] = "Damaged" } },                                                                                                -- head
 }
 
-function Config.SendDistressCall(msg)
+function Config.sendDistressCall(msg)
 	--[--] -- Quasar
 
 	-- TriggerServerEvent('qs-smartphone:server:sendJobAlert', {message = msg, location = GetEntityCoords(PlayerPedId())}, "ambulance")
@@ -285,4 +285,13 @@ function Config.SendDistressCall(msg)
 
 	--     TriggerServerEvent('gksphone:jbmessage', name, Races[1].phone_number, msg, '', GPS, "ambulance")
 	-- end)
+end
+
+function Config.giveVehicleKeys(vehicle plate)
+	-- exaple usage
+	-- exports['youscript']:name(vehicle, plate)
+end
+function Config.removeVehicleKeys(vehicle plate)
+	-- exaple usage
+	-- exports['youscript']:name(vehicle, plate)
 end
