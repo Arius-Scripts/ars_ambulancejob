@@ -32,14 +32,14 @@ function updateStatus(data)
 
     Player.Functions.SetMetaData("isdead", data.status)
 
-    if not player[source] then
-        player[source] = {}
+    if not player[data.target] then
+        player[data.target] = {}
     end
 
-    player[source].isDead = data.status
+    player[data.target].isDead = data.status
 
     if data.status == true then
-        player[source].killedBy = data.killedBy
+        player[data.target].killedBy = data.killedBy
     end
 end
 
