@@ -54,7 +54,7 @@ AddEventHandler('ars_ambulancejob:discord:radius', function(Command, playerId, r
 end)
 
 RegisterServerEvent('ars_ambulancejob:discord:all')
-AddEventHandler('ars_ambulancejob:discord:radius', function(Command, playerId)
+AddEventHandler('ars_ambulancejob:discord:all', function(Command, playerId)
     local xPlayer = ESX.GetPlayerFromId(playerId)
     local Staffname = xPlayer.getName()
     local currentTime = os.date('%d-%m-%Y %H:%M:%S', os.time())
