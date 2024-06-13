@@ -106,7 +106,6 @@ RegisterNetEvent("ars_ambulancejob:putOnStretcher", function(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:togglePatientFromVehicle", function(data)
-    print(data.target)
     if not player[data.target].isDead then return end
 
     TriggerClientEvent("ars_ambulancejob:togglePatientFromVehicle", data.target, data.vehicle)

@@ -108,7 +108,6 @@ function putOnStretcher(toggle, target)
     local data = {}
     data.toggle = toggle
     data.target = GetPlayerServerId(NetworkGetPlayerIndexFromPed(target))
-    print(data.target)
     TriggerServerEvent("ars_ambulancejob:putOnStretcher", data)
     patientOnStretcher = toggle and target or nil
 end
@@ -146,7 +145,6 @@ RegisterNetEvent("ars_ambulancejob:putOnStretcher", function(toggle)
 
     if toggle then
         local closestStretcher = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 5.5, `prop_ld_binbag_01`, false)
-        print(closestStretcher)
         AttachEntityToEntity(playerPed, closestStretcher, 0, 0, 0.0, 1.0, 195.0, 0.0, 180.0, 0.0, false, false, false, false, 2)
     else
         DetachEntity(playerPed)
