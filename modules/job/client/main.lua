@@ -313,8 +313,7 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
 
         Wait(1000)
 
-        TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 10.0, -10.0,
-            -1, 0, 0, 0, 0, 0)
+        TaskPlayAnim(playerPed, Config.Animations["get_up"].dict, Config.Animations["get_up"].clip, 10.0, -10.0, -1, 0, 0, 0, 0, 0)
 
 
         utils.useItem("defibrillator", Config.ConsumeItemPerUse)

@@ -56,7 +56,7 @@ function stopPlayerDeath()
     AnimpostfxStopAll()
 
     DoScreenFadeIn(700)
-    TaskPlayAnim(playerPed, Config.DeathAnimations["revive"].dict, Config.DeathAnimations["revive"].clip, 8.0, -8.0, -1, 0, 0, 0, 0, 0)
+    TaskPlayAnim(playerPed, Config.Animations["get_up"].dict, Config.Animations["get_up"].clip, 8.0, -8.0, -1, 0, 0, 0, 0, 0)
 
     -- LocalPlayer.state:set("injuries", {}, true)
     LocalPlayer.state:set("dead", false, true)
@@ -140,7 +140,7 @@ local function initPlayerDeath(logged_dead)
     player.isDead = true
     startCommandTimer()
 
-    for _, anim in pairs(Config.DeathAnimations) do
+    for _, anim in pairs(Config.Animations) do
         lib.requestAnimDict(anim.dict)
     end
 
@@ -189,7 +189,7 @@ local function initPlayerDeath(logged_dead)
 
             if not player.gettingRevived and not player.respawning then
                 sleep = 0
-                local anim = cache.vehicle and Config.DeathAnimations["car"] or Config.DeathAnimations["normal"]
+                local anim = cache.vehicle and Config.Animations["death_car"] or Config.Animations["death_normal"]
 
                 if not IsEntityPlayingAnim(playerPed, anim.dict, anim.clip, 3) then
                     TaskPlayAnim(playerPed, anim.dict, anim.clip, 50.0, 8.0, -1, 1, 1.0, false, false, false)
