@@ -49,6 +49,7 @@ server_scripts {
 	"modules/compatibility/frameworks/**/server.lua",
 	"server.lua",
 	"modules/commands/server.lua",
+	"modules/commands/webhook.lua",
 	"modules/compatibility/txadmin/server.lua",
 }
 
