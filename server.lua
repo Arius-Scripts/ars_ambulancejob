@@ -96,7 +96,7 @@ end)
 
 RegisterNetEvent("ars_ambulancejob:removeInventory", function()
     if player[source].isDead and Config.RemoveItemsOnRespawn then
-        exports.ox_inventory:ClearInventory(source)
+        exports.ox_inventory:ClearInventory(source, Config.KeepItemsOnRespawn)
     end
 end)
 

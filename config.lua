@@ -22,8 +22,9 @@ Config.MedicBagItem            = "medicalbag"
 
 Config.HelpCommand             = "911"
 Config.RemoveItemsOnRespawn    = true
+Config.KeepItemsOnRespawn      = { "money", "WEAPON_PISTOL" } -- items that will not be removed when respawed (works only when Config.RemoveItemsOnRespawn is true)
 
-Config.BaseInjuryReward        = 150 -- changes if the injury value is higher then 1
+Config.BaseInjuryReward        = 150                          -- changes if the injury value is higher then 1
 Config.ReviveReward            = 700
 
 Config.ParamedicTreatmentPrice = 4000
