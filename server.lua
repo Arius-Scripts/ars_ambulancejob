@@ -2,6 +2,7 @@ player = {}
 distressCalls = {}
 
 RegisterNetEvent("ars_ambulancejob:updateDeathStatus", function(death)
+    local source = source
     local data = {}
     data.target = source
     data.status = death.isDead
@@ -11,6 +12,7 @@ RegisterNetEvent("ars_ambulancejob:updateDeathStatus", function(death)
 end)
 
 RegisterNetEvent("ars_ambulancejob:revivePlayer", function(data)
+    local source = source
     if not hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
 
     local sourcePed = GetPlayerPed(source)
@@ -27,6 +29,7 @@ RegisterNetEvent("ars_ambulancejob:revivePlayer", function(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
+    local source = source
     if not hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
 
 
@@ -51,7 +54,7 @@ end)
 RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
     local source = source    
     if not source or source < 1 then return end
-    
+
     local playerName = getPlayerName(source)
 
     distressCalls[#distressCalls + 1] = {
@@ -82,6 +85,8 @@ RegisterNetEvent("ars_ambulancejob:callCompleted", function(call)
 end)
 
 RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
+    local source = source
+
     if data.toggle then
         exports.ox_inventory:RemoveItem(source, data.item, data.quantity)
     else
@@ -99,6 +104,7 @@ RegisterNetEvent("ars_ambulancejob:useItem", function(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:removeInventory", function()
+    local source = source
     if player[source].isDead and Config.RemoveItemsOnRespawn then
         exports.ox_inventory:ClearInventory(source, Config.KeepItemsOnRespawn)
     end
