@@ -50,11 +50,13 @@ end)
 
 RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
     if not source or source < 1 then return end
+    local playerName = getPlayerName(source)
+
     distressCalls[#distressCalls + 1] = {
         msg = data.msg,
         gps = data.gps,
         location = data.location,
-        name = getPlayerName(source)
+        name = playerName
     }
 
     local players = GetPlayers()
@@ -63,7 +65,7 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
         local id = tonumber(players[i])
 
         if hasJob(id, Config.EmsJobs) then
-            TriggerClientEvent("ars_ambulancejob:createDistressCall", id, getPlayerName(source))
+            TriggerClientEvent("ars_ambulancejob:createDistressCall", id, playerName)
         end
     end
 end)
