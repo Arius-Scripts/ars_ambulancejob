@@ -11,8 +11,6 @@ local NetworkFadeOutEntity     = NetworkFadeOutEntity
 local DeleteVehicle            = DeleteVehicle
 local DrawMarker               = DrawMarker
 local Wait                     = Wait
-local IsEntityDead             = IsEntityDead
-local vector3                  = vector3
 local TaskVehicleDriveWander   = TaskVehicleDriveWander
 local DeletePed                = DeletePed
 
