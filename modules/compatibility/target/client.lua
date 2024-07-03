@@ -187,7 +187,7 @@ elseif GetResourceState('qb-target') == 'started' then
                 icon = option.icon,
                 job = jobs,
                 canInteract = option.cn,
-                onSelect = option.fn
+                action = option.fn
             }
         end
 
