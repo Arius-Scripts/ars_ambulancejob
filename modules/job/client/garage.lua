@@ -151,4 +151,12 @@ function initGarage(data, jobs)
     end
 end
 
+function unloadGarage()
+    for _, point in pairs(depositPositions) do
+        point:remove()
+        utils.debug("Point", _, "removed")
+    end
+    depositPositions = {}
+end
+
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

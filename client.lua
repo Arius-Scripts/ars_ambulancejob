@@ -36,6 +36,8 @@ local function createZones()
                         DeletePed(v)
                     end
                 end
+
+                unloadGarage()
             end
         })
     end
