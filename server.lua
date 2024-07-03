@@ -49,7 +49,9 @@ RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
+    local source = source    
     if not source or source < 1 then return end
+    
     local playerName = getPlayerName(source)
 
     distressCalls[#distressCalls + 1] = {
@@ -61,7 +63,7 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
 
     local players = GetPlayers()
 
-    for i = 1, #players do
+    for i = 1, #players dov
         local id = tonumber(players[i])
 
         if hasJob(id, Config.EmsJobs) then
