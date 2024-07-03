@@ -4,12 +4,14 @@ if not ESX then return end
 
 function removeAccountMoney(target, account, amount)
     local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
+
     xPlayer.removeAccountMoney(account, amount)
 end
 
 function hasJob(target, jobs)
     local xPlayer = ESX.GetPlayerFromId(target)
-
+    if not xPlayer then return end
     if type(jobs) == "table" then
         for index, jobName in pairs(jobs) do
             if xPlayer.job.name == jobName then return true end
@@ -23,6 +25,7 @@ end
 
 function playerJob(target)
     local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
 
     return xPlayer.job.name
 end
@@ -45,12 +48,14 @@ end
 
 function getPlayerName(target)
     local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
 
     return xPlayer.getName()
 end
 
 function getDeathStatus(target)
     local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
 
     local isDead = MySQL.scalar.await('SELECT `is_dead` FROM `users` WHERE `identifier` = ? LIMIT 1', {
         xPlayer.identifier

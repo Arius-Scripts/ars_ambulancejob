@@ -4,11 +4,14 @@ if not QBCore then return end
 
 function removeAccountMoney(target, account, amount)
     local xPlayer = QBCore.Functions.GetPlayer(target)
+    if not xPlayer then return end
+
     xPlayer.Functions.RemoveMoney(account, amount)
 end
 
 function hasJob(target, jobs)
     local xPlayer = QBCore.Functions.GetPlayer(target)
+    if not xPlayer then return end
 
     if type(jobs) == "table" then
         for index, jobName in pairs(jobs) do
@@ -23,6 +26,7 @@ end
 
 function playerJob(target)
     local xPlayer = QBCore.Functions.GetPlayer(target)
+    if not xPlayer then return end
 
     return xPlayer.PlayerData.job.name
 end
@@ -45,12 +49,14 @@ end
 
 function getPlayerName(target)
     local xPlayer = QBCore.Functions.GetPlayer(target)
+    if not xPlayer then return end
 
     return xPlayer.PlayerData.charinfo.firstname .. " " .. xPlayer.PlayerData.charinfo.lastname
 end
 
 function getDeathStatus(target)
     local Player = QBCore.Functions.GetPlayer(target)
+    if not Player then return end
 
     local data = {
         isDead = Player.PlayerData.metadata['isdead']
