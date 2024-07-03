@@ -2,7 +2,7 @@ lib.locale()
 
 Config                         = {}
 
-Config.Debug                   = true
+Config.Debug                   = false
 
 Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.EmsJobs                 = { "ambulance", "ems" }
