@@ -2,6 +2,7 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 
 if not ESX then return end
 
+Framework = {}
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData)
@@ -16,7 +17,7 @@ AddEventHandler('esx:onPlayerLogout', function()
     player.isDead = false
 end)
 
-function toggleClothes(toggle, clothes)
+function Framework.toggleClothes(toggle, clothes)
     if toggle then
         utils.debug("Putting on clothes")
 
@@ -119,20 +120,20 @@ function toggleClothes(toggle, clothes)
     end
 end
 
-function getPlayerJobGrade()
+function Framework.getPlayerJobGrade()
     local playerData = ESX.GetPlayerData()
     local jobGrade = playerData.job.grade
 
     return jobGrade
 end
 
-function playerJob()
+function Framework.playerJob()
     local playerData = ESX.GetPlayerData()
 
     return playerData.job.name
 end
 
-function hasJob(jobs)
+function Framework.hasJob(jobs)
     local playerData = ESX.GetPlayerData()
 
     if type(jobs) == "table" then
@@ -146,16 +147,16 @@ function hasJob(jobs)
     return false
 end
 
-function openBossMenu(job)
+function Framework.openBossMenu(job)
     TriggerEvent('esx_society:openBossMenu', job, function(data, menu) end, { wash = false })
 end
 
-function healStatus()
+function Framework.healStatus()
     TriggerEvent('esx_status:add', "hunger", 1000000)
     TriggerEvent('esx_status:add', "thirst", 1000000)
 end
 
-function playerSpawned()
+function Framework.playerSpawned()
     TriggerEvent('esx_basicneeds:resetStatus')
     TriggerServerEvent('esx:onPlayerSpawn')
     TriggerEvent('esx:onPlayerSpawn')

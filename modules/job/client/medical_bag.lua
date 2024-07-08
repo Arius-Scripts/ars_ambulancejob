@@ -61,7 +61,7 @@ local function placeMedicalBag()
 end
 
 RegisterNetEvent("ars_ambulancejob:placeMedicalBag", function()
-    if not hasJob(Config.EmsJobs) then return end
+    if not Framework.hasJob(Config.EmsJobs) then return end
 
     placeMedicalBag()
 end)

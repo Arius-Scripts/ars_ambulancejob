@@ -10,7 +10,7 @@ local function createStashes()
                 coords = stash.pos,
                 distance = 3,
                 onEnter = function(self)
-                    if hasJob(Config.EmsJobs) then
+                    if Framework.hasJob(Config.EmsJobs) then
                         lib.showTextUI(locale('control_to_open_stash'))
                     end
                 end,
@@ -18,7 +18,7 @@ local function createStashes()
                     lib.hideTextUI()
                 end,
                 nearby = function(self)
-                    if hasJob(Config.EmsJobs) then
+                    if Framework.hasJob(Config.EmsJobs) then
                         DrawMarker(2, self.coords.x, self.coords.y, self.coords.z, 0.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.2,
                             0.2, 0.2, 199, 208, 209, 100, true, true, 2, nil, nil, false)
 

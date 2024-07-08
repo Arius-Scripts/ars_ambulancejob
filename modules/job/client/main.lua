@@ -151,7 +151,7 @@ exports("createDistressCall", createDistressCall)
 RegisterCommand(Config.HelpCommand, createDistressCall)
 
 function openDistressCalls()
-    if not hasJob(Config.EmsJobs) then return end
+    if not Framework.hasJob(Config.EmsJobs) then return end
 
     local playerPed = cache.ped or PlayerPedId()
     local playerCoords = cache.coords or GetEntityCoords(playerPed)
@@ -359,7 +359,7 @@ end)
 
 
 RegisterNetEvent("ars_ambulancejob:createDistressCall", function(name)
-    if not hasJob(Config.EmsJobs) then return end
+    if not Framework.hasJob(Config.EmsJobs) then return end
 
     lib.notify({
         title = locale("notification_new_call_title"),

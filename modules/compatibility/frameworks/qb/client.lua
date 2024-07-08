@@ -2,6 +2,8 @@ local QBCore = GetResourceState('qb-core'):find('start') and exports['qb-core']:
 
 if not QBCore then return end
 
+Framework = {}
+
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     player.loaded = true
     Wait(3000)
@@ -13,14 +15,14 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     player.isDead = false
 end)
 
-function toggleClothes(toggle, clothes)
+function Framework.toggleClothes(toggle, clothes)
     if toggle then
         utils.debug("Putting on clothes")
 
         local playerData = QBCore.Functions.GetPlayerData()
         local gender = playerData.charinfo.gender
         local playerPed = cache.ped
-        local jobGrade = getPlayerJobGrade()
+        local jobGrade = Framework.getPlayerJobGrade()
 
         utils.debug("Job Grade " .. jobGrade)
 
@@ -111,20 +113,20 @@ function toggleClothes(toggle, clothes)
     end
 end
 
-function getPlayerJobGrade()
+function Framework.getPlayerJobGrade()
     local playerData = QBCore.Functions.GetPlayerData()
     local jobGrade = playerData.job.grade
 
     return type(jobGrade) == "table" and jobGrade.level or jobGrade
 end
 
-function playerJob()
+function Framework.playerJob()
     local playerData = QBCore.Functions.GetPlayerData()
 
     return playerData.job.name
 end
 
-function hasJob(jobs)
+function Framework.hasJob(jobs)
     local playerData = QBCore.Functions.GetPlayerData()
 
     if type(jobs) == "table" then
@@ -138,18 +140,18 @@ function hasJob(jobs)
     return false
 end
 
-function openBossMenu(job)
+function Framework.openBossMenu(job)
     TriggerEvent("qb-bossmenu:client:OpenMenu")
 end
 
-function healStatus()
+function Framework.healStatus()
     local playerData = QBCore.Functions.GetPlayerData()
 
     TriggerServerEvent('consumables:server:addHunger', playerData.metadata.hunger + 100000)
     TriggerServerEvent('consumables:server:addThirst', playerData.metadata.hunger + 100000)
 end
 
-function playerSpawned()
+function Framework.playerSpawned()
 end
 
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

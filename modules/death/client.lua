@@ -62,7 +62,7 @@ function stopPlayerDeath()
     LocalPlayer.state:set("dead", false, true)
     player.distressCallTime = nil
 
-    playerSpawned()
+    Framework.playerSpawned()
     healPlayer()
 end
 
@@ -71,7 +71,7 @@ function healPlayer()
     local maxHealth = GetEntityMaxHealth(playerPed)
 
     SetEntityHealth(playerPed, maxHealth)
-    healStatus()
+    Framework.healStatus()
 end
 
 RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)

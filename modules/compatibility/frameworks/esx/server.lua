@@ -2,14 +2,16 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 
 if not ESX then return end
 
-function removeAccountMoney(target, account, amount)
+Framework = {}
+
+function Framework.removeAccountMoney(target, account, amount)
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
 
     xPlayer.removeAccountMoney(account, amount)
 end
 
-function hasJob(target, jobs)
+function Framework.hasJob(target, jobs)
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
     if type(jobs) == "table" then
@@ -23,14 +25,14 @@ function hasJob(target, jobs)
     return false
 end
 
-function playerJob(target)
+function Framework.playerJob(target)
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
 
     return xPlayer.job.name
 end
 
-function updateStatus(data)
+function Framework.updateStatus(data)
     local xPlayer = ESX.GetPlayerFromId(data.target)
 
     MySQL.update('UPDATE users SET is_dead = ? WHERE identifier = ?', { data.status, xPlayer.identifier })
@@ -46,14 +48,14 @@ function updateStatus(data)
     end
 end
 
-function getPlayerName(target)
+function Framework.getPlayerName(target)
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
 
     return xPlayer.getName()
 end
 
-function getDeathStatus(target)
+function Framework.getDeathStatus(target)
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
 
@@ -68,8 +70,20 @@ function getDeathStatus(target)
     return data
 end
 
+function Framework.addItem(source, item, amount)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    if not xPlayer then return end
+    return xPlayer.addInventoryItem(item, amount)
+end
+
+function Framework.removeItem(source, item, amount)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    if not xPlayer then return end
+    return xPlayer.removeInventoryItem(item, amount)
+end
+
 ESX.RegisterUsableItem(Config.MedicBagItem, function(source, a, b)
-    if not hasJob(source, Config.EmsJobs) then return end
+    if not Framework.hasJob(source, Config.EmsJobs) then return end
 
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
 end)

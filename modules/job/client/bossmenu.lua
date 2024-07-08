@@ -6,8 +6,8 @@ for index, hospital in pairs(Config.Hospitals) do
             label = locale("bossmenu_label"),
             groups = Config.EmsJobs,
             fn = function(data)
-                if getPlayerJobGrade() >= hospital.bossmenu.min_grade then
-                    openBossMenu(playerJob())
+                if Framework.getPlayerJobGrade() >= hospital.bossmenu.min_grade then
+                    Framework.openBossMenu(Framework.playerJob())
                 else
                     print(locale("bossmenu_denied"))
                 end

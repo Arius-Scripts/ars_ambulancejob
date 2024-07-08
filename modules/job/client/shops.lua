@@ -14,7 +14,7 @@ local function createShops()
                 distance = 3,
                 onEnter = function(self)
                     if pharmacy.job then
-                        if hasJob(Config.EmsJobs) and getPlayerJobGrade() >= pharmacy.grade then
+                        if Framework.hasJob(Config.EmsJobs) and Framework.getPlayerJobGrade() >= pharmacy.grade then
                             self.access = true
                             lib.showTextUI(locale('control_to_open_shop'))
                         else

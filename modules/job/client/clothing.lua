@@ -30,7 +30,7 @@ local function openClothingMenu(clothes)
                                 clip = 'try_shirt_positive_d'
                             },
                         }) then
-                        toggleClothes(false, clothes)
+                        Framework.toggleClothes(false, clothes)
                     end
                 end,
             },
@@ -55,7 +55,7 @@ local function openClothingMenu(clothes)
                                 clip = 'try_shirt_positive_d'
                             },
                         }) then
-                        toggleClothes(true, clothes)
+                        Framework.toggleClothes(true, clothes)
                     end
                 end,
             },

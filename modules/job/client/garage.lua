@@ -19,7 +19,7 @@ local depositPositions         = {}
 local function openCarList(garage)
     local vehicles = {}
     local playerPed = cache.ped
-    local jobGrade = getPlayerJobGrade()
+    local jobGrade = Framework.getPlayerJobGrade()
 
     for k, v in pairs(garage.vehicles) do
         if jobGrade >= v.min_grade then
@@ -58,7 +58,7 @@ end
 
 
 local function depositVehicle(data)
-    if hasJob(data.jobs) then
+    if Framework.hasJob(data.jobs) then
         local playerPed = cache.ped
         local playerVehicle = cache.vehicle
         if playerVehicle and GetPedInVehicleSeat(playerVehicle, -1) ~= 0 then

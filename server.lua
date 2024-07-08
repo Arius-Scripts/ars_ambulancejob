@@ -8,12 +8,12 @@ RegisterNetEvent("ars_ambulancejob:updateDeathStatus", function(death)
     data.status = death.isDead
     data.killedBy = death?.weapon or false
 
-    updateStatus(data)
+    Framework.updateStatus(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:revivePlayer", function(data)
     local source = source
-    if not hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
+    if not Framework.hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
 
     local sourcePed = GetPlayerPed(source)
     local targetPed = GetPlayerPed(data.targetServerId)
@@ -30,7 +30,7 @@ end)
 
 RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
     local source = source
-    if not hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
+    if not Framework.hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
 
 
     local sourcePed = GetPlayerPed(source)
@@ -55,7 +55,7 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
     local source = source
     if not source or source < 1 then return end
 
-    local playerName = getPlayerName(source)
+    local playerName = Framework.getPlayerName(source)
 
     distressCalls[#distressCalls + 1] = {
         msg = data.msg,
@@ -69,7 +69,7 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
     for i = 1, #players do
         local id = tonumber(players[i])
 
-        if hasJob(id, Config.EmsJobs) then
+        if Framework.hasJob(id, Config.EmsJobs) then
             TriggerClientEvent("ars_ambulancejob:createDistressCall", id, playerName)
         end
     end
@@ -95,7 +95,7 @@ RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:useItem", function(data)
-    if not hasJob(source, Config.EmsJobs) then return end
+    if not Framework.hasJob(source, Config.EmsJobs) then return end
 
     local item = exports.ox_inventory:GetSlotWithItem(source, data.item)
     local slot = item.slot
@@ -122,13 +122,13 @@ RegisterNetEvent("ars_ambulancejob:togglePatientFromVehicle", function(data)
 end)
 
 lib.callback.register('ars_ambulancejob:getDeathStatus', function(source, target)
-    return player[target] and player[target] or getDeathStatus(target or source)
+    return player[target] and player[target] or Framework.getDeathStatus(target or source)
 end)
 
 lib.callback.register('ars_ambulancejob:getData', function(source, target)
     local data = {}
     data.injuries = Player(target).state.injuries or false
-    data.status = getDeathStatus(target or source) or Player(target).state.dead
+    data.status = Framework.getDeathStatus(target or source) or Player(target).state.dead
     data.killedBy = player[target]?.killedBy or false
 
     return data
@@ -160,7 +160,7 @@ lib.callback.register('ars_ambulancejob:getMedicsOniline', function(source)
     for i = 1, #players do
         local id = tonumber(players[i])
 
-        if hasJob(id, Config.EmsJobs) then
+        if Framework.hasJob(id, Config.EmsJobs) then
             count += 1
         end
     end
