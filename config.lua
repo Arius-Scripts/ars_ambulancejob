@@ -4,6 +4,8 @@ Config                         = {}
 
 Config.Debug                   = false
 
+Config.UseOxInventory          = GetResourceState('ox_inventory'):find('start')
+
 Config.ClothingScript          = 'illenium-appearance' -- 'illenium-appearance', 'fivem-appearance' ,'core' or false -- to disable
 Config.EmsJobs                 = { "ambulance", "ems" }
 Config.RespawnTime             = 0                     -- in minutes

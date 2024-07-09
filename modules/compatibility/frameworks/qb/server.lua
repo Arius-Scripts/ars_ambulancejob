@@ -3,6 +3,7 @@ QBCore = GetResourceState('qb-core'):find('start') and exports['qb-core']:GetCor
 if not QBCore then return end
 
 Framework = {}
+local ox_inventory = Config.UseOxInventory and exports.ox_inventory
 
 function Framework.removeAccountMoney(target, account, amount)
     local xPlayer = QBCore.Functions.GetPlayer(target)
@@ -68,6 +69,10 @@ function Framework.getDeathStatus(target)
 end
 
 function Framework.addItem(source, item, amount)
+    if ox_inventory then
+        return ox_inventory:AddItem(source, item, amount)
+    end
+
     local xPlayer = QBCore.Functions.GetPlayer(source)
     if not xPlayer then return end
     if item == "money" or item == "cash" then
@@ -78,9 +83,23 @@ function Framework.addItem(source, item, amount)
 end
 
 function Framework.removeItem(source, item, amount)
+    if ox_inventory then
+        return ox_inventory:RemoveItem(source, item, amount)
+    end
+
     local xPlayer = QBCore.Functions.GetPlayer(source)
     if not xPlayer then return end
     return xPlayer.Functions.RemoveItem(item, amount)
+end
+
+function Framework.wipeInventory(target, keep)
+    if ox_inventory then
+        return ox_inventory:ClearInventory(target, keep)
+    end
+
+    local xPlayer = QBCore.Functions.GetPlayer(source)
+    if not xPlayer then return end
+    exports["qb-inventory"]:ClearInventory(target, keep)
 end
 
 QBCore.Functions.CreateUseableItem(Config.MedicBagItem, function(source, item)

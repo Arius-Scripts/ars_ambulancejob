@@ -69,14 +69,15 @@ local function checkPatient(target)
             icon = 'medkit',
             iconColor = "#5BC0DE",
             onSelect = function()
-                local count = exports.ox_inventory:Search('count', "defibrillator")
-                if count < 1 then return utils.showNotification(locale("not_enough_defibrillator")) end
+                local hasItem = Framework.hasItem("defibrillator")
+                if not hasItem then return utils.showNotification(locale("not_enough_defibrillator")) end
 
+                if Config.UseOxInventory then
+                    local itemDurability = utils.getItem("defibrillator")?.metadata?.durability
 
-                local itemDurability = utils.getItem("defibrillator")?.metadata?.durability
-
-                if itemDurability then
-                    if itemDurability < Config.ConsumeItemPerUse then return utils.showNotification(locale("no_durability")) end
+                    if itemDurability then
+                        if itemDurability < Config.ConsumeItemPerUse then return utils.showNotification(locale("no_durability")) end
+                    end
                 end
 
                 local playerPed = cache.ped or PlayerPedId()

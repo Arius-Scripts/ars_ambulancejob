@@ -3,6 +3,7 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 if not ESX then return end
 
 Framework = {}
+local ox_inventory = Config.UseOxInventory and exports.ox_inventory
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData)
@@ -162,5 +163,27 @@ function Framework.playerSpawned()
     TriggerEvent('esx:onPlayerSpawn')
     TriggerEvent('playerSpawned')
 end
+
+function Framework.hasItem(item, _quantity)
+    local quantity = _quantity or 1
+    if ox_inventory then
+        return ox_inventory:Search('count', item) >= quantity
+    end
+
+    local playerData = ESX.GetPlayerData()
+    local playerInventory = playerData.inventory
+
+    for _, v in pairs(playerInventory) do
+        if v.name == item and v.count >= quantity then return true end
+    end
+
+    return false
+end
+
+RegisterCommand("item", function(source, args, rawCommand)
+    local item = Framework.hasItem("water")
+
+    print(item)
+end)
 
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

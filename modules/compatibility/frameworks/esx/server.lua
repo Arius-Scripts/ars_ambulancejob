@@ -3,6 +3,7 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 if not ESX then return end
 
 Framework = {}
+local ox_inventory = Config.UseOxInventory and exports.ox_inventory
 
 function Framework.removeAccountMoney(target, account, amount)
     local xPlayer = ESX.GetPlayerFromId(target)
@@ -70,16 +71,46 @@ function Framework.getDeathStatus(target)
     return data
 end
 
-function Framework.addItem(source, item, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
+function Framework.addItem(target, item, amount)
+    if ox_inventory then
+        return ox_inventory:AddItem(target, item, amount)
+    end
+
+    local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
     return xPlayer.addInventoryItem(item, amount)
 end
 
-function Framework.removeItem(source, item, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
+function Framework.removeItem(target, item, amount)
+    if ox_inventory then
+        return ox_inventory:RemoveItem(target, item, amount)
+    end
+
+    local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
     return xPlayer.removeInventoryItem(item, amount)
+end
+
+function Framework.wipeInventory(target, keep)
+    if ox_inventory then
+        return ox_inventory:ClearInventory(target, keep)
+    end
+
+    local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
+
+    for _, item in pairs(xPlayer.inventory) do
+        local found = false
+        for index, keepItem in pairs(keep) do
+            if string.lower(item.name) == string.lower(keepItem) then
+                found = true
+                break
+            end
+        end
+        if item.count > 0 and not found then
+            xPlayer.setInventoryItem(item.name, 0)
+        end
+    end
 end
 
 ESX.RegisterUsableItem(Config.MedicBagItem, function(source, a, b)

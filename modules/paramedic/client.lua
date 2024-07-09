@@ -18,62 +18,60 @@ local function openParamedicMenu(ped, hospital)
             {
                 title = locale("get_treated_paramedic"),
                 onSelect = function()
-                    local money = exports.ox_inventory:Search("count", "money")
+                    local hasMoney = Framework.hasItem("money", Config.ParamedicTreatmentPrice)
+                    if not hasMoney then return utils.showNotification(locale("not_enough_money")) end
 
-                    if money >= Config.ParamedicTreatmentPrice then
-                        utils.addRemoveItem("remove", "money", Config.ParamedicTreatmentPrice)
 
-                        local dict = lib.requestAnimDict("anim@gangops@morgue@table@")
-                        local playerPed = cache.ped or PlayerPedId()
-                        local previousCoords = cache.coords or GetEntityCoords(playerPed)
-                        local bed = nil
+                    utils.addRemoveItem("remove", "money", Config.ParamedicTreatmentPrice)
 
-                        DoScreenFadeOut(500)
-                        while not IsScreenFadedOut() do Wait(1) end
+                    local dict = lib.requestAnimDict("anim@gangops@morgue@table@")
+                    local playerPed = cache.ped or PlayerPedId()
+                    local previousCoords = cache.coords or GetEntityCoords(playerPed)
+                    local bed = nil
 
-                        Wait(1000)
-                        DoScreenFadeIn(300)
+                    DoScreenFadeOut(500)
+                    while not IsScreenFadedOut() do Wait(1) end
 
-                        for i = 1, #hospital.respawn do
-                            local _bed = hospital.respawn[i]
-                            local isBedOccupied = utils.isBedOccupied(_bed.bedPoint)
-                            if not isBedOccupied then
-                                bed = _bed
-                                break
-                            end
+                    Wait(1000)
+                    DoScreenFadeIn(300)
+
+                    for i = 1, #hospital.respawn do
+                        local _bed = hospital.respawn[i]
+                        local isBedOccupied = utils.isBedOccupied(_bed.bedPoint)
+                        if not isBedOccupied then
+                            bed = _bed
+                            break
                         end
-
-                        if not bed then bed = hospital.respawn[1] end
-
-                        SetEntityCoords(playerPed, bed.bedPoint)
-                        SetEntityHeading(playerPed, bed.bedPoint.w)
-                        TaskPlayAnim(playerPed, dict, "body_search", 2.0, 2.0, -1, 1, 0, false, false, false)
-
-                        SetEntityCoords(ped, bed.spawnPoint)
-                        TaskStartScenarioInPlace(ped, "WORLD_HUMAN_CLIPBOARD", -1, true)
-
-                        lib.progressBar({ duration = 15000, label = locale("getting_treated"), useWhileDead = false, canCancel = true, disable = { car = true, move = true }, })
-
-                        SetEntityHealth(playerPed, GetEntityMaxHealth(playerPed))
-                        player.injuries = {}
-
-                        SetEntityCoords(ped, hospital.paramedic.pos.xyz)
-                        SetEntityHeading(ped, hospital.paramedic.pos.w)
-
-                        DoScreenFadeOut(500)
-                        while not IsScreenFadedOut() do Wait(1) end
-
-                        SetEntityCoords(playerPed, previousCoords)
-
-                        Wait(1000)
-                        DoScreenFadeIn(300)
-
-                        utils.showNotification(locale("treated_by_paramedic"))
-                        ClearPedTasks(ped)
-                        ClearAreaOfObjects(hospital.paramedic.pos.xyz, 2.0, 0)
-                    else
-                        utils.showNotification(locale("not_enough_money"))
                     end
+
+                    if not bed then bed = hospital.respawn[1] end
+
+                    SetEntityCoords(playerPed, bed.bedPoint)
+                    SetEntityHeading(playerPed, bed.bedPoint.w)
+                    TaskPlayAnim(playerPed, dict, "body_search", 2.0, 2.0, -1, 1, 0, false, false, false)
+
+                    SetEntityCoords(ped, bed.spawnPoint)
+                    TaskStartScenarioInPlace(ped, "WORLD_HUMAN_CLIPBOARD", -1, true)
+
+                    lib.progressBar({ duration = 15000, label = locale("getting_treated"), useWhileDead = false, canCancel = true, disable = { car = true, move = true }, })
+
+                    SetEntityHealth(playerPed, GetEntityMaxHealth(playerPed))
+                    player.injuries = {}
+
+                    SetEntityCoords(ped, hospital.paramedic.pos.xyz)
+                    SetEntityHeading(ped, hospital.paramedic.pos.w)
+
+                    DoScreenFadeOut(500)
+                    while not IsScreenFadedOut() do Wait(1) end
+
+                    SetEntityCoords(playerPed, previousCoords)
+
+                    Wait(1000)
+                    DoScreenFadeIn(300)
+
+                    utils.showNotification(locale("treated_by_paramedic"))
+                    ClearPedTasks(ped)
+                    ClearAreaOfObjects(hospital.paramedic.pos.xyz, 2.0, 0)
                 end,
             }
         }
