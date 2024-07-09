@@ -40,6 +40,10 @@ local function placeMedicalBag()
             icon = 'fa-solid fa-suitcase',
             groups = false,
             fn = function()
+                if not Config.UseOxInventory then
+                    return print("ONLY AVAILABLE FOR OX INVENTORY FOR NOW")
+                end
+
                 openMedicalBag()
             end
         },

@@ -1,3 +1,5 @@
+if not Config.UseOxInventory then return end
+
 local DrawMarker            = DrawMarker
 local IsControlJustReleased = IsControlJustReleased
 local CreateThread          = CreateThread
