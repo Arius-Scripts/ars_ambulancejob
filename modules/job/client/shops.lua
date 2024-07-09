@@ -52,7 +52,7 @@ local function createShops()
                                             { type = 'number', label = locale("pharmacy_buying_quantity"), icon = 'hashtag' },
                                         })
                                         if not amount then return end
-                                        print(amount)
+
                                         local quantity = amount[1]
                                         local totalPrice = item.price * quantity
 
