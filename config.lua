@@ -120,14 +120,15 @@ Config.Hospitals = {
 					pos = vector3(315.5516, -598.6013, 43.2918),
 				},
 				items = {
-					{ name = 'medicalbag',    price = 10 },
-					{ name = 'bandage',       price = 10 },
-					{ name = 'defibrillator', price = 10 },
-					{ name = 'tweezers',      price = 10 },
-					{ name = 'burncream',     price = 10 },
-					{ name = 'suturekit',     price = 10 },
-					{ name = 'icepack',       price = 10 },
+					{ name = 'medicalbag',    label = "Medical Bag",   icon = "fas fa-briefcase-medical", price = 10 },
+					{ name = 'bandage',       label = "Bandage",       icon = "fas fa-bandage",           price = 10 },
+					{ name = 'defibrillator', label = "Defibrillator", icon = "fas fa-heartbeat",         price = 10 },
+					{ name = 'tweezers',      label = "Tweezers",      icon = "fas fa-tools",             price = 10 },
+					{ name = 'burncream',     label = "Burncream",     icon = "fas fa-fire-extinguisher", price = 10 },
+					{ name = 'suturekit',     label = "Suturekit",     icon = "fas fa-scissors",          price = 10 },
+					{ name = 'icepack',       label = "Ice Pack",      icon = "fas fa-snowflake",         price = 10 },
 				}
+
 			},
 			["ems_shop_2"] = {
 				job = false,
@@ -143,7 +144,7 @@ Config.Hospitals = {
 					pos = vector3(303.84, -597.6, 43.28),
 				},
 				items = {
-					{ name = 'bandage', price = 10 },
+					{ name = 'bandage', label = "Bandage", icon = "fas fa-bandage", price = 10 },
 				}
 			},
 		},
