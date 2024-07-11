@@ -39,24 +39,7 @@ local function openClothingMenu(clothes)
                 description = locale('clothesmenu_job_description'),
                 icon = "fa-solid fa-user-doctor",
                 onSelect = function()
-                    if lib.progressBar({
-                            duration = 3000,
-                            label = locale("clothesmenu_job_use"),
-                            useWhileDead = false,
-                            allowCuffed = false,
-                            canCancel = false,
-                            disable = {
-                                car = true,
-                                move = true,
-                                combat = true,
-                            },
-                            anim = {
-                                dict = 'clothingshirt',
-                                clip = 'try_shirt_positive_d'
-                            },
-                        }) then
-                        Framework.toggleClothes(true, clothes)
-                    end
+                    Framework.toggleClothes(true, clothes)
                 end,
             },
         }

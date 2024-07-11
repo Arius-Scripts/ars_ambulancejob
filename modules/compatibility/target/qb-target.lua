@@ -1,5 +1,5 @@
 if GetResourceState('qb-target') ~= 'started' then return end
-
+print("qb target", GetResourceState('qb-target'))
 local qb_target = exports['qb-target']
 Target = {}
 

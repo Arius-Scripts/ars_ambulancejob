@@ -37,6 +37,46 @@ function Framework.toggleClothes(toggle, clothes)
                 data = clothes.female[jobGrade] or clothes.female[1]
             end
 
+            local outfits = {}
+            local selected = false
+
+            for outfitName, outfit in pairs(data) do
+                outfits[#outfits + 1] = {
+                    title = outfitName,
+                    icon = 'fa-solid fa-shirt',
+                    onSelect = function()
+                        data = outfit
+                        selected = true
+                    end,
+                }
+            end
+            lib.registerContext({
+                id = 'police_outfits',
+                title = locale("police_outfits_title"),
+                options = outfits
+            })
+            lib.showContext('police_outfits')
+
+            while not selected do Wait(500) end
+            utils.debug("Using " .. Config.ClothingScript)
+
+            lib.progressBar({
+                duration = 3000,
+                label = locale("clothesmenu_job_use"),
+                useWhileDead = false,
+                allowCuffed = false,
+                canCancel = false,
+                disable = {
+                    car = true,
+                    move = true,
+                    combat = true,
+                },
+                anim = {
+                    dict = 'clothingshirt',
+                    clip = 'try_shirt_positive_d'
+                },
+            })
+
             utils.debug("Using " .. Config.ClothingScript)
 
             exports[Config.ClothingScript]:setPedProps(playerPed, {
@@ -103,10 +143,52 @@ function Framework.toggleClothes(toggle, clothes)
             utils.debug("Using " .. Config.ClothingScript)
 
             if gender == 0 then
-                TriggerEvent('qb-clothing:client:loadOutfit', { outfitData = clothes.male[jobGrade] })
+                data = clothes.male[jobGrade] or clothes.male[1]
             else
-                TriggerEvent('qb-clothing:client:loadOutfit', { outfitData = clothes.female[jobGrade] })
+                data = clothes.female[jobGrade] or clothes.female[1]
             end
+
+            local outfits = {}
+            local selected = false
+
+            for outfitName, outfit in pairs(data) do
+                outfits[#outfits + 1] = {
+                    title = outfitName,
+                    icon = 'fa-solid fa-shirt',
+                    onSelect = function()
+                        data = outfit
+                        selected = true
+                    end,
+                }
+            end
+
+            lib.registerContext({
+                id = 'police_outfits',
+                title = locale("police_outfits_title"),
+                options = outfits
+            })
+            lib.showContext('police_outfits')
+
+            while not selected do Wait(500) end
+
+            lib.progressBar({
+                duration = 3000,
+                label = locale("clothesmenu_job_use"),
+                useWhileDead = false,
+                allowCuffed = false,
+                canCancel = false,
+                disable = {
+                    car = true,
+                    move = true,
+                    combat = true,
+                },
+                anim = {
+                    dict = 'clothingshirt',
+                    clip = 'try_shirt_positive_d'
+                },
+            })
+
+            TriggerEvent('qb-clothing:client:loadOutfit', { outfitData = data })
         end
     else
         utils.debug("Putting civil clothes")
