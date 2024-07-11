@@ -180,10 +180,4 @@ function Framework.hasItem(item, _quantity)
     return false
 end
 
-RegisterCommand("item", function(source, args, rawCommand)
-    local item = Framework.hasItem("water")
-
-    print(item)
-end)
-
 -- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡
