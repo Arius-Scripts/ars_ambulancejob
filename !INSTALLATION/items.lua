@@ -58,7 +58,4 @@
     label = 'Ems tablet',
     weight = 200,
     stack = true,
-    client = {
-        export = 'ars_ambulancejob.openDistressCalls'
-    }
 },

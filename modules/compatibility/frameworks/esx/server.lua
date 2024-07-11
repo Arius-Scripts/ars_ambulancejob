@@ -119,6 +119,13 @@ ESX.RegisterUsableItem(Config.MedicBagItem, function(source, a, b)
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
 end)
 
+ESX.RegisterUsableItem(Config.TabletItem, function(source, a, b)
+    if not Framework.hasJob(source, Config.EmsJobs) then return end
+
+    TriggerClientEvent("ars_ambulancejob:openDistressCalls", source)
+end)
+
+
 CreateThread(function()
     for k, v in pairs(Config.EmsJobs) do
         TriggerEvent('esx_society:registerSociety', v, v, 'society_' .. v, 'society_' .. v, 'society_' .. v, { type = 'public' })

@@ -112,3 +112,8 @@ QBCore.Functions.CreateUseableItem(Config.MedicBagItem, function(source, item)
 
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
 end)
+QBCore.Functions.CreateUseableItem(Config.TabletItem, function(source, item)
+    if not Framework.hasJob(source, Config.EmsJobs) then return end
+
+    TriggerClientEvent("ars_ambulancejob:openDistressCalls", source)
+end)

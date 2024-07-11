@@ -22,6 +22,8 @@ Config.AdminGroup              = "group.admin"
 Config.MedicBagProp            = "xm_prop_x17_bag_med_01a"
 Config.MedicBagItem            = "medicalbag"
 
+Config.TabletItem              = "emstablet"
+
 Config.HelpCommand             = "911"
 Config.RemoveItemsOnRespawn    = true
 Config.KeepItemsOnRespawn      = { "money", "WEAPON_PISTOL" } -- items that will not be removed when respawed (works only when Config.RemoveItemsOnRespawn is true)

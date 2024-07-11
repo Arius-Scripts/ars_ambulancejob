@@ -247,6 +247,7 @@ function openDistressCalls()
     lib.showContext('openDistressCalls')
 end
 
+RegisterNetEvent("ars_ambulancejob:openDistressCalls", openDistressCalls)
 exports("openDistressCalls", openDistressCalls)
 
 
