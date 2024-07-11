@@ -288,5 +288,3 @@ end)
 exports("isDead", function()
     return player.isDead
 end)
-
--- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

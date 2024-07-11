@@ -81,5 +81,3 @@ local function createShops()
     end
 end
 CreateThread(createShops)
-
--- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡

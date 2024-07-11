@@ -159,5 +159,3 @@ function updateInjuries(victim, weapon)
         LocalPlayer.state:set("injuries", player.injuries, true)
     end
 end
-
--- © 𝐴𝑟𝑖𝑢𝑠 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡
