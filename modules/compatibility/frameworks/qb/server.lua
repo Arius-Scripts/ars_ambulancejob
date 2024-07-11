@@ -76,7 +76,7 @@ function Framework.addItem(source, item, amount)
     local xPlayer = QBCore.Functions.GetPlayer(source)
     if not xPlayer then return end
     if item == "money" or item == "cash" then
-        return xPlayer.Functions.AddMoney(amount)
+        return xPlayer.Functions.AddMoney("cash", amount)
     else
         return xPlayer.Functions.AddItem(item, amount)
     end
