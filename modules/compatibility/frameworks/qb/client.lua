@@ -155,10 +155,15 @@ end
 
 function Framework.hasItem(item, _quantity)
     local quantity = _quantity or 1
+
     if ox_inventory then
         return ox_inventory:Search('count', item) >= quantity
     end
     local playerData = QBCore.Functions.GetPlayerData()
+    if item == "money" then
+        local playerAccounts = playerData.money
+        return playerAccounts["cash"] >= quantity
+    end
     local playerInventory = playerData.items
 
     for _, v in pairs(playerInventory) do

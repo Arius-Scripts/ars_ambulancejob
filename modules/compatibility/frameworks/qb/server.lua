@@ -89,6 +89,11 @@ function Framework.removeItem(source, item, amount)
 
     local xPlayer = QBCore.Functions.GetPlayer(source)
     if not xPlayer then return end
+
+    if item == "money" then
+        return xPlayer.Functions.RemoveMoney("cash", amount)
+    end
+
     return xPlayer.Functions.RemoveItem(item, amount)
 end
 
