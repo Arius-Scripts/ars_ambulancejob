@@ -140,8 +140,8 @@ function treatInjury(bone)
     SetEntityHealth(cache.ped, newHealth)
 end
 
-local bodyParts = require "data.body_parts"
-local weapons = require "data.weapons"
+local bodyParts = lib.load("data.body_parts")
+local weapons = lib.load("data.weapons")
 function updateInjuries(victim, weapon)
     local found, lastDamagedBone = GetPedLastDamageBone(victim)
 

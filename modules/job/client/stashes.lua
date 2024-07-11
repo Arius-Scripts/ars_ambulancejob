@@ -4,9 +4,10 @@ local DrawMarker            = DrawMarker
 local IsControlJustReleased = IsControlJustReleased
 local CreateThread          = CreateThread
 
+local hospitals             = lib.load("data.hospitals")
 
 local function createStashes()
-    for index, hospital in pairs(Config.Hospitals) do
+    for index, hospital in pairs(hospitals) do
         for id, stash in pairs(hospital.stash) do
             lib.points.new({
                 coords = stash.pos,

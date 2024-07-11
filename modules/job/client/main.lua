@@ -21,7 +21,7 @@ local SetEntityInvincible          = SetEntityInvincible
 local TriggerEvent                 = TriggerEvent
 local SetCurrentPedWeapon          = SetCurrentPedWeapon
 
-local weapons                      = require "data.weapons"
+local weapons                      = lib.load("data.weapons")
 
 local function checkPatient(target)
     local targetServerId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(target))

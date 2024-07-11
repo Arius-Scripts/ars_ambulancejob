@@ -1,4 +1,6 @@
-for index, hospital in pairs(Config.Hospitals) do
+local hospitals = lib.load("data.hospitals")
+
+for index, hospital in pairs(hospitals) do
     Target.addBoxZone(hospital.bossmenu.pos, {
         {
             name = "open_bossmenu" .. index,

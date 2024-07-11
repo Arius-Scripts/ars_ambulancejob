@@ -1,6 +1,7 @@
 if not Config.Debug then return end
+local hospitals = lib.load("data.hospitals")
 
-for name, hospital in pairs(Config.Hospitals) do
+for name, hospital in pairs(hospitals) do
     local zonePos = hospital.zone.pos
     local zoneSize = hospital.zone.size
     local inZone = false

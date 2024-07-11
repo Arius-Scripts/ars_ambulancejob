@@ -2,9 +2,10 @@ local DrawMarker            = DrawMarker
 local IsControlJustReleased = IsControlJustReleased
 local CreateThread          = CreateThread
 local ox_inventory          = Config.UseOxInventory and exports.ox_inventory
+local hospitals             = lib.load("data.hospitals")
 
 local function createShops()
-    for _, hospital in pairs(Config.Hospitals) do
+    for _, hospital in pairs(hospitals) do
         for name, pharmacy in pairs(hospital.pharmacy) do
             if pharmacy.blip.enable then
                 utils.createBlip(pharmacy.blip)

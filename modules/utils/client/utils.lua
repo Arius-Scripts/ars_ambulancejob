@@ -90,7 +90,7 @@ function utils.getClosestHospital()
     local playerCoords = cache.coords or GetEntityCoords(playerPed)
     local minDist = 999999
 
-    for k, v in pairs(Config.Hospitals) do
+    for k, v in pairs(lib.load("data.hospitals")) do
         local hospitalCoords = v.zone.pos
         local dist = #(playerCoords - hospitalCoords)
 

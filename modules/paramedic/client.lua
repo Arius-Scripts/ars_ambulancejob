@@ -115,8 +115,10 @@ local function createAmbulanceDriver(vehicle)
     return ped
 end
 
+local hospitals = lib.load("data.hospitals")
+
 function initParamedic()
-    for index, hospital in pairs(Config.Hospitals) do
+    for index, hospital in pairs(hospitals) do
         local ped = utils.createPed(hospital.paramedic.model, hospital.paramedic.pos)
 
         FreezeEntityPosition(ped, true)

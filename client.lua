@@ -4,17 +4,17 @@ local CreateThread    = CreateThread
 
 player                = {}
 player.injuries       = {}
-local hospitals       = {}
+local hospitals       = lib.load("data.hospitals")
 
 local function createZones()
-    for index, hospital in pairs(Config.Hospitals) do
+    for index, hospital in pairs(hospitals) do
         local cfg = hospital
 
         if cfg.blip.enable then
             utils.createBlip(cfg.blip)
         end
 
-        hospitals[#hospitals + 1] = lib.zones.box({
+        lib.zones.box({
             name = 'ars_hospital:' .. index,
             coords = cfg.zone.pos,
             size = cfg.zone.size,

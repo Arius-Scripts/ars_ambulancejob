@@ -181,7 +181,9 @@ if ox_inventory then
 
     AddEventHandler('onServerResourceStart', function(resourceName)
         if resourceName == GetCurrentResourceName() then
-            for index, hospital in pairs(Config.Hospitals) do
+            local hospitals = lib.load("data.hospitals")
+
+            for index, hospital in pairs(hospitals) do
                 local cfg = hospital
 
                 for id, stash in pairs(cfg.stash) do
