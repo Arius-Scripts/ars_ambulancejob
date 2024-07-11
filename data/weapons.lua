@@ -1,4 +1,4 @@
-WEAPONS = {
+return {
     [`WEAPON_UNARMED`] = { locale("been_beaten"), "beaten" },
     [`WEAPON_KNIFE`] = { locale("been_stabbed"), "stabbed" },
     [`WEAPON_NIGHTSTICK`] = { locale("been_hit", locale("nightstick")), "beaten" },

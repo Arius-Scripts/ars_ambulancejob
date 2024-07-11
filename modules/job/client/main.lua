@@ -21,6 +21,7 @@ local SetEntityInvincible          = SetEntityInvincible
 local TriggerEvent                 = TriggerEvent
 local SetCurrentPedWeapon          = SetCurrentPedWeapon
 
+local weapons                      = require "data.weapons"
 
 local function checkPatient(target)
     local targetServerId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(target))
@@ -97,7 +98,7 @@ local function checkPatient(target)
         }
 
         options[#options + 1] = {
-            title = WEAPONS[data.killedBy] and WEAPONS[data.killedBy][1] or locale("patient_not_found"),
+            title = weapons[data.killedBy] and weapons[data.killedBy][1] or locale("patient_not_found"),
             readOnly = true,
             icon = 'skull',
         }

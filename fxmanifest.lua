@@ -20,7 +20,6 @@ shared_scripts {
 }
 
 client_scripts {
-	"data/weapons.lua",
 	"modules/utils/client/utils.lua",
 
 	"client.lua",

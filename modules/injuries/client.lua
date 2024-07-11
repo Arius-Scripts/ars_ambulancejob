@@ -141,6 +141,7 @@ function treatInjury(bone)
 end
 
 local bodyParts = require "data.body_parts"
+local weapons = require "data.weapons"
 function updateInjuries(victim, weapon)
     local found, lastDamagedBone = GetPedLastDamageBone(victim)
 
@@ -150,7 +151,7 @@ function updateInjuries(victim, weapon)
 
     if damagedBone then
         if not player.injuries[damagedBone.id] then
-            player.injuries[damagedBone.id] = { bone = damagedBone.id, label = damagedBone.label, desc = damagedBone.levels["default"], value = player.isDead and 100 or 10, cause = WEAPONS[weapon] and WEAPONS[weapon][2] or "not found" }
+            player.injuries[damagedBone.id] = { bone = damagedBone.id, label = damagedBone.label, desc = damagedBone.levels["default"], value = player.isDead and 100 or 10, cause = weapons[weapon] and weapons[weapon][2] or "not found" }
         else
             local newVal = math.min(player.injuries[damagedBone.id].value + 10, 100)
             player.injuries[damagedBone.id].value = newVal
