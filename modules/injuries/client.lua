@@ -140,10 +140,11 @@ function treatInjury(bone)
     SetEntityHealth(cache.ped, newHealth)
 end
 
+local bodyParts = require "data.body_parts"
 function updateInjuries(victim, weapon)
     local found, lastDamagedBone = GetPedLastDamageBone(victim)
 
-    local damagedBone = Config.BodyParts[tostring(lastDamagedBone)]
+    local damagedBone = bodyParts[tostring(lastDamagedBone)]
 
     utils.debug("Damaged bone ", lastDamagedBone, damagedBone.label)
 

@@ -54,4 +54,5 @@ server_scripts {
 
 files {
 	'locales/*.json',
+	"data/*.lua"
 }
