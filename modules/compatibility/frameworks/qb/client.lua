@@ -3,6 +3,8 @@ local QBCore = GetResourceState('qb-core'):find('start') and exports['qb-core']:
 if not QBCore then return end
 
 Framework = {}
+local ox_inventory = Config.UseOxInventory and exports.ox_inventory
+
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     player.loaded = true
@@ -149,6 +151,21 @@ function Framework.healStatus()
 
     TriggerServerEvent('consumables:server:addHunger', playerData.metadata.hunger + 100000)
     TriggerServerEvent('consumables:server:addThirst', playerData.metadata.hunger + 100000)
+end
+
+function Framework.hasItem(item, _quantity)
+    local quantity = _quantity or 1
+    if ox_inventory then
+        return ox_inventory:Search('count', item) >= quantity
+    end
+    local playerData = QBCore.Functions.GetPlayerData()
+    local playerInventory = playerData.items
+
+    for _, v in pairs(playerInventory) do
+        if v.name == item and v.amount >= quantity then return true end
+    end
+
+    return false
 end
 
 function Framework.playerSpawned()
