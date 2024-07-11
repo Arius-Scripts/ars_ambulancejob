@@ -126,8 +126,12 @@ ESX.RegisterUsableItem(Config.TabletItem, function(source, a, b)
 end)
 
 
-CreateThread(function()
-    for k, v in pairs(Config.EmsJobs) do
-        TriggerEvent('esx_society:registerSociety', v, v, 'society_' .. v, 'society_' .. v, 'society_' .. v, { type = 'public' })
-    end
-end)
+if GetResourceState('esx_society'):find('start') then
+    CreateThread(function()
+        for k, v in pairs(Config.EmsJobs) do
+            TriggerEvent('esx_society:registerSociety', v, v, 'society_' .. v, 'society_' .. v, 'society_' .. v, { type = 'public' })
+        end
+    end)
+else
+    print("^6[Warning] > ^7 esx_society ^6needs to be started")
+end
