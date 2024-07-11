@@ -3,7 +3,8 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 if not ESX then return end
 
 Framework = {}
-local ox_inventory = Config.UseOxInventory and exports.ox_inventory
+local useOxInventory = lib.load("config").useOxInventory
+local ox_inventory = useOxInventory and exports.ox_inventory
 
 function Framework.removeAccountMoney(target, account, amount)
     local xPlayer = ESX.GetPlayerFromId(target)
@@ -113,14 +114,18 @@ function Framework.wipeInventory(target, keep)
     end
 end
 
-ESX.RegisterUsableItem(Config.MedicBagItem, function(source, a, b)
-    if not Framework.hasJob(source, Config.EmsJobs) then return end
+local medicBagItem = lib.load("config").medicBagItem
+local emsJobs = lib.load("config").emsJobs
+local tabletItem = lib.load("config").tabletItem
+
+ESX.RegisterUsableItem(medicBagItem, function(source, a, b)
+    if not Framework.hasJob(source, emsJobs) then return end
 
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
 end)
 
-ESX.RegisterUsableItem(Config.TabletItem, function(source, a, b)
-    if not Framework.hasJob(source, Config.EmsJobs) then return end
+ESX.RegisterUsableItem(tabletItem, function(source, a, b)
+    if not Framework.hasJob(source, emsJobs) then return end
 
     TriggerClientEvent("ars_ambulancejob:openDistressCalls", source)
 end)
@@ -128,7 +133,7 @@ end)
 
 if GetResourceState('esx_society'):find('start') then
     CreateThread(function()
-        for k, v in pairs(Config.EmsJobs) do
+        for k, v in pairs(emsJobs) do
             TriggerEvent('esx_society:registerSociety', v, v, 'society_' .. v, 'society_' .. v, 'society_' .. v, { type = 'public' })
         end
     end)

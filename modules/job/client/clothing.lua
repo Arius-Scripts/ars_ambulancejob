@@ -1,4 +1,5 @@
-if not Config.ClothingScript then return end
+local useInternalClothing = lib.load("config").clothingScript
+if not useInternalClothing then return end
 
 local FreezeEntityPosition            = FreezeEntityPosition
 local SetEntityInvincible             = SetEntityInvincible

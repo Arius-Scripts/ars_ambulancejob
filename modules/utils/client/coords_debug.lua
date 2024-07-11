@@ -1,4 +1,5 @@
-if not Config.Debug then return end
+local debug = lib.load("config").debug
+if not debug then return end
 local hospitals = lib.load("data.hospitals")
 
 for name, hospital in pairs(hospitals) do

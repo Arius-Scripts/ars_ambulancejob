@@ -1,4 +1,7 @@
-lib.addCommand(Config.ReviveCommand, {
+local adminGroups = lib.load("config").adminGroup
+local reviveCommand = lib.load("config").reviveCommand
+
+lib.addCommand(reviveCommand, {
     help = locale("revive_player"),
     params = {
         {
@@ -8,7 +11,7 @@ lib.addCommand(Config.ReviveCommand, {
             optional = true,
         },
     },
-    restricted = Config.AdminGroup
+    restricted = adminGroups
 }, function(source, args, raw)
     if not args.target then args.target = source end
 
@@ -25,8 +28,8 @@ lib.addCommand(Config.ReviveCommand, {
     end
 end)
 
-
-lib.addCommand(Config.ReviveAreaCommand, {
+local reviveAreaCommand = lib.load("config").reviveAreaCommand
+lib.addCommand(reviveAreaCommand, {
     help = locale("revive_area"),
     params = {
         {
@@ -36,7 +39,7 @@ lib.addCommand(Config.ReviveAreaCommand, {
             optional = false,
         },
     },
-    restricted = Config.AdminGroup
+    restricted = adminGroups
 }, function(source, args, raw)
     if source <= 0 then return print("^4ars_ambulancejob > ^0", "You cant run this command from console") end
 
@@ -58,8 +61,8 @@ lib.addCommand(Config.ReviveAreaCommand, {
     TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("revived_area")):format(args.radius))
 end)
 
-
-lib.addCommand(Config.HealCommand, {
+local healCommand = lib.load("config").healCommand
+lib.addCommand(healCommand, {
     help = locale("heal_player"),
     params = {
         {
@@ -69,7 +72,7 @@ lib.addCommand(Config.HealCommand, {
             optional = true,
         },
     },
-    restricted = Config.AdminGroup
+    restricted = adminGroups
 }, function(source, args, raw)
     if not args.target then args.target = source end
 
@@ -84,7 +87,8 @@ lib.addCommand(Config.HealCommand, {
     end
 end)
 
-lib.addCommand(Config.HealAreaCommand, {
+local healAreaCommand = lib.load("config").healAreaCommand
+lib.addCommand(healAreaCommand, {
     help = locale("heal_area"),
     params = {
         {
@@ -94,7 +98,7 @@ lib.addCommand(Config.HealAreaCommand, {
             optional = false,
         },
     },
-    restricted = Config.AdminGroup
+    restricted = adminGroups
 }, function(source, args, raw)
     if source <= 0 then return print("^4ars_ambulancejob > ^0", "You cant run this command from console") end
 
@@ -115,9 +119,10 @@ lib.addCommand(Config.HealAreaCommand, {
     TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("healed_area")):format(args.radius))
 end)
 
-lib.addCommand(Config.ReviveAllCommand, {
+local reviveAllCommand = lib.load("config").reviveAllCommand
+lib.addCommand(reviveAllCommand, {
     help = locale("revive_all"),
-    restricted = Config.AdminGroup
+    restricted = adminGroups
 }, function(source, args, raw)
     local players = GetPlayers()
 

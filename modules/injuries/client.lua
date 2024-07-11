@@ -1,6 +1,8 @@
 local TriggerServerEvent   = TriggerServerEvent
 local GetPedLastDamageBone = GetPedLastDamageBone
 
+local useOxInventory       = lib.load("config").useOxInventory
+local consumeItemPerUse    = lib.load("config").consumeItemPerUse
 local function checkInjuryCause(cause)
     local item = "bandage"
 
@@ -20,18 +22,18 @@ local function checkInjuryCause(cause)
     local hasItem = Framework.hasItem(item)
     if not hasItem then return utils.showNotification(locale("not_enough_" .. item)) end
 
-    if Config.UseOxInventory then
+    if useOxInventory then
         local itemDurability = utils.getItem(item)?.metadata?.durability
 
         if itemDurability then
-            if itemDurability < Config.ConsumeItemPerUse then
+            if itemDurability < consumeItemPerUse then
                 utils.showNotification(locale("no_durability"))
                 return false
             end
         end
     end
 
-    utils.useItem(item, Config.ConsumeItemPerUse)
+    utils.useItem(item, consumeItemPerUse)
 
     return true
 end

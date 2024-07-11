@@ -3,7 +3,8 @@ QBCore = GetResourceState('qb-core'):find('start') and exports['qb-core']:GetCor
 if not QBCore then return end
 
 Framework = {}
-local ox_inventory = Config.UseOxInventory and exports.ox_inventory
+local useOxInventory = lib.load("config").useOxInventory
+local ox_inventory = useOxInventory and exports.ox_inventory
 
 function Framework.removeAccountMoney(target, account, amount)
     local xPlayer = QBCore.Functions.GetPlayer(target)
@@ -107,13 +108,17 @@ function Framework.wipeInventory(target, keep)
     exports["qb-inventory"]:ClearInventory(target, keep)
 end
 
-QBCore.Functions.CreateUseableItem(Config.MedicBagItem, function(source, item)
-    if not Framework.hasJob(source, Config.EmsJobs) then return end
+local medicBagItem = lib.load("config").medicBagItem
+local emsJobs = lib.load("config").emsJobs
+local tabletItem = lib.load("config").tabletItem
+
+QBCore.Functions.CreateUseableItem(medicBagItem, function(source, item)
+    if not Framework.hasJob(source, emsJobs) then return end
 
     TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
 end)
-QBCore.Functions.CreateUseableItem(Config.TabletItem, function(source, item)
-    if not Framework.hasJob(source, Config.EmsJobs) then return end
+QBCore.Functions.CreateUseableItem(tabletItem, function(source, item)
+    if not Framework.hasJob(source, emsJobs) then return end
 
     TriggerClientEvent("ars_ambulancejob:openDistressCalls", source)
 end)

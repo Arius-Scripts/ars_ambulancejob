@@ -1,5 +1,5 @@
-if GetResourceState('qb-target') ~= 'started' then return end
-print("qb target", GetResourceState('qb-target'))
+if GetResourceState('qb-target') ~= 'started' or GetResourceState('ox_target') == 'started' then return end
+
 local qb_target = exports['qb-target']
 Target = {}
 

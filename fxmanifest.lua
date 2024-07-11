@@ -11,9 +11,10 @@ description 'Advanced ambulance job with intergrated death system'
 
 
 --#--Shared Scripts--#--
-shared_scripts {
-	'@ox_lib/init.lua',
-	'config.lua',
+shared_script '@ox_lib/init.lua'
+
+ox_libs {
+	'locale',
 }
 
 --#--Cliend-Side Scripts--#--
@@ -53,5 +54,6 @@ server_scripts {
 --#--Additions Files--#--
 files {
 	'locales/*.json',
-	"data/*.lua"
+	"data/*.lua",
+	'config.lua',
 }

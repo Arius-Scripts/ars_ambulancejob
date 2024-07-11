@@ -28,8 +28,10 @@ function utils.showNotification(msg, type)
     })
 end
 
+local debug = lib.load("config").debug
+
 function utils.debug(...)
-    if Config.Debug then
+    if debug then
         local args = { ... }
 
         for i = 1, #args do

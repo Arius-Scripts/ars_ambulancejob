@@ -3,7 +3,8 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 if not ESX then return end
 
 Framework = {}
-local ox_inventory = Config.UseOxInventory and exports.ox_inventory
+local useOxInventory = lib.load("config").useOxInventory
+local ox_inventory = useOxInventory and exports.ox_inventory
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData)
@@ -18,6 +19,7 @@ AddEventHandler('esx:onPlayerLogout', function()
     player.isDead = false
 end)
 
+local clothingScript = lib.load("config").clothingScript
 function Framework.toggleClothes(toggle, clothes)
     if toggle then
         utils.debug("Putting on clothes")
@@ -28,8 +30,8 @@ function Framework.toggleClothes(toggle, clothes)
 
         utils.debug("Job Grade " .. jobGrade)
 
-        if Config.ClothingScript and Config.ClothingScript ~= 'core' then
-            local model = exports[Config.ClothingScript]:getPedModel(playerPed)
+        if clothingScript and clothingScript ~= 'core' then
+            local model = exports[clothingScript]:getPedModel(playerPed)
 
             if model == 'mp_m_freemode_01' then
                 data = clothes.male[jobGrade] or clothes.male[1]
@@ -58,7 +60,7 @@ function Framework.toggleClothes(toggle, clothes)
             lib.showContext('police_outfits')
 
             while not selected do Wait(500) end
-            utils.debug("Using " .. Config.ClothingScript)
+            utils.debug("Using " .. clothingScript)
 
             lib.progressBar({
                 duration = 3000,
@@ -77,7 +79,7 @@ function Framework.toggleClothes(toggle, clothes)
                 },
             })
 
-            exports[Config.ClothingScript]:setPedProps(playerPed, {
+            exports[clothingScript]:setPedProps(playerPed, {
                 {
                     component_id = 0,
                     texture = data['helmet_2'],
@@ -85,7 +87,7 @@ function Framework.toggleClothes(toggle, clothes)
                 },
             })
 
-            exports[Config.ClothingScript]:setPedComponents(playerPed, {
+            exports[clothingScript]:setPedComponents(playerPed, {
                 {
                     component_id = 1,
                     texture = data['mask_2'],
@@ -137,8 +139,8 @@ function Framework.toggleClothes(toggle, clothes)
                     drawable = data['bag']
                 },
             })
-        elseif Config.ClothingScript == 'core' then
-            utils.debug("Using " .. Config.ClothingScript)
+        elseif clothingScript == 'core' then
+            utils.debug("Using " .. clothingScript)
             ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
                 local gender = skin.sex
                 if gender == 0 then

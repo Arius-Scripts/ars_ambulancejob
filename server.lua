@@ -1,6 +1,8 @@
-player = {}
-distressCalls = {}
-local ox_inventory = Config.UseOxInventory and exports.ox_inventory
+player               = {}
+distressCalls        = {}
+local emsJobs        = lib.load("config").emsJobs
+local useOxInventory = lib.load("config").useOxInventory
+local ox_inventory   = useOxInventory and exports.ox_inventory
 
 RegisterNetEvent("ars_ambulancejob:updateDeathStatus", function(death)
     local source = source
@@ -14,7 +16,7 @@ end)
 
 RegisterNetEvent("ars_ambulancejob:revivePlayer", function(data)
     local source = source
-    if not Framework.hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
+    if not Framework.hasJob(source, emsJobs) or not source or source < 1 then return end
 
     local sourcePed = GetPlayerPed(source)
     local targetPed = GetPlayerPed(data.targetServerId)
@@ -31,7 +33,7 @@ end)
 
 RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
     local source = source
-    if not Framework.hasJob(source, Config.EmsJobs) or not source or source < 1 then return end
+    if not Framework.hasJob(source, emsJobs) or not source or source < 1 then return end
 
 
     local sourcePed = GetPlayerPed(source)
@@ -70,7 +72,7 @@ RegisterNetEvent("ars_ambulancejob:createDistressCall", function(data)
     for i = 1, #players do
         local id = tonumber(players[i])
 
-        if Framework.hasJob(id, Config.EmsJobs) then
+        if Framework.hasJob(id, emsJobs) then
             TriggerClientEvent("ars_ambulancejob:createDistressCall", id, playerName)
         end
     end
@@ -94,7 +96,7 @@ RegisterNetEvent("ars_ambulancejob:removAddItem", function(data)
 end)
 
 RegisterNetEvent("ars_ambulancejob:useItem", function(data)
-    if not Framework.hasJob(source, Config.EmsJobs) then return end
+    if not Framework.hasJob(source, emsJobs) then return end
 
     if ox_inventory then
         local item = ox_inventory:GetSlotWithItem(source, data.item)
@@ -105,11 +107,11 @@ RegisterNetEvent("ars_ambulancejob:useItem", function(data)
 
     Framework.removeItem(data.item)
 end)
-
+local removeItemsOnRespawn = lib.load("config").removeItemsOnRespawn
 RegisterNetEvent("ars_ambulancejob:removeInventory", function()
     local source = source
-    if player[source].isDead and Config.RemoveItemsOnRespawn then
-        Framework.wipeInventory(source, Config.KeepItemsOnRespawn)
+    if player[source].isDead and removeItemsOnRespawn then
+        Framework.wipeInventory(source, lib.load("config").keepItemsOnRespawn)
     end
 end)
 
@@ -158,7 +160,7 @@ lib.callback.register('ars_ambulancejob:getMedicsOniline', function(source)
     for i = 1, #players do
         local id = tonumber(players[i])
 
-        if Framework.hasJob(id, Config.EmsJobs) then
+        if Framework.hasJob(id, emsJobs) then
             count += 1
         end
     end
@@ -172,10 +174,10 @@ if ox_inventory then
         return item
     end)
 
-
+    local medicBagItem = lib.load("config").medicBagItem
     ox_inventory:registerHook('swapItems', function(payload)
         if string.find(payload.toInventory, "medicalBag_") then
-            if payload.fromSlot.name == Config.MedicBagItem then return false end
+            if payload.fromSlot.name == medicBagItem then return false end
         end
     end, {})
 

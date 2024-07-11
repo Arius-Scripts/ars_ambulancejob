@@ -15,6 +15,8 @@ local TaskVehicleDriveWander   = TaskVehicleDriveWander
 local DeletePed                = DeletePed
 
 local depositPositions         = {}
+local giveVehicleKeys          = lib.load("config").giveVehicleKeys
+local removeVehicleKeys        = lib.load("config").removeVehicleKeys
 
 local function openCarList(garage)
     local vehicles = {}
@@ -40,7 +42,7 @@ local function openCarList(garage)
                     lib.setVehicleProperties(vehicle, v.modifications)
 
                     local plate = lib.getVehicleProperties(vehicle).plate
-                    Config.giveVehicleKeys(vehicle, plate)
+                    giveVehicleKeys(vehicle, plate)
 
                     TaskEnterVehicle(playerPed, vehicle, -1, -1, 1.0, 1, 0)
                 end
@@ -56,6 +58,7 @@ local function openCarList(garage)
     lib.showContext('vehicleList')
 end
 
+local usePedToDepositVehicle = lib.load("config").usePedToDepositVehicle
 
 local function depositVehicle(data)
     if Framework.hasJob(data.jobs) then
@@ -73,11 +76,11 @@ local function depositVehicle(data)
                 local vehicleToDelete = playerVehicle
 
                 local plate = lib.getVehicleProperties(playerVehicle).plate
-                Config.removeVehicleKeys(playerVehicle, plate)
+                removeVehicleKeys(playerVehicle, plate)
 
                 lib.hideTextUI()
 
-                if Config.UsePedToDepositVehicle then
+                if usePedToDepositVehicle then
                     local emsDriver = utils.createPed(data.model, data.driverSpawnCoords)
                     FreezeEntityPosition(emsDriver, false)
 

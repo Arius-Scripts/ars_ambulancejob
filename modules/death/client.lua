@@ -24,7 +24,7 @@ local IsPedAPlayer                 = IsPedAPlayer
 local IsPedDeadOrDying             = IsPedDeadOrDying
 local IsPedFatallyInjured          = IsPedFatallyInjured
 
-
+local animations                   = lib.load("config").animations
 function stopPlayerDeath()
     player.isDead = false
     -- player.injuries = {}
@@ -56,7 +56,7 @@ function stopPlayerDeath()
     AnimpostfxStopAll()
 
     DoScreenFadeIn(700)
-    TaskPlayAnim(playerPed, Config.Animations["get_up"].dict, Config.Animations["get_up"].clip, 8.0, -8.0, -1, 0, 0, 0, 0, 0)
+    TaskPlayAnim(playerPed, animations["get_up"].dict, animations["get_up"].clip, 8.0, -8.0, -1, 0, 0, 0, 0, 0)
 
     -- LocalPlayer.state:set("injuries", {}, true)
     LocalPlayer.state:set("dead", false, true)
@@ -84,10 +84,11 @@ RegisterNetEvent("ars_ambulancejob:healPlayer", function(data)
     end
 end)
 
+local removeItemsOnRespawn = lib.load("config").removeItemsOnRespawn
 local function respawnPlayer()
     local playerPed = cache.ped or PlayerPedId()
 
-    if Config.RemoveItemsOnRespawn then
+    if removeItemsOnRespawn then
         TriggerServerEvent("ars_ambulancejob:removeInventory")
     end
 
@@ -134,19 +135,21 @@ local function respawnPlayer()
     player.respawning = false
 end
 
+local useExtraEffects = lib.load("config").extraEffects
+local respawnTime = lib.load("config").respawnTime
 local function initPlayerDeath(logged_dead)
     if player.isDead then return end
 
     player.isDead = true
     startCommandTimer()
 
-    for _, anim in pairs(Config.Animations) do
+    for _, anim in pairs(animations) do
         lib.requestAnimDict(anim.dict)
     end
 
     if logged_dead then goto logged_dead end
 
-    if Config.ExtraEffects then
+    if useExtraEffects then
         ShakeGameplayCam('DEATH_FAIL_IN_EFFECT_SHAKE', 1.0)
         AnimpostfxPlay('DeathFailOut', 0, true)
 
@@ -180,7 +183,7 @@ local function initPlayerDeath(logged_dead)
     SetEntityHealth(cache.ped, 100)
     SetEveryoneIgnorePlayer(cache.playerId, true)
 
-    local time = 60000 * Config.RespawnTime
+    local time = 60000 * respawnTime
     local deathTime = GetGameTimer()
 
     CreateThread(function()
@@ -189,7 +192,7 @@ local function initPlayerDeath(logged_dead)
 
             if not player.gettingRevived and not player.respawning then
                 sleep = 0
-                local anim = cache.vehicle and Config.Animations["death_car"] or Config.Animations["death_normal"]
+                local anim = cache.vehicle and animations["death_car"] or animations["death_normal"]
 
                 if not IsEntityPlayingAnim(playerPed, anim.dict, anim.clip, 3) then
                     TaskPlayAnim(playerPed, anim.dict, anim.clip, 50.0, 8.0, -1, 1, 1.0, false, false, false)

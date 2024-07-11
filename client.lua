@@ -4,8 +4,11 @@ local CreateThread    = CreateThread
 
 player                = {}
 player.injuries       = {}
-local hospitals       = lib.load("data.hospitals")
 
+local hospitals       = lib.load("data.hospitals")
+local emsJobs         = lib.load("config").emsJobs
+local clothingScript  = lib.load("config").clothingScript
+local debug           = lib.load("config").debug
 local function createZones()
     for index, hospital in pairs(hospitals) do
         local cfg = hospital
@@ -18,14 +21,14 @@ local function createZones()
             name = 'ars_hospital:' .. index,
             coords = cfg.zone.pos,
             size = cfg.zone.size,
-            clothes = Config.ClothingScript and cfg.clothes,
-            debug = Config.Debug,
+            clothes = clothingScript and cfg.clothes,
+            debug = debug,
             rotation = 0.0,
             onEnter = function(self)
-                initGarage(cfg.garage, Config.EmsJobs)
+                initGarage(cfg.garage, emsJobs)
 
                 if self.clothes then
-                    initClothes(self.clothes, Config.EmsJobs)
+                    initClothes(self.clothes, emsJobs)
                 end
 
                 initParamedic()

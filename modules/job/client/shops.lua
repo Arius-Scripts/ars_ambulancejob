@@ -1,8 +1,10 @@
 local DrawMarker            = DrawMarker
 local IsControlJustReleased = IsControlJustReleased
 local CreateThread          = CreateThread
-local ox_inventory          = Config.UseOxInventory and exports.ox_inventory
+local useOxInventory        = lib.load("config").useOxInventory
+local ox_inventory          = useOxInventory and exports.ox_inventory
 local hospitals             = lib.load("data.hospitals")
+local emsJobs               = lib.load("config").emsJobs
 
 local function createShops()
     for _, hospital in pairs(hospitals) do
@@ -16,7 +18,7 @@ local function createShops()
                 distance = 3,
                 onEnter = function(self)
                     if pharmacy.job then
-                        if Framework.hasJob(Config.EmsJobs) and Framework.getPlayerJobGrade() >= pharmacy.grade then
+                        if Framework.hasJob(emsJobs) and Framework.getPlayerJobGrade() >= pharmacy.grade then
                             self.access = true
                             lib.showTextUI(locale('control_to_open_shop'))
                         else

@@ -1,14 +1,15 @@
-local DoScreenFadeOut    = DoScreenFadeOut
-local DoScreenFadeIn     = DoScreenFadeIn
-local GetEntityCoords    = GetEntityCoords
-local GetEntityMaxHealth = GetEntityMaxHealth
-local IsScreenFadedOut   = IsScreenFadedOut
-local SetEntityCoords    = SetEntityCoords
-local SetEntityHeading   = SetEntityHeading
-local SetEntityHealth    = SetEntityHealth
-local TaskPlayAnim       = TaskPlayAnim
-local Wait               = Wait
+local DoScreenFadeOut         = DoScreenFadeOut
+local DoScreenFadeIn          = DoScreenFadeIn
+local GetEntityCoords         = GetEntityCoords
+local GetEntityMaxHealth      = GetEntityMaxHealth
+local IsScreenFadedOut        = IsScreenFadedOut
+local SetEntityCoords         = SetEntityCoords
+local SetEntityHeading        = SetEntityHeading
+local SetEntityHealth         = SetEntityHealth
+local TaskPlayAnim            = TaskPlayAnim
+local Wait                    = Wait
 
+local paramedicTreatmentPrice = lib.load("config").paramedicTreatmentPrice
 
 local function openParamedicMenu(ped, hospital)
     lib.registerContext({
@@ -18,11 +19,11 @@ local function openParamedicMenu(ped, hospital)
             {
                 title = locale("get_treated_paramedic"),
                 onSelect = function()
-                    local hasMoney = Framework.hasItem("money", Config.ParamedicTreatmentPrice)
+                    local hasMoney = Framework.hasItem("money", paramedicTreatmentPrice)
                     if not hasMoney then return utils.showNotification(locale("not_enough_money")) end
 
 
-                    utils.addRemoveItem("remove", "money", Config.ParamedicTreatmentPrice)
+                    utils.addRemoveItem("remove", "money", paramedicTreatmentPrice)
 
                     local dict = lib.requestAnimDict("anim@gangops@morgue@table@")
                     local playerPed = cache.ped or PlayerPedId()
@@ -116,6 +117,7 @@ local function createAmbulanceDriver(vehicle)
 end
 
 local hospitals = lib.load("data.hospitals")
+local allowAlwaysTreatment = lib.load("config").allowAlways
 
 function initParamedic()
     for index, hospital in pairs(hospitals) do
@@ -131,7 +133,7 @@ function initParamedic()
                 icon = 'fa-solid fa-ambulance',
                 groups = false,
                 fn = function()
-                    if not Config.AllowAlways then
+                    if not allowAlwaysTreatment then
                         local medicsOnline = lib.callback.await('ars_ambulancejob:getMedicsOniline', false)
                         if medicsOnline <= 0 then
                             openParamedicMenu(ped, hospital)
@@ -227,15 +229,15 @@ local function offlineRevive()
     DeleteEntity(ambulanceDriver)
 end
 
+local timeToWaitForCommand = lib.load("config").timeToWaitForCommand * 60000
 function startCommandTimer()
     CreateThread(function()
         local deathTime = GetGameTimer()
-        local TimeToWaitForCommand = Config.TimeToWaitForCommand * 60000
 
         while player.isDead do
             local currentTime = GetGameTimer()
             local timePassed = currentTime - deathTime
-            player.timePassedForCommand = math.ceil((TimeToWaitForCommand - timePassed) / 1000)
+            player.timePassedForCommand = math.ceil((timeToWaitForCommand - timePassed) / 1000)
             utils.debug(player.timePassedForCommand)
 
             Wait(1000)
@@ -243,4 +245,5 @@ function startCommandTimer()
     end)
 end
 
-RegisterCommand(Config.NpcReviveCommand, offlineRevive)
+local npcReviveCommand = lib.load("config").npcReviveCommand
+RegisterCommand(npcReviveCommand, offlineRevive)
