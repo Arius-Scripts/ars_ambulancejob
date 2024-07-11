@@ -26,7 +26,7 @@ client_scripts {
 	"client.lua",
 
 	"modules/compatibility/frameworks/**/client.lua",
-	"modules/compatibility/target/**/client.lua",
+	"modules/compatibility/target/*.lua",
 
 	"modules/injuries/client.lua",
 	"modules/death/client.lua",

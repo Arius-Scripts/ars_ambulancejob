@@ -118,7 +118,7 @@ function initGarage(data, jobs)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
 
-        addLocalEntity(ped, {
+        Target.addLocalEntity(ped, {
             {
                 label = locale('garage_interact_label'),
                 icon = 'fa-solid fa-car',

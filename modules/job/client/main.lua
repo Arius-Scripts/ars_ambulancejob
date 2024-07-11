@@ -251,7 +251,7 @@ RegisterNetEvent("ars_ambulancejob:openDistressCalls", openDistressCalls)
 exports("openDistressCalls", openDistressCalls)
 
 
-addGlobalPlayer({
+Target.addGlobalPlayer({
     {
         name = 'check_suspect',
         icon = 'fas fa-magnifying-glass',

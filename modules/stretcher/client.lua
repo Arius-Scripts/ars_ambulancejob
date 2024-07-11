@@ -228,11 +228,11 @@ local function vehicleInteractions()
 
     }
 
-    addGlobalVehicle(options)
+    Target.addGlobalVehicle(options)
 end
 
 local function stretcherInteraction()
-    addModel({ `prop_ld_binbag_01` }, {
+    Target.addModel({ `prop_ld_binbag_01` }, {
         {
             name = 'ars_ambulancejob_stretcher_model',
             label = locale('take_stretcher'),

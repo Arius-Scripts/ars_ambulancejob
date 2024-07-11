@@ -34,7 +34,7 @@ local function placeMedicalBag()
 
     utils.addRemoveItem("remove", "medicalbag", 1)
 
-    addLocalEntity(medicBag, {
+    Target.addLocalEntity(medicBag, {
         {
             label = locale('open_medical_bag'),
             icon = 'fa-solid fa-suitcase',

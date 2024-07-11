@@ -123,7 +123,7 @@ function initParamedic()
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
 
-        addLocalEntity(ped, {
+        Target.addLocalEntity(ped, {
             {
                 label = locale('paramedic_interact_label'),
                 icon = 'fa-solid fa-ambulance',

@@ -72,7 +72,7 @@ function initClothes(data, jobs)
     SetEntityInvincible(ped, true)
     SetBlockingOfNonTemporaryEvents(ped, true)
 
-    addLocalEntity(ped, {
+    Target.addLocalEntity(ped, {
         {
             label = locale('clothing_interact_label'),
             icon = 'fa-solid fa-road',

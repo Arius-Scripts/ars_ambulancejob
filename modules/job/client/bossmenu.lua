@@ -1,5 +1,5 @@
 for index, hospital in pairs(Config.Hospitals) do
-    addBoxZone(hospital.bossmenu.pos, {
+    Target.addBoxZone(hospital.bossmenu.pos, {
         {
             name = "open_bossmenu" .. index,
             icon = 'fa-solid fa-road',
