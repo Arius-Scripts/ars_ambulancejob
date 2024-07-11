@@ -1,24 +1,22 @@
---#--
---Fx info--
---#--
+--#--Fx Info--#--
 fx_version 'cerulean'
 use_fxv2_oal 'yes'
 lua54 'yes'
 game 'gta5'
+
+--#--Resource Info--#--
 version '1.0.3'
 author 'Arius Scripts'
 description 'Advanced ambulance job with intergrated death system'
 
 
---#--
---Manifest--
---#--
-
+--#--Shared Scripts--#--
 shared_scripts {
 	'@ox_lib/init.lua',
 	'config.lua',
 }
 
+--#--Cliend-Side Scripts--#--
 client_scripts {
 	"modules/utils/client/utils.lua",
 
@@ -43,6 +41,7 @@ client_scripts {
 	"modules/utils/client/coords_debug.lua",
 }
 
+--#--Server-Side Scripts--#--
 server_scripts {
 	"@oxmysql/lib/MySQL.lua",
 	"modules/compatibility/frameworks/**/server.lua",
@@ -51,6 +50,7 @@ server_scripts {
 	"modules/compatibility/txadmin/server.lua",
 }
 
+--#--Additions Files--#--
 files {
 	'locales/*.json',
 	"data/*.lua"
