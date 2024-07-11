@@ -5,7 +5,7 @@ lua54 'yes'
 game 'gta5'
 
 --#--Resource Info--#--
-version '1.0.3'
+version '1.0.4'
 author 'Arius Scripts'
 description 'Advanced ambulance job with intergrated death system'
 
