@@ -161,7 +161,7 @@ local function vehicleInteractions()
             label = locale('take_stretcher'),
             groups = emsJobs,
             cn = function(entity, distance, coords, name)
-                return isEmsVehicle(entity) and not usingStretcher
+                return isEmsVehicle(entity) and not usingStretcher and not player.isDead
             end,
             fn = function(data)
                 local vehicle = type(data) == "number" and data or data.entity
@@ -179,7 +179,7 @@ local function vehicleInteractions()
             label = locale('put_stretcher'),
             groups = emsJobs,
             cn = function(entity, distance, coords, name)
-                return isEmsVehicle(entity) and usingStretcher and not patientOnStretcher
+                return isEmsVehicle(entity) and usingStretcher and not patientOnStretcher and not player.isDead
             end,
             fn = function(data)
                 local vehicle = type(data) == "number" and data or data.entity
@@ -196,7 +196,7 @@ local function vehicleInteractions()
             label = locale('put_patient_in_vehicle'),
             groups = emsJobs,
             cn = function(entity, distance, coords, name)
-                return isEmsVehicle(entity) and usingStretcher and patientOnStretcher
+                return isEmsVehicle(entity) and usingStretcher and patientOnStretcher and not player.isDead
             end,
             fn = function(data)
                 local dataToSend = {}
@@ -214,7 +214,7 @@ local function vehicleInteractions()
             label = locale('take_patient_from_vehicle'),
             groups = emsJobs,
             cn = function(entity, distance, coords, name)
-                return isEmsVehicle(entity) and Entity(entity).state?.patient
+                return isEmsVehicle(entity) and Entity(entity).state?.patient and not player.isDead
             end,
             fn = function(data)
                 local dataToSend = {}
@@ -242,7 +242,7 @@ local function stretcherInteraction()
             groups = emsJobs,
             distance = 3,
             cn = function()
-                return not usingStretcher
+                return not usingStretcher and not player.isDead
             end,
             fn = function(data)
                 useStretcher(type(data) == "number" and data or data.entity)
@@ -255,7 +255,7 @@ local function stretcherInteraction()
             groups = emsJobs,
             cn = function(entity, distance, coords, name)
                 local playerId, playerPed, playerCoords = lib.getClosestPlayer(GetEntityCoords(entity), 2.0, false)
-                return GetEntityAttachedTo(playerPed) == entity
+                return GetEntityAttachedTo(playerPed) == entity and not player.isDead
             end,
             fn = function(data)
                 local playerId, playerPed, playerCoords = lib.getClosestPlayer(GetEntityCoords(cache.ped), 2.0, false)

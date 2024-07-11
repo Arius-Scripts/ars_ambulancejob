@@ -280,7 +280,7 @@ Target.addGlobalPlayer({
             local _coords = GetEntityCoords(entity)
             local closestStretcher = GetClosestObjectOfType(_coords.x, _coords.y, _coords.z, 5.5, `prop_ld_binbag_01`, false)
 
-            return closestStretcher ~= 0
+            return closestStretcher ~= 0 and not player.isDead
         end,
         fn = function(data)
             putOnStretcher(true, type(data) == "number" and data or data.entity)
