@@ -47,15 +47,15 @@ Config.emsVehicles = {                -- vehicles that have access to the props 
 }
 
 Config.animations = {
-	["deathCar"] = {
+	["death_car"] = {
 		dict = "veh@low@front_ps@idle_duck",
 		clip = "sit"
 	},
-	["deathNormal"] = {
+	["death_normal"] = {
 		dict = "dead",
 		clip = "dead_a"
 	},
-	["getUp"] = {
+	["get_up"] = {
 		dict = "get_up@directional@movement@from_knees@action",
 		clip = "getup_r_0"
 	}
