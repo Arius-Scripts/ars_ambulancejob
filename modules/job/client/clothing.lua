@@ -50,20 +50,22 @@ local function openClothingMenu(clothes)
 end
 
 function initClothes(data, jobs)
-    local ped = utils.createPed(data.model, data.pos)
+    if data.enabled then
+        local ped = utils.createPed(data.model, data.pos)
 
-    FreezeEntityPosition(ped, true)
-    SetEntityInvincible(ped, true)
-    SetBlockingOfNonTemporaryEvents(ped, true)
+        FreezeEntityPosition(ped, true)
+        SetEntityInvincible(ped, true)
+        SetBlockingOfNonTemporaryEvents(ped, true)
 
-    Target.addLocalEntity(ped, {
-        {
-            label = locale('clothing_interact_label'),
-            icon = 'fa-solid fa-road',
-            groups = jobs,
-            fn = function()
-                openClothingMenu(data)
-            end
-        }
-    })
+        Target.addLocalEntity(ped, {
+            {
+                label = locale('clothing_interact_label'),
+                icon = 'fa-solid fa-road',
+                groups = jobs,
+                fn = function()
+                    openClothingMenu(data)
+                end
+            }
+        })
+    end
 end
