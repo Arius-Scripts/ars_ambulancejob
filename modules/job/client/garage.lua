@@ -136,7 +136,7 @@ function initGarage(data, jobs)
             coords = garage.deposit,
             distance = 5,
             onEnter = function(self)
-                if cache.vehicle and hasJob(jobs) then
+                if cache.vehicle and Framework.hasJob(jobs) then
                     lib.showTextUI(locale('deposit_vehicle'))
                 end
             end,
