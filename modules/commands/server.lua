@@ -18,8 +18,12 @@ lib.addCommand(reviveCommand, {
     local data = {}
     data.revive = true
 
-    TriggerClientEvent('ars_ambulancejob:healPlayer', args.target, data)
+    local StaffID = source
+    local TargetID = args.target
 
+    TriggerClientEvent('ars_ambulancejob:healPlayer', args.target, data)
+    Citizen.Wait(10)
+    TriggerEvent('ars_ambulancejob:discord:target', "revive", StaffID, TargetID)
 
     if source > 0 then
         TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("revived_player")):format(args.target))
@@ -48,6 +52,9 @@ lib.addCommand(reviveAreaCommand, {
     local playerPed = GetPlayerPed(source)
     local playerCoords = GetEntityCoords(playerPed)
 
+    local StaffID = source
+    local radius = args.radius
+
     for i = 1, #players do
         local player = players[i]
         local ped    = GetPlayerPed(player)
@@ -56,6 +63,8 @@ lib.addCommand(reviveAreaCommand, {
 
         if dist <= args.radius then
             TriggerClientEvent('ars_ambulancejob:healPlayer', player, { revive = true })
+            Citizen.Wait(10)
+            TriggerEvent('ars_ambulancejob:discord:radius', "revivearea", StaffID, radius)
         end
     end
     TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("revived_area")):format(args.radius))
@@ -76,9 +85,14 @@ lib.addCommand(healCommand, {
 }, function(source, args, raw)
     if not args.target then args.target = source end
 
+    local StaffID = source
+    local TargetID = args.target
+
     local data = {}
     data.heal = true
     TriggerClientEvent('ars_ambulancejob:healPlayer', args.target, data)
+    Citizen.Wait(10)
+    TriggerEvent("ars_ambulancejob:discord:target", Config.HealCommand, source, TargetID)
 
     if source > 0 then
         TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("healed_player")):format(args.target))
@@ -107,6 +121,9 @@ lib.addCommand(healAreaCommand, {
     local playerPed = GetPlayerPed(source)
     local playerCoords = GetEntityCoords(playerPed)
 
+    local StaffID = source
+    local radius = args.radius
+
     for i = 1, #players do
         local player = players[i]
         local ped    = GetPlayerPed(player)
@@ -114,6 +131,8 @@ lib.addCommand(healAreaCommand, {
         local dist   = #(coords - playerCoords)
         if dist <= args.radius then
             TriggerClientEvent('ars_ambulancejob:healPlayer', player, { heal = true })
+            Citizen.Wait(10)
+            TriggerEvent('ars_ambulancejob:discord:radius', "healarea", StaffID, radius)
         end
     end
     TriggerClientEvent("ars_ambulancejob:showNotification", source, (locale("healed_area")):format(args.radius))
@@ -126,6 +145,8 @@ lib.addCommand(reviveAllCommand, {
 }, function(source, args, raw)
     local players = GetPlayers()
 
+    local StaffID = source
+
     for i = 1, #players do
         local player = players[i]
         TriggerClientEvent('ars_ambulancejob:healPlayer', player, { revive = true })
@@ -133,6 +154,8 @@ lib.addCommand(reviveAllCommand, {
 
     if source > 0 then
         TriggerClientEvent("ars_ambulancejob:showNotification", source, locale("revived_all"))
+        Citizen.Wait(10)
+        TriggerEvent("ars_ambulancejob:discord:all", Config.ReviveAllCommand, source)
     else
         print("^4ars_ambulancejob > ^0", locale("revived_all"))
     end
