@@ -30,6 +30,7 @@ Config.baseInjuryReward = 150
 Config.reviveReward = 700
 
 Config.paramedicTreatmentPrice = 4000
+Config.shouldRevive = false
 Config.allowAlways = true             -- false if you want it to work only when there are only medics online
 
 Config.ambulanceStretchers = 2        -- how many stretchers should an ambulance have

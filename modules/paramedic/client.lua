@@ -10,6 +10,7 @@ local TaskPlayAnim            = TaskPlayAnim
 local Wait                    = Wait
 
 local paramedicTreatmentPrice = lib.load("config").paramedicTreatmentPrice
+local shouldRevive            = lib.load("config").shouldRevive
 
 local function openParamedicMenu(ped, hospital)
     lib.registerContext({
@@ -56,20 +57,24 @@ local function openParamedicMenu(ped, hospital)
 
                     lib.progressBar({ duration = 15000, label = locale("getting_treated"), useWhileDead = false, canCancel = true, disable = { car = true, move = true }, })
 
-                    SetEntityHealth(playerPed, GetEntityMaxHealth(playerPed))
-                    player.injuries = {}
+
 
                     SetEntityCoords(ped, hospital.paramedic.pos.xyz)
                     SetEntityHeading(ped, hospital.paramedic.pos.w)
+                    if shouldRevive then
+                        stopPlayerDeath()
+                    else
+                        DoScreenFadeOut(500)
+                        while not IsScreenFadedOut() do Wait(1) end
 
-                    DoScreenFadeOut(500)
-                    while not IsScreenFadedOut() do Wait(1) end
+                        Wait(1000)
+                        DoScreenFadeIn(300)
+                        SetEntityHealth(playerPed, GetEntityMaxHealth(playerPed))
+                        player.injuries = {}
+                    end
+
 
                     SetEntityCoords(playerPed, previousCoords)
-
-                    Wait(1000)
-                    DoScreenFadeIn(300)
-
                     utils.showNotification(locale("treated_by_paramedic"))
                     ClearPedTasks(ped)
                     ClearAreaOfObjects(hospital.paramedic.pos.xyz, 2.0, 0)
