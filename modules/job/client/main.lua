@@ -107,11 +107,11 @@ local function checkPatient(target)
     end
 
     lib.registerContext({
-        id = 'check_patient',
+        id = 'ars_ambulancejob:check_patient',
         title = locale("check_patient_menu_title"),
         options = options
     })
-    lib.showContext('check_patient')
+    lib.showContext('ars_ambulancejob:check_patient')
 end
 
 local timeForNewCall = lib.load("config").waitTimeForNewCall
@@ -175,8 +175,7 @@ function openDistressCalls()
     TaskPlayAnim(playerPed, dict, "base", 2.0, 2.0, -1, 51, 0, false, false, false)
 
     local tablet = CreateObject(model, playerCoords.x, playerCoords.y, playerCoords.z + 0.2, true, true, true)
-    AttachEntityToEntity(tablet, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, -0.03, 0.0, 20.0, -90.0, 0.0, true,
-        true, false, true, 1, true)
+    AttachEntityToEntity(tablet, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, -0.03, 0.0, 20.0, -90.0, 0.0, true, true, false, true, 1, true)
 
     for i = 1, #distressCalls do
         local call = distressCalls[i]
@@ -191,7 +190,7 @@ function openDistressCalls()
             arrow       = true,
             onSelect    = function()
                 lib.registerContext({
-                    id      = 'openCall' .. call.name .. call.msg .. i,
+                    id      = "ars_ambulancejob:openCall",
                     title   = call.name,
                     menu    = "openDistressCalls",
                     options = {
@@ -238,13 +237,13 @@ function openDistressCalls()
                         },
                     }
                 })
-                lib.showContext('openCall' .. call.name .. call.msg .. i)
+                lib.showContext("ars_ambulancejob:openCall")
             end
         }
     end
 
     lib.registerContext({
-        id      = 'openDistressCalls',
+        id      = 'ars_ambulancejob:openDistressCalls',
         title   = "Calls",
         onExit  = function()
             ClearPedTasks(playerPed)
@@ -252,7 +251,7 @@ function openDistressCalls()
         end,
         options = calls
     })
-    lib.showContext('openDistressCalls')
+    lib.showContext('ars_ambulancejob:openDistressCalls')
 end
 
 RegisterNetEvent("ars_ambulancejob:openDistressCalls", openDistressCalls)

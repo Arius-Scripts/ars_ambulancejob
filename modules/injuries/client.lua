@@ -57,7 +57,7 @@ function checkInjuries(data)
                 arrow = true,
                 onSelect = function()
                     lib.registerContext({
-                        id = 'patient_injury' .. _,
+                        id = 'ars_ambulancejob:patient_injury',
                         title = v.label,
                         menu = "patient_injuries",
                         options = {
@@ -109,20 +109,20 @@ function checkInjuries(data)
                         }
                     })
 
-                    lib.showContext('patient_injury' .. _)
+                    lib.showContext("ars_ambulancejob:patient_injury")
                 end
             }
         end
     end
 
     lib.registerContext({
-        id = 'patient_injuries',
+        id = 'ars_ambulancejob:patient_injuries',
         title = locale("injury_menu_title"),
         menu = "check_patient",
         options = injuries
     })
 
-    lib.showContext('patient_injuries')
+    lib.showContext('ars_ambulancejob:patient_injuries')
 end
 
 function treatInjury(bone)

@@ -51,11 +51,11 @@ local function openCarList(garage)
     end
 
     lib.registerContext({
-        id = 'vehicleList',
+        id = 'ars_ambulancejob:vehicleList',
         title = locale("vehiclemenu_label"),
         options = vehicles
     })
-    lib.showContext('vehicleList')
+    lib.showContext('ars_ambulancejob:vehicleList')
 end
 
 local usePedToDepositVehicle = lib.load("config").usePedToDepositVehicle

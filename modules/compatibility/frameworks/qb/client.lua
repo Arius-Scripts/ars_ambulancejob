@@ -53,11 +53,11 @@ function Framework.toggleClothes(toggle, clothes)
                 }
             end
             lib.registerContext({
-                id = 'police_outfits',
+                id = 'ars_ambulancejob:police_outfits',
                 title = locale("police_outfits_title"),
                 options = outfits
             })
-            lib.showContext('police_outfits')
+            lib.showContext('ars_ambulancejob:police_outfits')
 
             while not selected do Wait(500) end
             utils.debug("Using " .. clothingScript)
@@ -165,11 +165,11 @@ function Framework.toggleClothes(toggle, clothes)
             end
 
             lib.registerContext({
-                id = 'police_outfits',
+                id = 'ars_ambulancejob:police_outfits',
                 title = locale("police_outfits_title"),
                 options = outfits
             })
-            lib.showContext('police_outfits')
+            lib.showContext('ars_ambulancejob:police_outfits')
 
             while not selected do Wait(500) end
 

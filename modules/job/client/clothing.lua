@@ -7,7 +7,7 @@ local SetBlockingOfNonTemporaryEvents = SetBlockingOfNonTemporaryEvents
 
 local function openClothingMenu(clothes)
     lib.registerContext({
-        id = 'ems_clothing_menu',
+        id = 'ars_ambulancejob:ems_clothing_menu',
         title = locale("clothesmenu_label"),
         options = {
             {
@@ -46,7 +46,7 @@ local function openClothingMenu(clothes)
         }
     })
 
-    lib.showContext('ems_clothing_menu')
+    lib.showContext('ars_ambulancejob:ems_clothing_menu')
 end
 
 function initClothes(data, jobs)

@@ -13,7 +13,7 @@ local paramedicTreatmentPrice = lib.load("config").paramedicTreatmentPrice
 
 local function openParamedicMenu(ped, hospital)
     lib.registerContext({
-        id = 'paramedic_menu_ambulance_job',
+        id = 'ars_ambulancejob:paramedic_menu',
         title = locale("paramedic_menu_title"),
         options = {
             {
@@ -77,7 +77,7 @@ local function openParamedicMenu(ped, hospital)
             }
         }
     })
-    lib.showContext('paramedic_menu_ambulance_job')
+    lib.showContext('ars_ambulancejob:paramedic_menu')
 end
 
 local function createAmbulance()
