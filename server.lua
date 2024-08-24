@@ -189,7 +189,7 @@ if ox_inventory then
                 local cfg = hospital
 
                 for id, stash in pairs(cfg.stash) do
-                    ox_inventory:RegisterStash(id, stash.label, stash.slots, stash.weight * 1000, cfg.stash.shared and true or nil)
+                    ox_inventory:RegisterStash(id, stash.label, stash.slots, stash.weight * 1000, stash.shared and true or nil)
                 end
 
                 for id, pharmacy in pairs(cfg.pharmacy) do
