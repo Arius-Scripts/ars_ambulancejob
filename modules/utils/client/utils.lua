@@ -16,6 +16,10 @@ local EndTextCommandSetBlipName = EndTextCommandSetBlipName
 local GetEntityCoords = GetEntityCoords
 local PlayerPedId = PlayerPedId
 local TriggerServerEvent = TriggerServerEvent
+local DoScreenFadeOut = DoScreenFadeOut
+local DoScreenFadeIn = DoScreenFadeIn
+local IsScreenFadedOut = IsScreenFadedOut
+local IsScreenFadedIn = IsScreenFadedIn
 
 utils = {}
 peds = {}
@@ -158,6 +162,24 @@ function utils.drawTextFrame(data)
     SetTextEntry('STRING')
     AddTextComponentString(data.msg)
     DrawText(data.x, data.y)
+end
+
+function utils.doScreenFadeOut(duration, wait)
+    DoScreenFadeOut(duration or 800)
+
+    if not wait then return end
+    while not IsScreenFadedOut() do
+        Wait(50)
+    end
+end
+
+function utils.doScreenFadeIn(duration, wait)
+    DoScreenFadeIn(duration or 800)
+
+    if not wait then return end
+    while not IsScreenFadedIn() do
+        Wait(50)
+    end
 end
 
 RegisterNetEvent('ars_ambulancejob:showNotification', utils.showNotification)

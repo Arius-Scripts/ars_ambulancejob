@@ -1,8 +1,5 @@
-local DoScreenFadeOut         = DoScreenFadeOut
-local DoScreenFadeIn          = DoScreenFadeIn
 local GetEntityCoords         = GetEntityCoords
 local GetEntityMaxHealth      = GetEntityMaxHealth
-local IsScreenFadedOut        = IsScreenFadedOut
 local SetEntityCoords         = SetEntityCoords
 local SetEntityHeading        = SetEntityHeading
 local SetEntityHealth         = SetEntityHealth
@@ -31,11 +28,9 @@ local function openParamedicMenu(ped, hospital)
                     local previousCoords = cache.coords or GetEntityCoords(playerPed)
                     local bed = nil
 
-                    DoScreenFadeOut(500)
-                    while not IsScreenFadedOut() do Wait(1) end
-
+                    utils.doScreenFadeOut(500, true)
                     Wait(1000)
-                    DoScreenFadeIn(300)
+                    utils.doScreenFadeIn(300)
 
                     for i = 1, #hospital.respawn do
                         local _bed = hospital.respawn[i]
@@ -64,11 +59,9 @@ local function openParamedicMenu(ped, hospital)
                     if shouldRevive then
                         stopPlayerDeath()
                     else
-                        DoScreenFadeOut(500)
-                        while not IsScreenFadedOut() do Wait(1) end
-
+                        utils.doScreenFadeOut(500, true)
                         Wait(1000)
-                        DoScreenFadeIn(300)
+                        utils.doScreenFadeIn(300)
                         SetEntityHealth(playerPed, GetEntityMaxHealth(playerPed))
                         player.injuries = {}
                     end

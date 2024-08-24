@@ -1,5 +1,3 @@
-local DoScreenFadeOut              = DoScreenFadeOut
-local IsScreenFadedOut             = IsScreenFadedOut
 local NetworkResurrectLocalPlayer  = NetworkResurrectLocalPlayer
 local ShakeGameplayCam             = ShakeGameplayCam
 local AnimpostfxPlay               = AnimpostfxPlay
@@ -17,7 +15,6 @@ local IsControlJustPressed         = IsControlJustPressed
 local TriggerServerEvent           = TriggerServerEvent
 local AddEventHandler              = AddEventHandler
 local SetEntityHeading             = SetEntityHeading
-local DoScreenFadeIn               = DoScreenFadeIn
 local PlayerPedId                  = PlayerPedId
 local NetworkGetPlayerIndexFromPed = NetworkGetPlayerIndexFromPed
 local IsPedAPlayer                 = IsPedAPlayer
@@ -31,11 +28,8 @@ function stopPlayerDeath()
 
     local playerPed = cache.ped or PlayerPedId()
 
-    DoScreenFadeOut(800)
+    utils.doScreenFadeOut(800, true)
 
-    while not IsScreenFadedOut() do
-        Wait(50)
-    end
 
     local coords = cache.coords or GetEntityCoords(playerPed)
     NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, coords.w, false, false)
@@ -55,7 +49,7 @@ function stopPlayerDeath()
     ClearPedTasks(playerPed)
     AnimpostfxStopAll()
 
-    DoScreenFadeIn(700)
+    utils.doScreenFadeIn(700)
     TaskPlayAnim(playerPed, animations["get_up"].dict, animations["get_up"].clip, 8.0, -8.0, -1, 0, 0, 0, 0, 0)
 
     -- LocalPlayer.state:set("injuries", {}, true)
@@ -98,8 +92,7 @@ local function respawnPlayer()
     local hospital = utils.getClosestHospital()
     local bed = nil
 
-    DoScreenFadeOut(500)
-    while not IsScreenFadedOut() do Wait(1) end
+    utils.doScreenFadeOut(800, true)
 
     for i = 1, #hospital.respawn do
         local _bed = hospital.respawn[i]
@@ -120,7 +113,7 @@ local function respawnPlayer()
     FreezeEntityPosition(playerPed, true)
 
 
-    DoScreenFadeIn(300)
+    utils.doScreenFadeIn(300)
     Wait(5000)
     SetEntityCoords(playerPed, vector3(bed.bedPoint.x, bed.bedPoint.y, bed.bedPoint.z) + vector3(0.0, 0.0, -1.0))
     FreezeEntityPosition(playerPed, false)
@@ -155,9 +148,9 @@ local function initPlayerDeath(logged_dead)
 
         Wait(4000)
 
-        DoScreenFadeOut(200)
+        utils.doScreenFadeOut(200, true)
         Wait(800)
-        DoScreenFadeIn(400)
+        utils.doScreenFadeIn(400)
     end
     if not player.isDead then return end
 
