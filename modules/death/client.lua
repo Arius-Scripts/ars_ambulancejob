@@ -181,7 +181,7 @@ local function initPlayerDeath(logged_dead)
 
     CreateThread(function()
         while player.isDead do
-            local sleep = 1500
+            local sleep = 500
 
             if not player.gettingRevived and not player.respawning then
                 sleep = 0
