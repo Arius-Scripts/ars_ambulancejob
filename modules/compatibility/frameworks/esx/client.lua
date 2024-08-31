@@ -7,14 +7,12 @@ local useOxInventory = lib.load("config").useOxInventory
 local ox_inventory = useOxInventory and exports.ox_inventory
 
 AddEventHandler('esx:onPlayerSpawn', function(playerData)
-    player.loaded = true
-    Wait(3000)
+    Wait(1000)
     onPlayerLoaded()
 end)
 
 RegisterNetEvent('esx:onPlayerLogout')
 AddEventHandler('esx:onPlayerLogout', function()
-    player.loaded = false
     player.isDead = false
 end)
 

@@ -8,13 +8,11 @@ local ox_inventory = useOxInventory and exports.ox_inventory
 
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    player.loaded = true
     Wait(3000)
     onPlayerLoaded()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    player.loaded = false
     player.isDead = false
 end)
 
