@@ -6,8 +6,7 @@ Framework = {}
 local useOxInventory = lib.load("config").useOxInventory
 local ox_inventory = useOxInventory and exports.ox_inventory
 
-RegisterNetEvent('esx:playerLoaded')
-AddEventHandler('esx:playerLoaded', function(playerData)
+AddEventHandler('esx:onPlayerSpawn', function(playerData)
     player.loaded = true
     Wait(3000)
     onPlayerLoaded()
