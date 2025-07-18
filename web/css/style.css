@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+	font-family: 'Orbitron', sans-serif;
+	user-select: none;
+	margin: 0;
+	overflow: hidden;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.animate-fadeIn {
+	animation: fadeIn 0.8s ease-out forwards;
+}

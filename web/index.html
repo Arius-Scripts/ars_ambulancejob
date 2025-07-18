@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Death Screen - Ars Ambulancejob</title>
+    <script defer src="js/script.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div id="deathScreen"
+        class="hidden fixed inset-0 bg-black/60 flex flex-col items-center justify-center z-50 font-inter text-white overflow-hidden">
+
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 pointer-events-none"></div>
+
+        <!-- Fading border effect -->
+        <div class="absolute inset-0 pointer-events-none border-4 border-red-800 rounded-xl opacity-20 animate-fadeOut">
+        </div>
+
+        <!-- Main message -->
+        <div class="relative z-10 text-center animate-fadeIn">
+            <h1 id="mainTitle"
+                class="text-6xl md:text-7xl text-red-600 font-black animate-pulse tracking-widest drop-shadow-xl">
+                You Are Unconscious
+            </h1>
+            <p id="subTitle" class="text-lg mt-4 opacity-70 italic">
+                You're losing consciousness... EMS has been notified.
+            </p>
+        </div>
+
+        <!-- Time of death section -->
+        <div class="relative z-10 mt-6 text-center text-sm text-gray-300">
+            <p>Time of Incapacitation:</p>
+            <span id="deathTime" class="font-mono text-red-500">00:00:00</span> <!-- Time format will be dynamic -->
+        </div>
+
+        <!-- Help panel with EMS alert -->
+        <div class="hidden relative z-10 mt-10 bg-black/60 p-6 rounded-xl border border-red-900 w-[90%] max-w-xl shadow-2xl "
+            id="helpTextContainer">
+            <div class="flex items-center justify-between text-sm text-red-300 font-mono">
+                <span><i class="fas fa-ambulance text-red-400"></i> EMS has been alerted</span>
+                <span class="text-red-500 animate-ping">●</span>
+            </div>
+            <div class="mt-3 text-sm text-gray-300 opacity-80">
+                Help is on the way. If EMS doesn’t reach you soon, you can respawn.
+            </div>
+        </div>
+
+        <!-- Respawn Countdown -->
+        <div class="relative z-10 mt-8 text-center">
+            <p class="text-gray-400 mb-1">Can respawn in:</p>
+            <h2 id="respawnTimer" class="text-4xl font-bold text-white tracking-widest">10</h2>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="relative z-10 mt-8 flex gap-6">
+            <button id="callEms"
+                class="bg-red-700 hover:bg-red-800 text-white text-lg px-6 py-3 rounded-xl shadow-lg transition-all duration-300">
+                <i class="fas fa-ambulance mr-2"></i> Call EMS
+            </button>
+            <button id="respawn"
+                class="bg-white hover:bg-gray-200 text-black text-lg px-6 py-3 rounded-xl shadow-lg transition-all duration-300 disabled:opacity-50"
+                disabled>
+                <i class="fas fa-skull-crossbones mr-2"></i> Respawn
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>
