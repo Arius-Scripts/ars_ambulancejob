@@ -4,7 +4,7 @@ Config.Debug = true
 
 Config.Framework = "esx"
 Config.Target = "ox_target" -- ox_target, qb-target
-Config.EmsJobs = { "ambulance", "ems" }
+Config.JobName = "ambulance"
 
 Config.UseLaststand = true
 Config.Commands = {

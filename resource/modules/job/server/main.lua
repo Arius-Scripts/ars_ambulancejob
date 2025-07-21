@@ -8,18 +8,28 @@ lib.callback.register("ars_ambulancejob:cb:server:createDistressCall", function(
     local now = os.time()
     local last = playerDistressCooldowns[source] or 0
     if now - last < COOLDOWN_SECONDS then
-        -- Still on cooldown, return remaining seconds
-        return { success = false, remaining = COOLDOWN_SECONDS - (now - last) }
+        return false, COOLDOWN_SECONDS - (now - last)
     end
-    -- Store the distress call with all info
+
     distressCalls[#distressCalls + 1] = {
         player = source,
         time = now,
         data = data
     }
     playerDistressCooldowns[source] = now
-    return { success = true }
+
+
+    local players = GetPlayers()
+    local playerName = Framework:getPlayerName(source)
+
+    for i = 1, #players do
+        local id = tonumber(players[i])
+
+        if Framework:hasJob(id, Config.JobName) then
+            TriggerClientEvent("ars_ambulancejob:client:createDistressCall", id, playerName)
+        end
+    end
+    return true
 end)
 
--- Optionally, add a function to get all distress calls (for admin or debug)
--- function getAllDistressCalls() return distressCalls end
+function getAllDistressCalls() return distressCalls end

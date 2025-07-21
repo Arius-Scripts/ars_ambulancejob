@@ -41,11 +41,11 @@ function showDeathScreen() {
 
 $("#callEms").on("click", function () {
     $("#helpTextContainer").removeClass("hidden")
-    $.post("https://your_resource_name/waitForEMS");
+    $.post("https://ars_ambulancejob/callEms");
 });
 
 $("#respawn").on("click", function () {
-    $.post("https://your_resource_name/respawnPlayer");
+    $.post("https://ars_ambulancejob/respawnPlayer");
     $("#deathScreen").addClass("hidden");
 });
 

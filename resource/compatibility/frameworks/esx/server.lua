@@ -23,6 +23,27 @@ function Framework:setInjuries(target, injuries)
     xPlayer.setMeta("injuries", json.encode(injuries))
 end
 
+function Framework:getPlayerName(target)
+    local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
+
+    return xPlayer.getName()
+end
+
+function Framework:hasJob(target, jobs)
+    local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
+    if type(jobs) == "table" then
+        for index, jobName in pairs(jobs) do
+            if xPlayer.job.name == jobName then return true end
+        end
+    else
+        return xPlayer.job.name == jobs
+    end
+
+    return false
+end
+
 AddEventHandler('esx:playerLogout', function(source)
     local injuries = Player(source).state.injuries
     Framework:setInjuries(source, injuries)

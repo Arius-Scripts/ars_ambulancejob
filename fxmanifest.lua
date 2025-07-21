@@ -35,6 +35,8 @@ files {
     "resource/utils/client/utils.lua",
     "resource/utils/client/coords_debug.lua",
 
+    "resource/modules/job/client/main.lua",
+    "resource/modules/job/server/main.lua",
     "resource/modules/job/client/facilities/*.lua",
 
     "web/index.html",

@@ -1,12 +1,11 @@
--- Refactored: Improved local scoping, require/lib.load usage, nil-safety, ox_lib conventions, and code organization.
--- Comments added to explain changes and fixes.
-
 -- Localize all dependencies and avoid polluting global scope
 local Death = require("resource.modules.death.client")
 local Injury = require("resource.modules.injuries.client")
+local Job = require("resource.modules.job.client.main")
+
 lib.load("resource.utils.client.utils")
 
-local Framework = lib.class("framework")
+Framework = lib.class("framework")
 
 -- Event: Handle player damage and death logic
 AddEventHandler('gameEventTriggered', function(event, data)
@@ -92,3 +91,43 @@ for index, hospital in pairs(Hospitals) do
         end
     })
 end
+
+
+RegisterNetEvent("ars_ambulancejob:client:createDistressCall", function(playerName)
+    if not Framework:hasJob(Config.JobName) then return end
+
+    lib.notify({
+        title = locale("notification_new_call_title"),
+        description = (locale("notification_new_call_desc")):format(playerName),
+        position = 'bottom-right',
+        duration = 8000,
+        style = {
+            backgroundColor = '#1C1C1C',
+            color = '#C1C2C5',
+            borderRadius = '8px',
+            ['.description'] = {
+                fontSize = '16px',
+                color = '#B0B3B8'
+            },
+        },
+        icon = 'fas fa-truck-medical',
+        iconColor = '#FEBD69'
+    })
+    PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset")
+end)
+
+
+RegisterNUICallback("callEms", function(data, cb)
+    Job:createDistressCall(data.msg)
+    cb(true)
+end)
+
+RegisterNUICallback("respawnPlayer", function(data, cb)
+    Death:stop()
+    cb(true)
+end)
+
+
+exports("createDistressCall", function(msg)
+    Job:createDistressCall(msg)
+end)
