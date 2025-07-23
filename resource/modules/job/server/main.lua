@@ -1,27 +1,30 @@
-local distressCalls = {}
 -- Table to store last distress call time per player
 local playerDistressCooldowns = {}
-local COOLDOWN_SECONDS = 300 -- 5 minutes
+local COOLDOWN_SECONDS = 1 * 60 -- 1 minutes
 
 -- Callback to create a distress call, enforcing cooldown
 lib.callback.register("ars_ambulancejob:cb:server:createDistressCall", function(source, data)
     local now = os.time()
     local last = playerDistressCooldowns[source] or 0
-    if now - last < COOLDOWN_SECONDS then
-        return false, COOLDOWN_SECONDS - (now - last)
+    local remaining = COOLDOWN_SECONDS - (now - last)
+    if remaining > 0 then
+        return false, remaining
     end
-
-    distressCalls[#distressCalls + 1] = {
-        player = source,
-        time = now,
-        data = data
-    }
     playerDistressCooldowns[source] = now
 
-
-    local players = GetPlayers()
     local playerName = Framework:getPlayerName(source)
 
+    local calls = GlobalState.distressCalls or {}
+    calls[#calls + 1] = {
+        name = playerName,
+        time = os.date("%Y-%m-%d %H:%M:%S", now),
+        msg = data.msg,
+        coords = data.coords,
+        streetName = data.streetName
+    }
+    GlobalState.distressCalls = calls
+
+    local players = GetPlayers()
     for i = 1, #players do
         local id = tonumber(players[i])
 
@@ -32,4 +35,9 @@ lib.callback.register("ars_ambulancejob:cb:server:createDistressCall", function(
     return true
 end)
 
-function getAllDistressCalls() return distressCalls end
+RegisterNetEvent("ars_ambulancejob:server:callCompleted", function(callIndex)
+    if not callIndex then return end
+    local calls = GlobalState.distressCalls or {}
+    calls[callIndex] = nil
+    GlobalState.distressCalls = calls
+end)

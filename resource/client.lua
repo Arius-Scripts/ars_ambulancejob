@@ -131,3 +131,16 @@ end)
 exports("createDistressCall", function(msg)
     Job:createDistressCall(msg)
 end)
+
+RegisterCommand("distresscalls", function()
+    print(json.encode(Job:getDistressCalls(), { indent = true }))
+end)
+
+RegisterCommand("distressc", function()
+    Job:createDistressCall("dsad")
+end)
+
+
+RegisterCommand("ds", function()
+    Job:openDistressCalls()
+end)
