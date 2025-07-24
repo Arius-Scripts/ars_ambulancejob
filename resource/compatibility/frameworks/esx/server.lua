@@ -44,6 +44,12 @@ function Framework:hasJob(target, jobs)
     return false
 end
 
+ESX.RegisterUsableItem(Config.MedicBagItem, function(source, a, b)
+    if not Framework.hasJob(source, Config.JobName) then return end
+
+    TriggerClientEvent("ars_ambulancejob:client:placeMedicBag", source)
+end)
+
 AddEventHandler('esx:playerLogout', function(source)
     local injuries = Player(source).state.injuries
     Framework:setInjuries(source, injuries)

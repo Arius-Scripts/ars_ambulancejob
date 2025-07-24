@@ -1,3 +1,4 @@
+GlobalState.distressCalls = GlobalState.distressCalls or {}
 -- Table to store last distress call time per player
 local playerDistressCooldowns = {}
 local COOLDOWN_SECONDS = 1 * 60 -- 1 minutes
@@ -41,3 +42,7 @@ RegisterNetEvent("ars_ambulancejob:server:callCompleted", function(callIndex)
     calls[callIndex] = nil
     GlobalState.distressCalls = calls
 end)
+
+----------------
+--[ End Distresscalls ]--
+----------------

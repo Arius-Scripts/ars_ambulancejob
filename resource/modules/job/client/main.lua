@@ -1,8 +1,9 @@
 local Job = lib.class("job")
 
-
 function Job:createDistressCall(msg)
     if not msg or type(msg) ~= "string" then return end
+
+    Config.sendDistressCall(msg)
 
     local data = {}
     local playerCoords = GetEntityCoords(cache.ped)
@@ -115,4 +116,150 @@ function Job:openDistressCalls()
     lib.showContext('ars_ambulancejob:openDistressCalls')
 end
 
-return Job
+RegisterNetEvent("ars_ambulancejob:client:createDistressCall", function(playerName)
+    if not Framework:hasJob(Config.JobName) then return end
+
+    lib.notify({
+        title = locale("notification_new_call_title"),
+        description = (locale("notification_new_call_desc")):format(playerName),
+        position = 'bottom-right',
+        duration = 8000,
+        style = {
+            backgroundColor = '#1C1C1C',
+            color = '#C1C2C5',
+            borderRadius = '8px',
+            ['.description'] = {
+                fontSize = '16px',
+                color = '#B0B3B8'
+            },
+        },
+        icon = 'fas fa-truck-medical',
+        iconColor = '#FEBD69'
+    })
+    PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset")
+end)
+
+
+RegisterNUICallback("sendDistressCall", function(data, cb)
+    Job:createDistressCall(data.msg)
+    cb(true)
+end)
+
+exports("createDistressCall", function(msg)
+    Job:createDistressCall(msg)
+end)
+
+RegisterCommand(Config.EmsCommand, function(source, args, rawCommand)
+    local input = lib.inputDialog(locale("distress_call_form_title"), {
+        { type = 'input', label = locale("distress_call_form_label"), description = locale("distress_call_form_desc"), required = true },
+    })
+    if not input then return end
+
+    local msg = input[1]
+
+    Job:createDistressCall(msg)
+end)
+
+----------------
+--[ End Distresscalls ]--
+----------------
+
+local function openMedicalBag()
+    local playerPed = cache.ped
+
+    TaskStartScenarioInPlace(playerPed, "CODE_HUMAN_MEDIC_TEND_TO_DEAD")
+
+    if not Config.UseOxInventory then
+        return false
+    end
+
+    lib.callback('ars_ambulancejob:openMedicalBag', false, function(stash)
+        exports.ox_inventory:openInventory("stash", stash)
+    end)
+end
+
+function Job:placeMedicBag()
+    lib.requestAnimDict("pickup_object")
+    lib.requestModel(Config.MedicBagProp)
+
+    local playerPed = cache.ped or PlayerPedId()
+    local coords = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 0.5, 0.0)
+
+    TaskPlayAnim(playerPed, "pickup_object", "pickup_low", 8.0, 8.0, 1000, 50, 0, false, false, false)
+
+    Wait(900)
+
+    local medicBag = CreateObjectNoOffset(Config.MedicBagProp, coords.x, coords.y, coords.z, true, false)
+    PlaceObjectOnGroundProperly(medicBag)
+
+    -- utils.addRemoveItem("remove", "medicalbag", 1)
+
+    Target.addLocalEntity(medicBag, {
+        {
+            label = locale('open_medical_bag'),
+            icon = 'fa-solid fa-suitcase',
+            groups = false,
+            fn = function()
+                -- TODO
+                if not Config.UseOxInventory then
+                    return print("ONLY AVAILABLE FOR OX INVENTORY FOR NOW")
+                end
+
+                openMedicalBag()
+            end
+        },
+        {
+            label = locale('pickup_medical_bag'),
+            icon = 'fa-solid fa-xmark',
+            groups = false,
+            fn = function(data)
+                TaskPlayAnim(playerPed, "pickup_object", "pickup_low", 8.0, 8.0, 1000, 50, 0, false, false, false)
+
+                Wait(900)
+                DeleteEntity(type(data) == "number" and data or data.entity)
+                ClearPedTasks(playerPed)
+
+                utils.addRemoveItem("add", "medicalbag", 1)
+            end
+        },
+    })
+end
+
+RegisterNetEvent("ars_ambulancejob:client:placeMedicBag", function()
+    if not Framework.hasJob(Cofnig.JobName) then return end
+
+    Job:placeMedicBag()
+end)
+
+RegisterCommand("mdi", function(source, args, rawCommand)
+    Job:placeMedicBag()
+end)
+
+
+----------------
+--[ End Medic Bag ]--
+----------------
+---
+local Hospitals = require("data.hospitals")
+
+for index, hospital in pairs(Hospitals) do
+    Target.addBoxZone(hospital.bossmenu.pos, {
+        {
+            name = "open_bossmenu" .. index,
+            icon = 'fa-solid fa-road',
+            label = locale("bossmenu_label"),
+            groups = Config.JobName,
+            fn = function(data)
+                if Framework.getPlayerJobGrade() >= hospital.bossmenu.min_grade then
+                    Framework.openBossMenu(Framework.playerJob())
+                else
+                    print(locale("bossmenu_denied"))
+                end
+            end
+        }
+    })
+end
+
+----------------
+--[ End Boss Menu ]--
+----------------

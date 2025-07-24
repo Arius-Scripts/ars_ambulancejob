@@ -5,8 +5,15 @@ Config.Debug = true
 Config.Framework = "esx"
 Config.Target = "ox_target" -- ox_target, qb-target
 Config.JobName = "ambulance"
+Config.EmsCommand = "911"
 
 Config.UseLaststand = true
+
+Config.MedicBagProp = "xm_prop_x17_bag_med_01a"
+Config.MedicBagItem = "medicalbag"
+
+Config.UseOxInventory = GetResourceState("ox_inventory") ~= "missing"
+
 Config.Commands = {
     revive = { name = "revive", group = { "group.admin" } },
     reviveArea = { name = "revivearea", group = { "group.admin" } },

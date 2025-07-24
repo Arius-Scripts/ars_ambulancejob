@@ -39,9 +39,21 @@ function showDeathScreen() {
     }, 1000);
 }
 
+
+const messages = [
+    "I've been badly injured, I need help!",
+    "I'm bleeding out, please send someone!",
+    "I've had a terrible accident, I need EMS!",
+    "I can't move... please hurry!",
+    "This might be my last chance... help me!"
+];
+
 $("#callEms").on("click", function () {
     $("#helpTextContainer").removeClass("hidden")
-    $.post("https://ars_ambulancejob/callEms");
+
+    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+
+    $.post(`https://ars_ambulancejob/sendDistressCall`, JSON.stringify({ msg: randomMsg }));
 });
 
 $("#respawn").on("click", function () {
