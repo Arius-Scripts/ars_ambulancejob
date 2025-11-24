@@ -17,11 +17,10 @@ local function openParamedicMenu(ped, hospital)
             {
                 title = locale("get_treated_paramedic"),
                 onSelect = function()
-                    local hasMoney = Framework.hasItem("money", paramedicTreatmentPrice)
-                    if not hasMoney then return utils.showNotification(locale("not_enough_money")) end
-
-
-                    utils.addRemoveItem("remove", "money", paramedicTreatmentPrice)
+                    local paid = lib.callback.await('ars_ambulancejob:payParamedicTreatment', false)
+                    if not paid then
+                        return utils.showNotification(locale("not_enough_money"))
+                    end
 
                     local dict = lib.requestAnimDict("anim@gangops@morgue@table@")
                     local playerPed = cache.ped or PlayerPedId()

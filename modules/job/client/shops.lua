@@ -56,14 +56,16 @@ local function createShops()
                                         })
                                         if not amount then return end
 
-                                        local quantity = amount[1]
-                                        local totalPrice = item.price * quantity
+                                        local quantity = tonumber(amount[1])
+                                        if not quantity or quantity < 1 then return end
 
-                                        local hasMoney = Framework.hasItem("money", totalPrice)
-                                        if not hasMoney then return utils.showNotification(locale("not_enough_money")) end
+                                        quantity = math.floor(quantity)
+                                        if quantity < 1 then return end
 
-                                        utils.addRemoveItem("remove", "money", totalPrice)
-                                        utils.addRemoveItem("add", item.name, quantity)
+                                        local result = lib.callback.await('ars_ambulancejob:purchaseItem', false, name, item.name, quantity)
+                                        if not result or result.success then return end
+
+                                        utils.showNotification(locale(result.reason))
                                     end,
                                 }
                             end

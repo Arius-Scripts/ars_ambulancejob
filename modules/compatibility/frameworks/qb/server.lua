@@ -3,6 +3,7 @@ QBCore = GetResourceState('qb-core'):find('start') and exports['qb-core']:GetCor
 if not QBCore then return end
 
 Framework = {}
+medicalBags = medicalBags or {}
 local useOxInventory = lib.load("config").useOxInventory
 local ox_inventory = useOxInventory and exports.ox_inventory
 
@@ -33,6 +34,14 @@ function Framework.playerJob(target)
     if not xPlayer then return end
 
     return xPlayer.PlayerData.job.name
+end
+
+function Framework.getPlayerJobGrade(target)
+    local xPlayer = QBCore.Functions.GetPlayer(target)
+    if not xPlayer then return end
+
+    local grade = xPlayer.PlayerData.job.grade
+    return type(grade) == "table" and grade.level or grade
 end
 
 function Framework.updateStatus(data)
@@ -108,6 +117,31 @@ function Framework.wipeInventory(target, keep)
     exports["qb-inventory"]:ClearInventory(target, keep)
 end
 
+function Framework.hasItem(target, item, amount)
+    local quantity = amount or 1
+
+    if ox_inventory then
+        local count = ox_inventory:Search(target, 'count', item)
+        return count and count >= quantity
+    end
+
+    local xPlayer = QBCore.Functions.GetPlayer(target)
+    if not xPlayer then return end
+
+    if item == "money" or item == "cash" then
+        return xPlayer.PlayerData.money["cash"] >= quantity
+    end
+
+    local inventory = xPlayer.PlayerData.items or {}
+    for _, data in pairs(inventory) do
+        if data and data.name == item and data.amount >= quantity then
+            return true
+        end
+    end
+
+    return false
+end
+
 local medicBagItem = lib.load("config").medicBagItem
 local emsJobs = lib.load("config").emsJobs
 local tabletItem = lib.load("config").tabletItem
@@ -115,7 +149,11 @@ local tabletItem = lib.load("config").tabletItem
 QBCore.Functions.CreateUseableItem(medicBagItem, function(source, item)
     if not Framework.hasJob(source, emsJobs) then return end
 
-    TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
+    local removed = Framework.removeItem(source, medicBagItem, 1)
+    if removed then
+        medicalBags[source] = (medicalBags[source] or 0) + 1
+        TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
+    end
 end)
 QBCore.Functions.CreateUseableItem(tabletItem, function(source, item)
     if not Framework.hasJob(source, emsJobs) then return end

@@ -7,6 +7,7 @@ local PlaceObjectOnGroundProperly      = PlaceObjectOnGroundProperly
 local DeleteEntity                     = DeleteEntity
 local ClearPedTasks                    = ClearPedTasks
 local RegisterNetEvent                 = RegisterNetEvent
+local TriggerServerEvent               = TriggerServerEvent
 
 local medicBagProp                     = lib.load("config").medicBagProp
 local useOxInventory                   = lib.load("config").useOxInventory
@@ -35,8 +36,6 @@ local function placeMedicalBag()
     medicBag = CreateObjectNoOffset(medicBagProp, coords.x, coords.y, coords.z, true, false)
     PlaceObjectOnGroundProperly(medicBag)
 
-    utils.addRemoveItem("remove", "medicalbag", 1)
-
     Target.addLocalEntity(medicBag, {
         {
             label = locale('open_medical_bag'),
@@ -61,7 +60,7 @@ local function placeMedicalBag()
                 DeleteEntity(type(data) == "number" and data or data.entity)
                 ClearPedTasks(playerPed)
 
-                utils.addRemoveItem("add", "medicalbag", 1)
+                TriggerServerEvent("ars_ambulancejob:returnMedicalBag")
             end
         },
     })

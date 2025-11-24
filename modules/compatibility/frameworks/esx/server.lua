@@ -3,6 +3,7 @@ local ESX = GetResourceState('es_extended'):find('start') and exports['es_extend
 if not ESX then return end
 
 Framework = {}
+medicalBags = medicalBags or {}
 local useOxInventory = lib.load("config").useOxInventory
 local ox_inventory = useOxInventory and exports.ox_inventory
 
@@ -32,6 +33,13 @@ function Framework.playerJob(target)
     if not xPlayer then return end
 
     return xPlayer.job.name
+end
+
+function Framework.getPlayerJobGrade(target)
+    local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
+
+    return xPlayer.job.grade
 end
 
 function Framework.updateStatus(data)
@@ -72,6 +80,13 @@ function Framework.getDeathStatus(target)
     return data
 end
 
+local moneyTypes = {
+    money = 'money',
+    cash = 'cash',
+    bank = 'bank',
+    black_money = 'black_money',
+}
+
 function Framework.addItem(target, item, amount)
     if ox_inventory then
         return ox_inventory:AddItem(target, item, amount)
@@ -79,6 +94,9 @@ function Framework.addItem(target, item, amount)
 
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
+    if moneyTypes[item] then
+        return xPlayer.addMoney(amount)
+    end
     return xPlayer.addInventoryItem(item, amount)
 end
 
@@ -89,6 +107,9 @@ function Framework.removeItem(target, item, amount)
 
     local xPlayer = ESX.GetPlayerFromId(target)
     if not xPlayer then return end
+    if moneyTypes[item] then
+        return xPlayer.removeMoney(amount)
+    end
     return xPlayer.removeInventoryItem(item, amount)
 end
 
@@ -114,6 +135,30 @@ function Framework.wipeInventory(target, keep)
     end
 end
 
+function Framework.hasItem(target, item, amount)
+    local quantity = amount or 1
+
+    if ox_inventory then
+        local count = ox_inventory:Search(target, 'count', item)
+        return count and count >= quantity
+    end
+
+    local xPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer then return end
+
+    if moneyTypes[item] then
+        return xPlayer.getMoney() >= quantity
+    end
+
+    for _, data in pairs(xPlayer.inventory or {}) do
+        if data and data.name == item and data.count >= quantity then
+            return true
+        end
+    end
+
+    return false
+end
+
 local medicBagItem = lib.load("config").medicBagItem
 local emsJobs = lib.load("config").emsJobs
 local tabletItem = lib.load("config").tabletItem
@@ -121,7 +166,11 @@ local tabletItem = lib.load("config").tabletItem
 ESX.RegisterUsableItem(medicBagItem, function(source, a, b)
     if not Framework.hasJob(source, emsJobs) then return end
 
-    TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
+    if Framework.hasItem(source, medicBagItem, 1) then
+        Framework.removeItem(source, medicBagItem, 1)
+        medicalBags[source] = (medicalBags[source] or 0) + 1
+        TriggerClientEvent("ars_ambulancejob:placeMedicalBag", source)
+    end
 end)
 
 ESX.RegisterUsableItem(tabletItem, function(source, a, b)
