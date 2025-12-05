@@ -35,12 +35,15 @@ local function isEmsVehicle(vehicle)
     local vehicleModel = GetEntityModel(vehicle)
     local vehicleClass = GetVehicleClass(vehicle)
 
-    for index, model in pairs(emsVehicles) do
-        if joaat(model) == vehicleModel or GetVehicleClassFromName(model) == vehicleClass then return true end
+    for model, value in pairs(emsVehicles) do
+        if value then
+            if joaat(model) == vehicleModel or GetVehicleClassFromName(model) == vehicleClass then return true end
+        end
     end
 
     return false
 end
+
 local function useStretcher(stretcher)
     usingStretcher = true
     currentStretcher = stretcher
