@@ -29,11 +29,13 @@ local usingStretcher = false
 local currentStretcher = nil
 local patientOnStretcher = nil
 local emsJobs = lib.load("config").emsJobs
+local emsVehicles = lib.load("config").emsVehicles
+
 local function isEmsVehicle(vehicle)
     local vehicleModel = GetEntityModel(vehicle)
     local vehicleClass = GetVehicleClass(vehicle)
 
-    for index, model in pairs(emsJobs) do
+    for index, model in pairs(emsVehicles) do
         if joaat(model) == vehicleModel or GetVehicleClassFromName(model) == vehicleClass then return true end
     end
 
