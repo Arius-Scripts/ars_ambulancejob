@@ -109,18 +109,6 @@ function utils.getClosestHospital()
     return closestHospital
 end
 
-function utils.addRemoveItem(type, item, quantity)
-    local data = {}
-    data.toggle = type == "remove"
-    data.item = item
-    data.quantity = quantity
-
-    utils.debug(type, item, quantity)
-    utils.debug(data)
-
-    TriggerServerEvent("ars_ambulancejob:removAddItem", data)
-end
-
 function utils.useItem(item, value)
     local data = {}
     data.item = item

@@ -327,7 +327,10 @@ RegisterNetEvent("ars_ambulancejob:playHealAnim", function(data)
 
 
         utils.useItem("defibrillator", consumeItemPerUse)
-        utils.addRemoveItem("add", "money", reviveReward)
+        TriggerServerEvent("ars_ambulancejob:claimReward", {
+            type = "revive",
+            target = data.targetServerId
+        })
     elseif data.anim == "dead" then
         utils.showNotification(locale("action_revived_notification"))
 
